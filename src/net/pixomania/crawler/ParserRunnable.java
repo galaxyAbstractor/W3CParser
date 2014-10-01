@@ -27,6 +27,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ParserRunnable implements Runnable {
 
@@ -98,6 +99,8 @@ public class ParserRunnable implements Runnable {
 		sv.setStatus((String) Main.getParsers().get("status").parse(url, doc));
 		sv.setEditors((ArrayList<String[]>) Main.getParsers().get("editors").parse(url, doc));
 
+		ArrayList<String> urls = (ArrayList<String>) Main.getParsers().get("previous").parse(url, doc);
+
 		if (!url.contains(standard.getName())) {
 			synchronized (this) {
 				try {
@@ -132,29 +135,29 @@ public class ParserRunnable implements Runnable {
 		/*			PREVIOUS START			*/
 		/* ################################ */
 		if(!orphan) {
-			Elements dt = doc.select("dt:contains(previous) ~ dd");
 
-			for (Element d : dt) {
-				// Have we already crawled this link? If so, prev will contain it
-				StandardVersion prev = alreadyCrawled(d.text());
-				if (prev == null) {
-					// We have never crawled d.text(), so let's start
-					// EXCEPTION are orphans
+			if (urls != null) {
+				for (String prevUrl : urls) {
+					// Have we already crawled this link? If so, prev will contain it
+					StandardVersion prev = alreadyCrawled(prevUrl);
+					if (prev == null) {
+						// We have never crawled d.text(), so let's start
+						// EXCEPTION are orphans
 
 					/*
 						Check if the link has already been crawled
 						Orphans are not added to the crawledURL list since we
 						don't want orphans to become a dead end
 					*/
-					StandardVersion isOrphan = isOrphan(d.text());
+						StandardVersion isOrphan = isOrphan(prevUrl);
 
-					if (isOrphan == null) {
-						// We have never crawled this before - neither is it an orphan
-						// let's crawl it if it contains w3.org
-						if (d.text().contains("w3.org")) {
-							sv.getPrev().add(parseVersion(d.text(), standard, sv));
-						}
-					} else if (d.text().contains(standard.getName()) && d.text().contains("w3.org")) {
+						if (isOrphan == null) {
+							// We have never crawled this before - neither is it an orphan
+							// let's crawl it if it contains w3.org
+							if (prevUrl.contains("w3.org")) {
+								sv.getPrev().add(parseVersion(prevUrl, standard, sv));
+							}
+						} else if (prevUrl.contains(standard.getName()) && prevUrl.contains("w3.org")) {
 						/*
 						 	This is an orphan, so let's crawl it, but only if it belongs to the correct standard
 							For example, web database version 1 and 2 may contain a link to web storage
@@ -162,17 +165,18 @@ public class ParserRunnable implements Runnable {
 							on the web storage standard!
 						*/
 
-						sv.getPrev().add(parseVersion(d.text(), standard, sv));
+							sv.getPrev().add(parseVersion(prevUrl, standard, sv));
+						} else {
+							// This is an orphan, but of a different standard. Let's add it as a previous version
+							// to the current standard. Then add the next version to the orphan.
+							sv.getPrev().add(isOrphan);
+							isOrphan.getNext().add(sv);
+						}
 					} else {
-						// This is an orphan, but of a different standard. Let's add it as a previous version
-						// to the current standard. Then add the next version to the orphan.
-						sv.getPrev().add(isOrphan);
-						isOrphan.getNext().add(sv);
+						// We already crawled this link, so let's add it to the lists
+						sv.getPrev().add(prev);
+						prev.getNext().add(sv);
 					}
-				} else {
-					// We already crawled this link, so let's add it to the lists
-					sv.getPrev().add(prev);
-					prev.getNext().add(sv);
 				}
 			}
 		}

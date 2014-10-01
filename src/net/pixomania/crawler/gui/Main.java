@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.pixomania.crawler.ParserRunnable;
+import net.pixomania.crawler.datatypes.SpecificRule;
 import net.pixomania.crawler.datatypes.Standard;
 import net.pixomania.crawler.datatypes.StandardVersion;
 import net.pixomania.crawler.parser.Parser;
@@ -25,6 +26,9 @@ import net.pixomania.crawler.parser.rules.date.DateRule1;
 import net.pixomania.crawler.parser.rules.date.DateRule2;
 import net.pixomania.crawler.parser.rules.editors.EditorsRule1;
 import net.pixomania.crawler.parser.rules.editors.EditorsRule2;
+import net.pixomania.crawler.parser.rules.editors.EditorsRule3;
+import net.pixomania.crawler.parser.rules.editors.SpecificEditorsRule1;
+import net.pixomania.crawler.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.parser.rules.status.StatusRule1;
 import net.pixomania.crawler.parser.rules.status.StatusRule2;
 import net.pixomania.crawler.parser.rules.status.StatusRule3;
@@ -83,15 +87,18 @@ public class Main extends Application {
 		parsers.put("date", new Parser<>(new DateRule1(), new DateRule2()));
 		parsers.put("title", new Parser<>(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser<>(new StatusRule1(), new StatusRule2(), new StatusRule3()));
-		parsers.put("editors", new Parser<>(new EditorsRule1(), new EditorsRule2()));
+		parsers.put("editors", new Parser<>(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
+		parsers.put("previous", new Parser<>(new PreviousRule1()));
 
-		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
-		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
-		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
-		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
-		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
-		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
+//		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
+//		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
+//		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
+//		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
+//		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
+//		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
 		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
+
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 
 		parserThread.start();
     }

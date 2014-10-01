@@ -6,25 +6,17 @@
 package net.pixomania.crawler.datatypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Standard {
-
 
 	private final String name;
 	private final String link;
 	private final ArrayList<StandardVersion> versions = new ArrayList<>();
-	private final SpecificRule[][] rules;
-
-	public Standard(String name, String link, SpecificRule[][] rules) {
-		this.name = name;
-		this.link = link;
-		this.rules = rules;
-	}
 
 	public Standard(String name, String link) {
 		this.name = name;
 		this.link = link;
-		this.rules = null;
 	}
 
 	@Override
@@ -54,9 +46,5 @@ public class Standard {
 
 	public ArrayList<StandardVersion> getVersions() {
 		return versions;
-	}
-
-	public SpecificRule[][] getRules() {
-		return rules;
 	}
 }
