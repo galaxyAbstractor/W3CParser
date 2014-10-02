@@ -5,30 +5,23 @@
 
 package net.pixomania.crawler;
 
+import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
-import net.pixomania.crawler.datatypes.SpecificRule;
 import net.pixomania.crawler.datatypes.Standard;
 import net.pixomania.crawler.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Main;
-import net.pixomania.crawler.parser.Parser;
-import net.pixomania.crawler.parser.rules.date.DateRule1;
-import net.pixomania.crawler.parser.rules.date.DateRule2;
-import net.pixomania.crawler.parser.rules.editors.EditorsRule1;
-import net.pixomania.crawler.parser.rules.editors.EditorsRule2;
-import net.pixomania.crawler.parser.rules.status.StatusRule1;
-import net.pixomania.crawler.parser.rules.status.StatusRule2;
-import net.pixomania.crawler.parser.rules.status.StatusRule3;
-import net.pixomania.crawler.parser.rules.title.TitleRule1;
-import net.pixomania.crawler.parser.rules.title.TitleRule2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
+/**
+ * The ParserRunnable class is the startpoint of the parsing.
+ * It iterates over each defined Standard instance, calling all the relevant
+ * Parser instances (which in turn runs the Rules), and saves the returned data
+ * in StandardVersion instances that are added to the Standard instance
+ */
 public class ParserRunnable implements Runnable {
 
 	private final ArrayList<StandardVersion> urlsCrawled = new ArrayList<>();
@@ -58,7 +51,18 @@ public class ParserRunnable implements Runnable {
 		Platform.runLater(() -> Main.redrawInfopanel("Done", null));
 	}
 
-	private StandardVersion parseVersion(String url, Standard standard, StandardVersion svnext) {
+	/**
+	 * This parses a single URL (== version).
+	 * This is a recursive method. When the version is done parsing, the URLs to the previous versions
+	 * are passed back into this method, and the returned StandardVersion is added to the list of
+	 * "previous" versions of the "next" standard (creating a kind of linked list between all versions)
+	 *
+	 * @param url The URL being parsed
+	 * @param standard The standard we are currently parsing
+	 * @param svnext The "next" StandardVersion, to be added to the current versions "next" list
+	 * @return The resulting StandardVersion
+	 */
+	private StandardVersion parseVersion(String url, Standard standard, @Nullable StandardVersion svnext) {
 		System.out.println("PARSING: " + url);
 		Platform.runLater(() -> Main.getBrowser().load(url));
 
@@ -94,6 +98,8 @@ public class ParserRunnable implements Runnable {
 
 		sv.setLink(url);
 
+		// Unfortunately we need to cast the return type, so we do have to know what kind of
+		// result we expect for that kind of parser
 		sv.setDate((String) Main.getParsers().get("date").parse(url, doc));
 		sv.setTitle((String) Main.getParsers().get("title").parse(url, doc));
 		sv.setStatus((String) Main.getParsers().get("status").parse(url, doc));
@@ -180,9 +186,7 @@ public class ParserRunnable implements Runnable {
 				}
 			}
 		}
-		/* ################################ */
-		/*			PREVIOUS END			*/
-		/* ################################ */
+
 		orphan = false;
 		return sv;
 	}

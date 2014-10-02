@@ -18,20 +18,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.pixomania.crawler.ParserRunnable;
-import net.pixomania.crawler.datatypes.SpecificRule;
 import net.pixomania.crawler.datatypes.Standard;
 import net.pixomania.crawler.datatypes.StandardVersion;
 import net.pixomania.crawler.parser.Parser;
-import net.pixomania.crawler.parser.rules.date.DateRule1;
-import net.pixomania.crawler.parser.rules.date.DateRule2;
+import net.pixomania.crawler.parser.rules.date.*;
+import net.pixomania.crawler.parser.rules.title.*;
 import net.pixomania.crawler.parser.rules.editors.*;
-import net.pixomania.crawler.parser.rules.previous.PreviousRule1;
-import net.pixomania.crawler.parser.rules.status.StatusRule1;
-import net.pixomania.crawler.parser.rules.status.StatusRule2;
-import net.pixomania.crawler.parser.rules.status.StatusRule3;
-import net.pixomania.crawler.parser.rules.title.TitleRule1;
-import net.pixomania.crawler.parser.rules.title.TitleRule2;
-
+import net.pixomania.crawler.parser.rules.previous.*;
+import net.pixomania.crawler.parser.rules.status.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -81,11 +75,11 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-		parsers.put("date", new Parser<>(new DateRule1(), new DateRule2()));
-		parsers.put("title", new Parser<>(new TitleRule1(), new TitleRule2()));
-		parsers.put("status", new Parser<>(new StatusRule1(), new StatusRule2(), new StatusRule3()));
-		parsers.put("editors", new Parser<>(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
-		parsers.put("previous", new Parser<>(new PreviousRule1()));
+		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
+		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
+		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
+		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
+		parsers.put("previous", new Parser(new PreviousRule1()));
 
 //		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
 		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
@@ -103,6 +97,12 @@ public class Main extends Application {
 		parserThread.start();
     }
 
+	/**
+	 * Redraws the information panel with the current StandardVersion and information about
+	 * all the standards
+	 * @param currentStandard The standard currently being parsed
+	 * @param sv The StandardVersion that was just parsed
+	 */
 	public static void redrawInfopanel(String currentStandard, StandardVersion sv) {
 		infopanel.getChildren().clear();
 
@@ -187,6 +187,13 @@ public class Main extends Application {
 		infopanel.getChildren().add(container);
 	}
 
+	/**
+	 * In case we found an "orphan", a standard that might not belong to the
+	 * current Standard being parsed, we ask for manual confirmation if it's
+	 * just a simple name change
+	 * @param name The standard name
+	 * @param url The URL
+	 */
 	public static void confirmDialog(String name, String url) {
 		infopanel.getChildren().clear();
 
