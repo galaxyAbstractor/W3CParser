@@ -1,5 +1,5 @@
 /*
- * @copyright (c) 2014, Victor Nagy
+ * @copyright (c) 2014, Victor Nagy, University of Skövde
  * @license BSD - $root/license
  */
 
