@@ -51,4 +51,17 @@ public class Parser<T> {
 
 		return result;
 	}
+
+	public T parse(String url, Document doc, boolean noSpecific) {
+		T result = null;
+
+		for (Rule<T> rule : rules) {
+			result = rule.run(url, doc);
+			if (result != null) {
+				break;
+			}
+		}
+
+		return result;
+	}
 }

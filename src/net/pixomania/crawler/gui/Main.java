@@ -24,10 +24,7 @@ import net.pixomania.crawler.datatypes.StandardVersion;
 import net.pixomania.crawler.parser.Parser;
 import net.pixomania.crawler.parser.rules.date.DateRule1;
 import net.pixomania.crawler.parser.rules.date.DateRule2;
-import net.pixomania.crawler.parser.rules.editors.EditorsRule1;
-import net.pixomania.crawler.parser.rules.editors.EditorsRule2;
-import net.pixomania.crawler.parser.rules.editors.EditorsRule3;
-import net.pixomania.crawler.parser.rules.editors.SpecificEditorsRule1;
+import net.pixomania.crawler.parser.rules.editors.*;
 import net.pixomania.crawler.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.parser.rules.status.StatusRule1;
 import net.pixomania.crawler.parser.rules.status.StatusRule2;
@@ -91,14 +88,17 @@ public class Main extends Application {
 		parsers.put("previous", new Parser<>(new PreviousRule1()));
 
 //		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
-//		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
+		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
 //		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
 //		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
 //		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
 //		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
-		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
+//		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
+//		standards.add(new Standard("html-media-capture", "http://www.w3.org/TR/html-media-capture/"));
+//		standards.add(new Standard("vibration", "http://www.w3.org/TR/2014/CR-vibration-20140909/"));
 
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());
 
 		parserThread.start();
     }
@@ -119,7 +119,8 @@ public class Main extends Application {
 			current.getChildren().add(new Label("Editors: "));
 
 			for (String[] editor : sv.getEditors()) {
-				current.getChildren().add(new Label("  " + editor[0] + ", " + editor[1]));
+				current.getChildren().add(new Label("  " + editor[0] + ", " + editor[1]+
+						((editor[2].equals("")) ? "" : " " + editor[2])));
 			}
 
 			current.setPrefWidth(500);
@@ -151,7 +152,8 @@ public class Main extends Application {
 				all.getChildren().add(new Label("Editors: "));
 
 				for (String[] editor : s.getEditors()) {
-					all.getChildren().add(new Label("  " + editor[0] + ", " + editor[1]));
+					all.getChildren().add(new Label("  " + editor[0] + ", " + editor[1] +
+							((editor[2].equals("")) ? "" : " " + editor[2])));
 				}
 
 				all.getChildren().add(new Label("Previous: "));

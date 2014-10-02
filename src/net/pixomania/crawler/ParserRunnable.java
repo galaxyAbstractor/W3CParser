@@ -154,10 +154,10 @@ public class ParserRunnable implements Runnable {
 						if (isOrphan == null) {
 							// We have never crawled this before - neither is it an orphan
 							// let's crawl it if it contains w3.org
-							if (prevUrl.contains("w3.org")) {
+							if (prevUrl.contains("w3.org/TR")) {
 								sv.getPrev().add(parseVersion(prevUrl, standard, sv));
 							}
-						} else if (prevUrl.contains(standard.getName()) && prevUrl.contains("w3.org")) {
+						} else if (prevUrl.contains(standard.getName()) && prevUrl.contains("w3.org/TR")) {
 						/*
 						 	This is an orphan, so let's crawl it, but only if it belongs to the correct standard
 							For example, web database version 1 and 2 may contain a link to web storage
