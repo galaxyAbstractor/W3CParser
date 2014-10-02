@@ -113,6 +113,8 @@ public class EditorsRule2 implements Rule<ArrayList<String[]>> {
 			}
 
 			String[] split = editorText.split(", ");
+			if (split.length < 2) return null;
+
 			ed[0] = split[0];
 			ed[1] = split[1];
 

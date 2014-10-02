@@ -81,15 +81,15 @@ public class Main extends Application {
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
-//		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
+		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
 		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
-//		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
-//		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
-//		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
-//		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
-//		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
-//		standards.add(new Standard("html-media-capture", "http://www.w3.org/TR/html-media-capture/"));
-//		standards.add(new Standard("vibration", "http://www.w3.org/TR/2014/CR-vibration-20140909/"));
+		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
+		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
+		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
+		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
+		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
+		standards.add(new Standard("html-media-capture", "http://www.w3.org/TR/html-media-capture/"));
+		standards.add(new Standard("vibration", "http://www.w3.org/TR/2014/CR-vibration-20140909/"));
 
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());

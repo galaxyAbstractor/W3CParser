@@ -7,6 +7,7 @@ package net.pixomania.crawler;
 
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
+import net.pixomania.crawler.csv.CSVExport;
 import net.pixomania.crawler.datatypes.Standard;
 import net.pixomania.crawler.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Main;
@@ -49,6 +50,7 @@ public class ParserRunnable implements Runnable {
 		});
 
 		Platform.runLater(() -> Main.redrawInfopanel("Done", null));
+		CSVExport.export(Main.getStandards());
 	}
 
 	/**

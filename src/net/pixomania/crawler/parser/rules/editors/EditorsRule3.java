@@ -112,6 +112,7 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 						m.group(10) + m.group(11), "");
 			}
 
+
 			re1=".*?";	// Non-greedy match on filler
 			re2="(\\(.*\\))";	// Round Braces 1
 

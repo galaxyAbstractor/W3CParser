@@ -15,7 +15,7 @@ public class SpecificEditorsRule1 implements Rule<ArrayList<String[]>> {
 	@Override
 	public ArrayList<String[]> run(String url, Document doc) {
 		ArrayList<String[]> editors = new ArrayList<>();
-		editors.add(new String[]{"Nikunj Mehta", "Oracle Corp"});
+		editors.add(new String[]{"Nikunj Mehta", "Oracle Corp", ""});
 		return editors;
 	}
 }
