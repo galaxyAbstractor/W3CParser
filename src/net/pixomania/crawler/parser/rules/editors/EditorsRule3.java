@@ -89,7 +89,7 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 
 				date += m.group(3);
 
-				ed[2] = date;
+				ed[2] = date.trim();
 
 				re1=".*?";	// Non-greedy match on filler
 				re2="((\\()";	// Any Single Character 1
@@ -120,7 +120,7 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 			m = p.matcher(editorText);
 
 			if (m.find()) {
-				ed[1] = m.group(1).substring(1, m.group(1).length()-1);
+				ed[1] = m.group(1).substring(1, m.group(1).length()-1).trim();
 				editorText = editorText.replace(m.group(1), "");
 			} else {
 				ed[1] = "Unknown";
@@ -136,7 +136,7 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 				editorText = editorText.replace(m.group(1), "").trim();
 			}
 
-			ed[0] = editorText;
+			ed[0] = editorText.trim();
 
 			editorList.add(ed);
 

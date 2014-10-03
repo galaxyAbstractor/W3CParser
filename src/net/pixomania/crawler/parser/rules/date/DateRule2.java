@@ -39,6 +39,6 @@ public class DateRule2 implements Rule<String> {
 		}
 
 		// Format it so we get the same date format across the board
-		return date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8);
+		return (date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8)).trim();
 	}
 }

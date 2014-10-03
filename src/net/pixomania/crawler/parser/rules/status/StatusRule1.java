@@ -18,7 +18,7 @@ public class StatusRule1 implements Rule<String> {
 			// The newer versions have abbr and time tags
 			status.get(0).select("abbr").get(0).remove();
 			status.get(0).select("time").get(0).remove();
-			return status.get(0).text();
+			return status.get(0).text().trim();
 		} else {
 			return null;
 		}

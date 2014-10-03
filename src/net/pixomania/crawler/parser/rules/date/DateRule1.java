@@ -15,7 +15,7 @@ public class DateRule1 implements Rule<String> {
 	public String run(String url, Document doc) {
 		Elements time = doc.select("time");
 		if (time.size() != 0) {
-			return time.get(0).attr("datetime");
+			return time.get(0).attr("datetime").trim();
 		} else {
 			return null;
 		}

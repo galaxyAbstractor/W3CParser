@@ -82,7 +82,7 @@ public class EditorsRule1 implements Rule<ArrayList<String[]>> {
 
 					date += m.group(3);
 
-					ed[2] = date;
+					ed[2] = date.trim();
 
 					re1=".*?";	// Non-greedy match on filler
 					re2="((\\()";	// Any Single Character 1
@@ -106,8 +106,8 @@ public class EditorsRule1 implements Rule<ArrayList<String[]>> {
 				}
 
 				String[] split = editorText.split(", ");
-				ed[0] = split[0];
-				ed[1] = split[1];
+				ed[0] = split[0].trim();
+				ed[1] = split[1].trim();
 
 				editorList.add(ed);
 			}

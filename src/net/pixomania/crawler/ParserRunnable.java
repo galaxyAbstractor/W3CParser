@@ -35,6 +35,8 @@ public class ParserRunnable implements Runnable {
 		this.orphan = orphan;
 	}
 
+	private boolean wait = false;
+
 	@Override
 	public void run() {
 		for (Standard standard : Main.getStandards()) {
@@ -51,6 +53,7 @@ public class ParserRunnable implements Runnable {
 
 		Platform.runLater(() -> Main.redrawInfopanel("Done", null));
 		CSVExport.export(Main.getStandards());
+		CSVExport.exportLinkability(Main.getStandards());
 	}
 
 	/**
@@ -131,17 +134,16 @@ public class ParserRunnable implements Runnable {
 		final StandardVersion innerSv = sv;
 		Platform.runLater(() -> Main.redrawInfopanel(standard.getName(), innerSv));
 
-		synchronized (this) {
-			try {
-				this.wait();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
+		if(wait) {
+			synchronized (this) {
+				try {
+					this.wait();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 
-		/* ################################ */
-		/*			PREVIOUS START			*/
-		/* ################################ */
 		if(!orphan) {
 
 			if (urls != null) {

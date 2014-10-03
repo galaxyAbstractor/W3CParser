@@ -18,7 +18,7 @@ public class StatusRule2 implements Rule<String> {
 			// The time and abbr tags are missing, but the date is
 			// surrounded by em
 			status.get(0).select("em").get(0).remove();
-			return status.get(0).text().replace("W3C", "");
+			return status.get(0).text().replace("W3C", "").trim();
 		} else {
 			return null;
 		}

@@ -11,6 +11,7 @@ import net.pixomania.crawler.datatypes.StandardVersion;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CSVExport {
@@ -21,7 +22,7 @@ public class CSVExport {
 		try {
 			if (CSVFile.exists()) CSVFile.delete();
 			if (!CSVFile.exists()) CSVFile.createNewFile();
-			writer = new FileWriter(new File("exported.csv"));
+			writer = new FileWriter(CSVFile);
 
 			writer.append("Standard,Editor,Affiliation,Until,Date,Status,Link\n");
 
@@ -39,13 +40,39 @@ public class CSVExport {
 				}
 			}
 
-			writer.append("\n");
+			writer.append(",,,,,,\n");
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public static void exportLinkability(ArrayList<Standard> standards) {
+		File CSVFile = new File("exported_link.csv");
 
+		FileWriter writer = null;
+		try {
+			if (CSVFile.exists()) CSVFile.delete();
+			if (!CSVFile.exists()) CSVFile.createNewFile();
+			writer = new FileWriter(CSVFile);
+
+			writer.append("Previous,Current\n");
+
+			for (Standard standard : standards) {
+				for (StandardVersion standardVersion : standard.getVersions()) {
+					for (StandardVersion prev : standardVersion.getPrev()) {
+						writer.append(prev.getLink()).append(",");
+						writer.append(standardVersion.getLink()).append("\n");
+					}
+				}
+			}
+
+			writer.append(",\n");
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
