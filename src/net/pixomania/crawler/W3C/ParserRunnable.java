@@ -3,14 +3,14 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler;
+package net.pixomania.crawler.W3C;
 
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
-import net.pixomania.crawler.csv.CSVExport;
-import net.pixomania.crawler.datatypes.Standard;
-import net.pixomania.crawler.datatypes.StandardVersion;
-import net.pixomania.crawler.gui.Main;
+import net.pixomania.crawler.W3C.csv.CSVExport;
+import net.pixomania.crawler.W3C.datatypes.Standard;
+import net.pixomania.crawler.W3C.datatypes.StandardVersion;
+import net.pixomania.crawler.W3C.gui.W3CGUI;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -39,21 +39,21 @@ public class ParserRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		for (Standard standard : Main.getStandards()) {
+		for (Standard standard : W3CGUI.getStandards()) {
 			parseVersion(standard.getLink(), standard, null);
 		}
 
 		Platform.runLater(() -> {
 			if (orphans.size() != 0) {
-				Main.getBrowser().load("data:text/html,Orphans!");
+				W3CGUI.getBrowser().load("data:text/html,Orphans!");
 			} else {
-				Main.getBrowser().load("data:text/html,No more standards!");
+				W3CGUI.getBrowser().load("data:text/html,No more standards!");
 			}
 		});
 
-		Platform.runLater(() -> Main.redrawInfopanel("Done", null));
-		CSVExport.export(Main.getStandards());
-		CSVExport.exportLinkability(Main.getStandards());
+		Platform.runLater(() -> W3CGUI.redrawInfopanel("Done", null));
+		CSVExport.export(W3CGUI.getStandards());
+		CSVExport.exportLinkability(W3CGUI.getStandards());
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ParserRunnable implements Runnable {
 	 */
 	private StandardVersion parseVersion(String url, Standard standard, @Nullable StandardVersion svnext) {
 		System.out.println("PARSING: " + url);
-		Platform.runLater(() -> Main.getBrowser().load(url));
+		Platform.runLater(() -> W3CGUI.getBrowser().load(url));
 
 		StandardVersion sv = null;
 
@@ -105,17 +105,17 @@ public class ParserRunnable implements Runnable {
 
 		// Unfortunately we need to cast the return type, so we do have to know what kind of
 		// result we expect for that kind of parser
-		sv.setDate((String) Main.getParsers().get("date").parse(url, doc));
-		sv.setTitle((String) Main.getParsers().get("title").parse(url, doc));
-		sv.setStatus((String) Main.getParsers().get("status").parse(url, doc));
-		sv.setEditors((ArrayList<String[]>) Main.getParsers().get("editors").parse(url, doc));
+		sv.setDate((String) W3CGUI.getParsers().get("date").parse(url, doc));
+		sv.setTitle((String) W3CGUI.getParsers().get("title").parse(url, doc));
+		sv.setStatus((String) W3CGUI.getParsers().get("status").parse(url, doc));
+		sv.setEditors((ArrayList<String[]>) W3CGUI.getParsers().get("editors").parse(url, doc));
 
-		ArrayList<String> urls = (ArrayList<String>) Main.getParsers().get("previous").parse(url, doc);
+		ArrayList<String> urls = (ArrayList<String>) W3CGUI.getParsers().get("previous").parse(url, doc);
 
 		if (!url.contains(standard.getName())) {
 			synchronized (this) {
 				try {
-					Platform.runLater(() -> Main.confirmDialog(standard.getName(), url));
+					Platform.runLater(() -> W3CGUI.confirmDialog(standard.getName(), url));
 
 					this.wait();
 				} catch (InterruptedException e1) {
@@ -132,7 +132,7 @@ public class ParserRunnable implements Runnable {
 		}
 
 		final StandardVersion innerSv = sv;
-		Platform.runLater(() -> Main.redrawInfopanel(standard.getName(), innerSv));
+		Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getName(), innerSv));
 
 		if(wait) {
 			synchronized (this) {

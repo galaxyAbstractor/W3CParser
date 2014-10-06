@@ -3,19 +3,18 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.parser.rules.date;
+package net.pixomania.crawler.W3C.parser.rules.title;
 
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class DateRule1 implements Rule<String> {
-
+public class TitleRule1 implements Rule<String> {
 	@Override
 	public String run(String url, Document doc) {
-		Elements time = doc.select("time");
-		if (time.size() != 0) {
-			return time.get(0).attr("datetime").trim();
+		Elements title = doc.select("#title");
+		if (title.size() != 0) {
+			return title.get(0).text().trim();
 		} else {
 			return null;
 		}

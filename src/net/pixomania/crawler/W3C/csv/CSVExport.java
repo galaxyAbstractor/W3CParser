@@ -3,15 +3,14 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.csv;
+package net.pixomania.crawler.W3C.csv;
 
-import net.pixomania.crawler.datatypes.Standard;
-import net.pixomania.crawler.datatypes.StandardVersion;
+import net.pixomania.crawler.W3C.datatypes.Standard;
+import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CSVExport {

@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.datatypes;
+package net.pixomania.crawler.W3C.datatypes;
 
 import java.util.ArrayList;
 

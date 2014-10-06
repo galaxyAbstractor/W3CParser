@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.gui;
+package net.pixomania.crawler.W3C.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,19 +17,19 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import net.pixomania.crawler.ParserRunnable;
-import net.pixomania.crawler.datatypes.Standard;
-import net.pixomania.crawler.datatypes.StandardVersion;
+import net.pixomania.crawler.W3C.ParserRunnable;
+import net.pixomania.crawler.W3C.datatypes.Standard;
+import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.parser.Parser;
-import net.pixomania.crawler.parser.rules.date.*;
-import net.pixomania.crawler.parser.rules.title.*;
-import net.pixomania.crawler.parser.rules.editors.*;
-import net.pixomania.crawler.parser.rules.previous.*;
-import net.pixomania.crawler.parser.rules.status.*;
+import net.pixomania.crawler.W3C.parser.rules.date.*;
+import net.pixomania.crawler.W3C.parser.rules.title.*;
+import net.pixomania.crawler.W3C.parser.rules.editors.*;
+import net.pixomania.crawler.W3C.parser.rules.previous.*;
+import net.pixomania.crawler.W3C.parser.rules.status.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Main extends Application {
+public class W3CGUI extends Application {
 
 	public static Browser getBrowser() {
 		return browser;
@@ -219,7 +219,4 @@ public class Main extends Application {
 		infopanel.getChildren().addAll(yes, no);
 	}
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

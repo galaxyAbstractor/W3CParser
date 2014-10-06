@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.gui;
+package net.pixomania.crawler.W3C.gui;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;

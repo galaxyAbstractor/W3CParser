@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.parser.rules.previous;
+package net.pixomania.crawler.W3C.parser.rules.previous;
 
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.nodes.Document;
