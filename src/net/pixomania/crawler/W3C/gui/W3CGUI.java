@@ -18,16 +18,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.pixomania.crawler.W3C.ParserRunnable;
+import net.pixomania.crawler.W3C.W3C;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
-import net.pixomania.crawler.parser.Parser;
-import net.pixomania.crawler.W3C.parser.rules.date.*;
-import net.pixomania.crawler.W3C.parser.rules.title.*;
-import net.pixomania.crawler.W3C.parser.rules.editors.*;
-import net.pixomania.crawler.W3C.parser.rules.previous.*;
-import net.pixomania.crawler.W3C.parser.rules.status.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import net.pixomania.crawler.gui.Browser;
 
 public class W3CGUI extends Application {
 
@@ -38,19 +32,7 @@ public class W3CGUI extends Application {
 	private static Browser browser;
 	private static final VBox infopanel = new VBox();
 
-	private static final ParserRunnable parser = new ParserRunnable();
-	private final Thread parserThread = new Thread(parser);
 
-	private final static ArrayList<Standard> standards = new ArrayList<>();
-	private final static HashMap<String, Parser> parsers = new HashMap<>();
-
-	public static ArrayList<Standard> getStandards() {
-		return standards;
-	}
-
-	public static HashMap<String, Parser> getParsers() {
-		return parsers;
-	}
 
 	@Override
     public void start(Stage primaryStage) throws Exception {
@@ -75,26 +57,7 @@ public class W3CGUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
-		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
-		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
-		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
-		parsers.put("previous", new Parser(new PreviousRule1()));
 
-		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
-		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
-		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
-		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
-		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
-		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
-		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
-		standards.add(new Standard("html-media-capture", "http://www.w3.org/TR/html-media-capture/"));
-		standards.add(new Standard("vibration", "http://www.w3.org/TR/2014/CR-vibration-20140909/"));
-
-		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
-		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());
-
-		parserThread.start();
     }
 
 	/**
@@ -130,9 +93,9 @@ public class W3CGUI extends Application {
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					synchronized (parser) {
+					synchronized (W3C.getParser()) {
 						btn.setDisable(true);
-						parser.notify();
+						W3C.getParser().notify();
 					}
 				}
 			});
@@ -142,7 +105,7 @@ public class W3CGUI extends Application {
 
 		VBox all = new VBox();
 
-		for (Standard standard : standards) {
+		for (Standard standard : W3C.getStandards()) {
 			all.getChildren().add(new Label("Name: " + standard.getName()));
 			for (StandardVersion s : standard.getVersions()) {
 				all.getChildren().add(new Label("Name: " + s.getTitle()));
@@ -201,6 +164,8 @@ public class W3CGUI extends Application {
 
 		Button yes = new Button("Yes");
 		Button no = new Button("No");
+
+		ParserRunnable parser = W3C.getParser();
 
 		yes.setOnAction((event) -> {
 				synchronized (parser) {

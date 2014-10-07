@@ -5,8 +5,9 @@
 
 package net.pixomania.crawler.parser;
 
-import org.jsoup.nodes.Document;
 import net.pixomania.crawler.parser.rules.Rule;
+import org.jsoup.nodes.Document;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

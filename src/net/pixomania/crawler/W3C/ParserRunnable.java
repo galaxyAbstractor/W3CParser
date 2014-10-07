@@ -11,11 +11,13 @@ import net.pixomania.crawler.W3C.csv.CSVExport;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
+import net.pixomania.crawler.mapper.PeopleMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The ParserRunnable class is the startpoint of the parsing.
@@ -37,9 +39,11 @@ public class ParserRunnable implements Runnable {
 
 	private boolean wait = false;
 
+	private final HashSet<String> unmappedEditors = new HashSet<>();
+
 	@Override
 	public void run() {
-		for (Standard standard : W3CGUI.getStandards()) {
+		for (Standard standard : W3C.getStandards()) {
 			parseVersion(standard.getLink(), standard, null);
 		}
 
@@ -52,8 +56,11 @@ public class ParserRunnable implements Runnable {
 		});
 
 		Platform.runLater(() -> W3CGUI.redrawInfopanel("Done", null));
-		CSVExport.export(W3CGUI.getStandards());
-		CSVExport.exportLinkability(W3CGUI.getStandards());
+		CSVExport.export(W3C.getStandards());
+		CSVExport.exportLinkability(W3C.getStandards());
+
+		System.out.println("Unmapped editors");
+		unmappedEditors.forEach(System.out::println);
 	}
 
 	/**
@@ -105,12 +112,19 @@ public class ParserRunnable implements Runnable {
 
 		// Unfortunately we need to cast the return type, so we do have to know what kind of
 		// result we expect for that kind of parser
-		sv.setDate((String) W3CGUI.getParsers().get("date").parse(url, doc));
-		sv.setTitle((String) W3CGUI.getParsers().get("title").parse(url, doc));
-		sv.setStatus((String) W3CGUI.getParsers().get("status").parse(url, doc));
-		sv.setEditors((ArrayList<String[]>) W3CGUI.getParsers().get("editors").parse(url, doc));
+		sv.setDate((String) W3C.getParsers().get("date").parse(url, doc));
+		sv.setTitle((String) W3C.getParsers().get("title").parse(url, doc));
+		sv.setStatus((String) W3C.getParsers().get("status").parse(url, doc));
+		ArrayList<String[]> editors = (ArrayList<String[]>) W3C.getParsers().get("editors").parse(url, doc);
+		sv.setEditors(editors);
 
-		ArrayList<String> urls = (ArrayList<String>) W3CGUI.getParsers().get("previous").parse(url, doc);
+		for (String[] editor : editors) {
+			if (!PeopleMap.personExists(editor[0])) {
+				unmappedEditors.add(editor[0]);
+			}
+		}
+
+		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc);
 
 		if (!url.contains(standard.getName())) {
 			synchronized (this) {
