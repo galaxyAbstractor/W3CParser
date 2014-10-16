@@ -37,7 +37,7 @@ public class ParserRunnable implements Runnable {
 		this.orphan = orphan;
 	}
 
-	private boolean wait = false;
+	private boolean wait = true;
 
 	private final HashSet<String> unmappedEditors = new HashSet<>();
 

@@ -6,6 +6,7 @@
 package net.pixomania.crawler.W3C;
 
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
@@ -50,24 +51,25 @@ public class W3C {
 		Thread thread = new Thread(runGUI);
 		thread.start();
 
+		// We need to wait for GUI to initialize before going on
+		synchronized (parsers) {
+			try {
+				parsers.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
-		standards.add(new Standard("IndexedDB", "http://www.w3.org/TR/IndexedDB/"));
-		standards.add(new Standard("webrtc", "http://www.w3.org/TR/webrtc/"));
-		standards.add(new Standard("geolocation-API", "http://www.w3.org/TR/geolocation-API/"));
-		standards.add(new Standard("webdatabase", "http://www.w3.org/TR/webdatabase/"));
-		standards.add(new Standard("webstorage", "http://www.w3.org/TR/webstorage/"));
-		standards.add(new Standard("touch-events", "http://www.w3.org/TR/touch-events/"));
-		standards.add(new Standard("selectors-api", "http://www.w3.org/TR/selectors-api/"));
-		standards.add(new Standard("html-media-capture", "http://www.w3.org/TR/html-media-capture/"));
-		standards.add(new Standard("vibration", "http://www.w3.org/TR/2014/CR-vibration-20140909/"));
+		standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
 
-		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
-		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());
+//		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
+//		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());
 
 		parserThread.start();
 	}

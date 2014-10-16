@@ -6,6 +6,7 @@
 package net.pixomania.crawler;
 
 import net.pixomania.crawler.Mozilla.Mozilla;
+import net.pixomania.crawler.W3C.W3C;
 import net.pixomania.crawler.mapper.PeopleMap;
 
 public class Main {
@@ -14,7 +15,7 @@ public class Main {
 		PeopleMap.add("Jonas Sicking", "jonas@sicking.cc");
 		PeopleMap.add("Anant Arayanan", "anarayanan@mozilla.com");
 		PeopleMap.add("Anant Arayanan", "anant@kix.in");
-		//W3C w3c = new W3C();
-		Mozilla mozilla = new Mozilla();
+		W3C w3c = new W3C();
+		//Mozilla mozilla = new Mozilla();
 	}
 }

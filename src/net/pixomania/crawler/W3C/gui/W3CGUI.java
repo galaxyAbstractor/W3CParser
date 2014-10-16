@@ -57,7 +57,9 @@ public class W3CGUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
+		synchronized (W3C.getParsers()) {
+			W3C.getParsers().notify();
+		}
     }
 
 	/**
