@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SpecificEditorsRule2 implements Rule<ArrayList<String[]>> {
 	@Override
 	public ArrayList<String[]> run(String url, Document doc) {
-		ArrayList<String[]> editors = (ArrayList<String[]>) W3C.getParsers().get("editors").parse(url, doc, true);
+		ArrayList<String[]> editors = (ArrayList<String[]>) W3C.getParsers().get("editors").parse(url, doc, true).getResult();
 		editors.set(3, new String[]{"Anant Narayanan", "Mozilla", "201211xx"});
 		return editors;
 	}

@@ -59,7 +59,7 @@ public class ParserRunnable implements Runnable {
 		if (emailHash == null) emailHash = new HashMap<>();
 
 		// URL is not relevant for this parsing
-		emailHash.put(email, (Integer) Bugtracker.getParsers().get("issuecount").parse(null, doc));
+		emailHash.put(email, (Integer) Bugtracker.getParsers().get("issuecount").parse(null, doc).getResult());
 
 		result.put(person, emailHash);
 

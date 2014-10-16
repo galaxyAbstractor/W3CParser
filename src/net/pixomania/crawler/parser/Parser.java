@@ -61,20 +61,22 @@ public class Parser {
 	 * @param doc The document to be parsed
 	 * @return Returns a type based on the generic of the Rule defined in this instance of the parser
 	 */
-	public Object parse(String url, Document doc) {
-		Object result = null;
+	public Result parse(String url, Document doc) {
+		Result result = new Result();
 
 		Rule specificRule = specificRules.get(url);
 
 		if(specificRule == null) {
 			for (Rule rule : rules) {
-				result = rule.run(url, doc);
-				if (result != null) {
+				result.setResult(rule.run(url, doc));
+				if (result.getResult() != null) {
+					result.setRule(rule);
 					break;
 				}
 			}
 		} else {
-			result = specificRule.run(url, doc);
+			result.setResult(specificRule.run(url, doc));
+			result.setRule(specificRule);
 		}
 
 		return result;
@@ -88,14 +90,15 @@ public class Parser {
 	 * @param url The URL we are parsing, this is checked against specific rules
 	 * @param doc The document to be parsed
 	 * @param noSpecific Ignore specific rules - however can be set to whatever, only used for overloading
-	 * @return Returns a type based on the generic of the Rule defined in this instance of the parser
+	 * @return Result Returns a type based on the generic of the Rule defined in this instance of the parser
 	 */
-	public Object parse(String url, Document doc, boolean noSpecific) {
-		Object result = null;
+	public Result parse(String url, Document doc, boolean noSpecific) {
+		Result result = new Result();
 
 		for (Rule rule : rules) {
-			result = rule.run(url, doc);
-			if (result != null) {
+			result.setResult(rule.run(url, doc));
+			if (result.getResult() != null) {
+				result.setRule(rule);
 				break;
 			}
 		}

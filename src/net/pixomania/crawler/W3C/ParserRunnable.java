@@ -12,6 +12,7 @@ import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.mapper.PeopleMap;
+import net.pixomania.crawler.parser.Result;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -110,13 +111,22 @@ public class ParserRunnable implements Runnable {
 
 		sv.setLink(url);
 
-		// Unfortunately we need to cast the return type, so we do have to know what kind of
-		// result we expect for that kind of parser
-		sv.setDate((String) W3C.getParsers().get("date").parse(url, doc));
-		sv.setTitle((String) W3C.getParsers().get("title").parse(url, doc));
-		sv.setStatus((String) W3C.getParsers().get("status").parse(url, doc));
-		ArrayList<String[]> editors = (ArrayList<String[]>) W3C.getParsers().get("editors").parse(url, doc);
+		Result date = W3C.getParsers().get("date").parse(url, doc);
+		sv.setDate((String) date.getResult());
+		sv.getRules().put("date", date.getRule());
+
+		Result title = W3C.getParsers().get("title").parse(url, doc);
+		sv.setTitle((String) title.getResult());
+		sv.getRules().put("title", title.getRule());
+
+		Result status = W3C.getParsers().get("status").parse(url, doc);
+		sv.setStatus((String) status.getResult());
+		sv.getRules().put("status", status.getRule());
+
+		Result ed = W3C.getParsers().get("editors").parse(url, doc);
+		ArrayList<String[]> editors = (ArrayList<String[]>) ed.getResult();
 		sv.setEditors(editors);
+		sv.getRules().put("editors", ed.getRule());
 
 		for (String[] editor : editors) {
 			if (!PeopleMap.personExists(editor[0])) {
@@ -124,7 +134,7 @@ public class ParserRunnable implements Runnable {
 			}
 		}
 
-		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc);
+		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc).getResult();
 
 		if (!url.contains(standard.getName())) {
 			synchronized (this) {

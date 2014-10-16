@@ -5,7 +5,10 @@
 
 package net.pixomania.crawler.W3C.datatypes;
 
+import net.pixomania.crawler.parser.rules.Rule;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StandardVersion {
 	private String title;
@@ -16,6 +19,8 @@ public class StandardVersion {
 
 	private final ArrayList<StandardVersion> next = new ArrayList<>();
 	private final ArrayList<StandardVersion> prev = new ArrayList<>();
+
+	private final HashMap<String, Rule> rules = new HashMap<>();
 
 	@Override
 	public String toString() {
@@ -79,6 +84,9 @@ public class StandardVersion {
 		this.link = link;
 	}
 
+	public HashMap<String, Rule> getRules() {
+		return rules;
+	}
 
 	public ArrayList<StandardVersion> getNext() {
 		return next;

@@ -77,11 +77,11 @@ public class W3CGUI extends Application {
 		current.getChildren().add(new Label("Current standard: " +currentStandard));
 
 		if (sv != null) {
-			current.getChildren().add(new Label("Name: " + sv.getTitle()));
-			current.getChildren().add(new Label("Date: " + sv.getDate()));
-			current.getChildren().add(new Label("Status: " + sv.getStatus()));
-			current.getChildren().add(new Label("Link: " + sv.getLink()));
-			current.getChildren().add(new Label("Editors: "));
+			current.getChildren().add(new Label("Name (Rule: " + sv.getRules().get("title").getClass().getSimpleName() +"): " + sv.getTitle()));
+			current.getChildren().add(new Label("Date (Rule: " + sv.getRules().get("date").getClass().getSimpleName() +"): " + sv.getDate()));
+			current.getChildren().add(new Label("Status (Rule: " + sv.getRules().get("status").getClass().getSimpleName() + "): " + sv.getStatus()));
+			current.getChildren().add(new Label("Link:" + sv.getLink()));
+			current.getChildren().add(new Label("Editors (Rule: " + sv.getRules().get("editors").getClass().getSimpleName() + "):"));
 
 			for (String[] editor : sv.getEditors()) {
 				current.getChildren().add(new Label("  " + editor[0] + ", " + editor[1]+
