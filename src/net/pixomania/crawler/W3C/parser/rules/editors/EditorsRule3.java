@@ -22,7 +22,25 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 		Elements wrongEditors = doc.select("dt:contains(Editor')");
 
 		if (wrongEditors.size() != 0) {
-			wrongEditors.get(0).remove();
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt:contains(Editors')");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("#authors ~ dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt:contains(Authors) ~ dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
 		}
 
 		Elements editors = doc.select("dt:contains(Editor) ~ dd");
@@ -123,7 +141,7 @@ public class EditorsRule3 implements Rule<ArrayList<String[]>> {
 				ed[1] = m.group(1).substring(1, m.group(1).length()-1).trim();
 				editorText = editorText.replace(m.group(1), "");
 			} else {
-				ed[1] = "Unknown";
+				return null;
 			}
 
 			re1=".*?";	// Non-greedy match on filler

@@ -6,6 +6,7 @@
 package net.pixomania.crawler.W3C.parser.rules.editors;
 
 import net.pixomania.crawler.parser.rules.Rule;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -22,7 +23,13 @@ public class EditorsRule2 implements Rule<ArrayList<String[]>> {
 		Elements wrongEditors = doc.select("dt:contains(Editor')");
 
 		if (wrongEditors.size() != 0) {
-			wrongEditors.get(0).remove();
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt:contains(Principal Authors:) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
 		}
 
 		Elements editors = doc.select("dt:contains(Editor) ~ dd");
@@ -116,7 +123,10 @@ public class EditorsRule2 implements Rule<ArrayList<String[]>> {
 			if (split.length < 2) return null;
 
 			ed[0] = split[0].trim();
-			ed[1] = split[1].trim();
+
+			String[] copy = new String[split.length-1];
+			System.arraycopy(split, 1, copy, 0, split.length-1);
+			ed[1] = StringUtils.join(copy, ", ").trim();
 
 			editorList.add(ed);
 		}

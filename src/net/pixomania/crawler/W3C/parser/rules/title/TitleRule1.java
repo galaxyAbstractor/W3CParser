@@ -14,7 +14,8 @@ public class TitleRule1 implements Rule<String> {
 	public String run(String url, Document doc) {
 		Elements title = doc.select("#title");
 		if (title.size() != 0) {
-			return title.get(0).text().trim();
+			String t = title.get(0).text().trim();
+			return t.isEmpty() ? null : t;
 		} else {
 			return null;
 		}

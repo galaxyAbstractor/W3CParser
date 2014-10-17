@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class PreviousRule1 implements Rule<ArrayList<String>> {
+public class PreviousRule2 implements Rule<ArrayList<String>> {
 
 	@Override
 	public ArrayList<String> run(String url, Document doc) {
@@ -22,8 +22,11 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 		if (dt.size() == 0) return null;
 
 		for (Element d : dt) {
-			if (d.text().contains(" ")) return null; // Space is a no no
-			urls.add(d.text());
+			Elements a = d.select("a");
+
+			for (Element link : a) {
+				urls.add(a.attr("href"));
+			}
 		}
 
 		if (urls.size() == 0) return null;
