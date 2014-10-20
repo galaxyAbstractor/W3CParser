@@ -23,6 +23,8 @@ import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Browser;
 
+import java.util.ArrayList;
+
 public class W3CGUI extends Application {
 
 	public static Browser getBrowser() {
@@ -83,9 +85,8 @@ public class W3CGUI extends Application {
 			current.getChildren().add(new Label("Link:" + sv.getLink()));
 			current.getChildren().add(new Label("Editors (Rule: " + sv.getRules().get("editors").getClass().getSimpleName() + "):"));
 
-			for (String[] editor : sv.getEditors()) {
-				current.getChildren().add(new Label("  " + editor[0] + ", " + editor[1]+
-						((editor[2].equals("")) ? "" : " " + editor[2])));
+			for (ArrayList<String> editor : sv.getEditors()) {
+				current.getChildren().add(new Label("  " + editor.get(0) + ", " + editor.get(1)));
 			}
 
 			current.setPrefWidth(500);
@@ -115,10 +116,8 @@ public class W3CGUI extends Application {
 				all.getChildren().add(new Label("Status: " + s.getStatus()));
 				all.getChildren().add(new Label("Link: " + s.getLink()));
 				all.getChildren().add(new Label("Editors: "));
-
-				for (String[] editor : s.getEditors()) {
-					all.getChildren().add(new Label("  " + editor[0] + ", " + editor[1] +
-							((editor[2].equals("")) ? "" : " " + editor[2])));
+				for (ArrayList<String> editor : s.getEditors()) {
+					all.getChildren().add(new Label("  " + editor.get(0) + ", " + editor.get(1)));
 				}
 
 				all.getChildren().add(new Label("Previous: "));

@@ -6,7 +6,6 @@
 package net.pixomania.crawler.W3C;
 
 import javafx.application.Application;
-import javafx.embed.swing.JFXPanel;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
@@ -64,15 +63,15 @@ public class W3C {
 		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
-		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(), new EditorsRule4()));
+		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 
-		//standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
+		standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
 		//standards.add(new Standard("xml-entity-names", "http://www.w3.org/TR/xml-entity-names/"));
 		//standards.add(new Standard("exi-profile", "http://www.w3.org/TR/exi-profile/"));
 		//standards.add(new Standard("emotionml", "http://www.w3.org/TR/emotionml/"));
 		//standards.add(new Standard("xpath-3", "http://www.w3.org/TR/xpath-3/"));
-		standards.add(new Standard("xpath-datamodel-30", "http://www.w3.org/TR/xpath-datamodel-30/"));
+		//standards.add(new Standard("xpath-datamodel-30", "http://www.w3.org/TR/xpath-datamodel-30/"));
 
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/webrtc/", new SpecificEditorsRule2());

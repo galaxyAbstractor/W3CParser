@@ -27,11 +27,11 @@ public class CSVExport {
 
 			for (Standard standard : standards) {
 				for (StandardVersion standardVersion : standard.getVersions()) {
-					for (String[] editor : standardVersion.getEditors()) {
+					for (ArrayList<String> editor : standardVersion.getEditors()) {
 						writer.append(standardVersion.getTitle()).append(",");
-						writer.append(editor[0]).append(",");
-						writer.append(editor[1]).append(",");
-						writer.append(editor[2]).append(",");
+						writer.append(editor.get(0)).append(",");
+						writer.append(editor.get(1)).append(",");
+						writer.append("").append(",");
 						writer.append(standardVersion.getDate()).append(",");
 						writer.append(standardVersion.getStatus()).append(",");
 						writer.append(standardVersion.getLink()).append("\n");

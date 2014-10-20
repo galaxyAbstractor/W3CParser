@@ -18,23 +18,6 @@ public class Standard {
 		this.link = link;
 	}
 
-	@Override
-	public String toString() {
-		String output = "";
-		for (int i = getVersions().size() - 1; i >= 0; i--) {
-			for (String[] editor : getVersions().get(i).getEditors()) {
-				output += getVersions().get(i).getTitle() + "\t";
-				output += editor[0] + "\t";
-				output += editor[1] + "\t";
-				output += getVersions().get(i).getDate() + "\t";
-				output += getVersions().get(i).getStatus() + "\t";
-				output += getVersions().get(i).getLink() + "\t\n";
-			}
-		}
-
-		return output;
-	}
-
 	public String getName() {
 		return name;
 	}

@@ -14,35 +14,13 @@ public class StandardVersion {
 	private String title;
 	private String date;
 	private String status;
-	private ArrayList<String[]> editors = new ArrayList<>();
+	private ArrayList<ArrayList<String>> editors = new ArrayList<>();
 	private String link;
 
 	private final ArrayList<StandardVersion> next = new ArrayList<>();
 	private final ArrayList<StandardVersion> prev = new ArrayList<>();
 
 	private final HashMap<String, Rule> rules = new HashMap<>();
-
-	@Override
-	public String toString() {
-		String output = "";
-
-		output += "Name: " + getTitle() + "\n";
-		output += "Link " + getLink() + "\n";
-		output += "Date: " + getDate() + "\n";
-		output += "Status: " + getStatus() + "\n";
-		output += "Editors: \n";
-
-		for (String[] editor : getEditors()) {
-			output += "\t" + editor[0] + ", " + editor[1] + "\n";
-		}
-
-		output += "Next: " + getNext().size() + "\n";
-
-		output += "Previous: " + getPrev().size() + "\n";
-
-		return output;
-	}
-
 
 	public String getTitle() {
 		return title;
@@ -68,11 +46,11 @@ public class StandardVersion {
 		this.status = status;
 	}
 
-	public ArrayList<String[]> getEditors() {
+	public ArrayList<ArrayList<String>> getEditors() {
 		return editors;
 	}
 
-	public void setEditors(ArrayList<String[]> editors) {
+	public void setEditors(ArrayList<ArrayList<String>> editors) {
 		this.editors = editors;
 	}
 

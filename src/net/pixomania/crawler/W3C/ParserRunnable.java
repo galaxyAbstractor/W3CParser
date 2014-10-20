@@ -124,13 +124,13 @@ public class ParserRunnable implements Runnable {
 		sv.getRules().put("status", status.getRule());
 
 		Result ed = W3C.getParsers().get("editors").parse(url, doc);
-		ArrayList<String[]> editors = (ArrayList<String[]>) ed.getResult();
+		ArrayList<ArrayList<String>> editors = (ArrayList<ArrayList<String>>) ed.getResult();
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
-		for (String[] editor : editors) {
-			if (!PeopleMap.personExists(editor[0])) {
-				unmappedEditors.add(editor[0]);
+		for (ArrayList<String> editor : editors) {
+			if (!PeopleMap.personExists(editor.get(0))) {
+				unmappedEditors.add(editor.get(0));
 			}
 		}
 
