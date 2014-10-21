@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.pixomania.crawler.W3C.ParserRunnable;
 import net.pixomania.crawler.W3C.W3C;
+import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Browser;
@@ -85,12 +86,18 @@ public class W3CGUI extends Application {
 			current.getChildren().add(new Label("Link:" + sv.getLink()));
 			current.getChildren().add(new Label("Editors (Rule: " + sv.getRules().get("editors").getClass().getSimpleName() + "):"));
 
-			for (ArrayList<String> editor : sv.getEditors()) {
-				current.getChildren().add(new Label("  " + editor.get(0) + ", " + editor.get(1)));
+			for (Person editor : sv.getEditors()) {
+				current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+				" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+				" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+				" email " + editor.getEmail()));
 			}
 
-			current.setPrefWidth(500);
-			container.getChildren().add(current);
+
+			ScrollPane sp1 = new ScrollPane();
+			sp1.setContent(current);
+			sp1.setPrefWidth(500);
+			container.getChildren().add(sp1);
 
 			Button btn = new Button("Correct");
 			btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -116,8 +123,11 @@ public class W3CGUI extends Application {
 				all.getChildren().add(new Label("Status: " + s.getStatus()));
 				all.getChildren().add(new Label("Link: " + s.getLink()));
 				all.getChildren().add(new Label("Editors: "));
-				for (ArrayList<String> editor : s.getEditors()) {
-					all.getChildren().add(new Label("  " + editor.get(0) + ", " + editor.get(1)));
+				for (Person editor : s.getEditors()) {
+					all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+							" email " + editor.getEmail()));
 				}
 
 				all.getChildren().add(new Label("Previous: "));

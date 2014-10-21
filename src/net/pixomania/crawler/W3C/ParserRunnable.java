@@ -8,6 +8,7 @@ package net.pixomania.crawler.W3C;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
 import net.pixomania.crawler.W3C.csv.CSVExport;
+import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
@@ -124,13 +125,13 @@ public class ParserRunnable implements Runnable {
 		sv.getRules().put("status", status.getRule());
 
 		Result ed = W3C.getParsers().get("editors").parse(url, doc);
-		ArrayList<ArrayList<String>> editors = (ArrayList<ArrayList<String>>) ed.getResult();
+		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
-		for (ArrayList<String> editor : editors) {
-			if (!PeopleMap.personExists(editor.get(0))) {
-				unmappedEditors.add(editor.get(0));
+		for (Person editor : editors) {
+			if (!PeopleMap.personExists(editor.getName())) {
+				unmappedEditors.add(editor.getName());
 			}
 		}
 

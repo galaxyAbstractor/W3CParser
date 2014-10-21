@@ -7,10 +7,10 @@ package net.pixomania.crawler.parser.name;
 
 public class RegexRule {
 	public String regex;
-	public int[] groups;
+	public int[] group;
 
-	public RegexRule(String regex, int[] groups) {
+	public RegexRule(String regex, int[] group) {
 		this.regex = regex;
-		this.groups = groups;
+		this.group = group;
 	}
 }

@@ -5,6 +5,7 @@
 
 package net.pixomania.crawler.W3C.csv;
 
+import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 
@@ -27,7 +28,8 @@ public class CSVExport {
 
 			for (Standard standard : standards) {
 				for (StandardVersion standardVersion : standard.getVersions()) {
-					for (ArrayList<String> editor : standardVersion.getEditors()) {
+					/*
+					for (Person editor : standardVersion.getEditors()) {
 						writer.append(standardVersion.getTitle()).append(",");
 						writer.append(editor.get(0)).append(",");
 						writer.append(editor.get(1)).append(",");
@@ -36,6 +38,7 @@ public class CSVExport {
 						writer.append(standardVersion.getStatus()).append(",");
 						writer.append(standardVersion.getLink()).append("\n");
 					}
+					*/
 				}
 			}
 

@@ -14,7 +14,7 @@ public class StandardVersion {
 	private String title;
 	private String date;
 	private String status;
-	private ArrayList<ArrayList<String>> editors = new ArrayList<>();
+	private ArrayList<Person> editors = new ArrayList<>();
 	private String link;
 
 	private final ArrayList<StandardVersion> next = new ArrayList<>();
@@ -46,11 +46,11 @@ public class StandardVersion {
 		this.status = status;
 	}
 
-	public ArrayList<ArrayList<String>> getEditors() {
+	public ArrayList<Person> getEditors() {
 		return editors;
 	}
 
-	public void setEditors(ArrayList<ArrayList<String>> editors) {
+	public void setEditors(ArrayList<Person> editors) {
 		this.editors = editors;
 	}
 
