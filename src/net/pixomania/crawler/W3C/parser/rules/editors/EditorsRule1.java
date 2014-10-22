@@ -27,6 +27,13 @@ public class EditorsRule1 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Person result = NameParser.parse(editor.text());
 
+			if (editor.select("a").size() != 0 &&
+					!editor.select("a").first().attr("href").isEmpty() &&
+					!editor.select("a").first().attr("href").contains("@")) {
+
+				result.setWebsite(editor.select("a").first().attr("href"));
+			}
+
 			if (result == null) return null;
 			editorList.add(result);
 		}

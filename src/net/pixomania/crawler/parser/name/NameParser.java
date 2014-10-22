@@ -18,15 +18,19 @@ public class NameParser {
 
 	static {
 		// name, current affiliation, current affiliation until, standard affiliation
-		// standard affiliation until, via affiliation, email
-		regex.add(new RegexRule("(([^\\(]+) \\((until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4}), while with ([^\\(]+))\\))", new int[]{2, 0, 0, 5, 4, 0, 0}));
-		regex.add(new RegexRule("(([^\\(]+) \\((while at (.+?(?=, currently)), currently ([^\\(]+)\\)))", new int[]{2, 5, 0, 4, 0, 0, 0}));
-		regex.add(new RegexRule("(([^,]+), ([^,]+), via (.+))", new int[]{2, 0, 0, 3, 0, 4, 0}));
-		regex.add(new RegexRule("(([^,]+), ([^<]+) <([^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 4}));
-		regex.add(new RegexRule("(([^,]+) <([^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 3}));
+		// standard affiliation until, via affiliation, email, working group, website
+		regex.add(new RegexRule("(([^\\(]+) \\((until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4}), while with ([^\\(]+))\\))", new int[]{2, 0, 0, 5, 4, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\((while at (.+?(?=, currently)), currently ([^\\(]+)\\)))", new int[]{2, 5, 0, 4, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 0, 3, 5}));
+		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <([^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 5, 3, 0}));
+		regex.add(new RegexRule("(([^,]+), ([^,]+), via (.+))", new int[]{2, 0, 0, 3, 0, 4, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 4}));
+		regex.add(new RegexRule("(([^,]+), ([^<]+) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0}));
+		regex.add(new RegexRule("(([^,]+) <([^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0}));
 
-		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0}));
-		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0}));
 
 		preproc.add("\\(deceased\\)");
 	}

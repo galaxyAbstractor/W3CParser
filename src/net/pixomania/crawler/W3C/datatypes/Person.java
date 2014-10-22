@@ -13,6 +13,8 @@ public class Person {
 	public String standardAffiliationUntil;
 	public String viaAffiliation;
 	public String email;
+	public String workgroup;
+	public String website;
 
 	public String getName() {
 		return name;
@@ -68,5 +70,21 @@ public class Person {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getWorkgroup() {
+		return workgroup;
+	}
+
+	public void setWorkgroup(String workgroup) {
+		this.workgroup = workgroup;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 }

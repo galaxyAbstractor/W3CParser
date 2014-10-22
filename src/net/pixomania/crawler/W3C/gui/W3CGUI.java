@@ -90,7 +90,7 @@ public class W3CGUI extends Application {
 				current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 				" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 				" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-				" email " + editor.getEmail()));
+				" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 			}
 
 
@@ -127,7 +127,7 @@ public class W3CGUI extends Application {
 					all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail()));
+							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 
 				all.getChildren().add(new Label("Previous: "));

@@ -50,7 +50,15 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
+
 			Person result = NameParser.parse(editor.text());
+
+			if (editor.select("a").size() != 0 &&
+				!editor.select("a").first().attr("href").isEmpty() &&
+				!editor.select("a").first().attr("href").contains("@")) {
+
+				result.setWebsite(editor.select("a").first().attr("href"));
+			}
 
 			if (result == null) return null;
 			editorList.add(result);
