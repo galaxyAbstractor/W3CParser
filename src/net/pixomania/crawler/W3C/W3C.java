@@ -66,7 +66,7 @@ public class W3C {
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 
-		//standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
+		standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
 		//standards.add(new Standard("xml-entity-names", "http://www.w3.org/TR/xml-entity-names/"));
 		//standards.add(new Standard("exi-profile", "http://www.w3.org/TR/exi-profile/"));
 		//standards.add(new Standard("emotionml", "http://www.w3.org/TR/emotionml/"));
@@ -74,7 +74,7 @@ public class W3C {
 		//standards.add(new Standard("xpath-datamodel-30", "http://www.w3.org/TR/xpath-datamodel-30/"));
 		//standards.add(new Standard("xquery-30", "http://www.w3.org/TR/xquery-30/"));
 		//standards.add(new Standard("xqueryx-30", "http://www.w3.org/TR/xqueryx-30/"));
-		standards.add(new Standard("xslt-xquery-serialization-30", "http://www.w3.org/TR/xslt-xquery-serialization-30/"));
+		//standards.add(new Standard("xslt-xquery-serialization-30", "http://www.w3.org/TR/xslt-xquery-serialization-30/"));
 
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 

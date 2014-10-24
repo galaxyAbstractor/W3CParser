@@ -25,7 +25,7 @@ public class PreviousRule2 implements Rule<ArrayList<String>> {
 			Elements a = d.select("a");
 
 			for (Element link : a) {
-				urls.add(a.attr("href"));
+				urls.add(link.attr("href"));
 			}
 		}
 
