@@ -3,62 +3,23 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.editors;
+package net.pixomania.crawler.W3C.parser.rules.previousEditors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class EditorsRule2 implements Rule<ArrayList<Person>> {
+public class PreviousEditorsRule2 implements Rule<ArrayList<Person>> {
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements wrongEditors = doc.select("dt:contains(Editor')");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Principal Authors:) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Editors')");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Authors) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Former Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		Elements editors = doc.select("dt:contains(Editor) ~ dd");
+		Elements editors = doc.select("dt:contains(Previous Editor) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
@@ -69,8 +30,8 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 				Person result = NameParser.parse(editor.text());
 
 				if (editor.select("a").size() != 0 &&
-						!editor.select("a").first().attr("href").isEmpty() &&
-						!editor.select("a").first().attr("href").contains("@")) {
+					!editor.select("a").first().attr("href").isEmpty() &&
+					!editor.select("a").first().attr("href").contains("@")) {
 
 					result.setWebsite(editor.select("a").first().attr("href"));
 				}

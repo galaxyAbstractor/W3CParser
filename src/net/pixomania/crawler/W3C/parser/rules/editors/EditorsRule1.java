@@ -21,6 +21,18 @@ public class EditorsRule1 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
+		Elements wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt:contains(Former Editor) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
 		Elements editors = doc.select(".p-author");
 		if (editors.size() == 0) return null;
 

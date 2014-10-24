@@ -15,6 +15,7 @@ public class StandardVersion {
 	private String date;
 	private String status;
 	private ArrayList<Person> editors = new ArrayList<>();
+	private ArrayList<Person> previousEditors = new ArrayList<>();
 	private String link;
 
 	private final ArrayList<StandardVersion> next = new ArrayList<>();
@@ -72,5 +73,13 @@ public class StandardVersion {
 
 	public ArrayList<StandardVersion> getPrev() {
 		return prev;
+	}
+
+	public ArrayList<Person> getPreviousEditors() {
+		return previousEditors;
+	}
+
+	public void setPreviousEditors(ArrayList<Person> previousEditors) {
+		this.previousEditors = previousEditors;
 	}
 }

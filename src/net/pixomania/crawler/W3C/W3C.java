@@ -13,6 +13,8 @@ import net.pixomania.crawler.W3C.parser.rules.date.DateRule2;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule2;
+import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
+import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule2;
 import net.pixomania.crawler.W3C.parser.rules.status.StatusRule1;
 import net.pixomania.crawler.W3C.parser.rules.status.StatusRule2;
 import net.pixomania.crawler.W3C.parser.rules.status.StatusRule3;
@@ -64,9 +66,10 @@ public class W3C {
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2()));
+		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 
-		standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
+		//standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
 		//standards.add(new Standard("xml-entity-names", "http://www.w3.org/TR/xml-entity-names/"));
 		//standards.add(new Standard("exi-profile", "http://www.w3.org/TR/exi-profile/"));
 		//standards.add(new Standard("emotionml", "http://www.w3.org/TR/emotionml/"));
@@ -75,6 +78,8 @@ public class W3C {
 		//standards.add(new Standard("xquery-30", "http://www.w3.org/TR/xquery-30/"));
 		//standards.add(new Standard("xqueryx-30", "http://www.w3.org/TR/xqueryx-30/"));
 		//standards.add(new Standard("xslt-xquery-serialization-30", "http://www.w3.org/TR/xslt-xquery-serialization-30/"));
+		//standards.add(new Standard("css-namespaces-3", "http://www.w3.org/TR/css-namespaces-3/"));
+		standards.add(new Standard("wai-aria", "http://www.w3.org/TR/2009/WD-wai-aria-20090224/"));
 
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 

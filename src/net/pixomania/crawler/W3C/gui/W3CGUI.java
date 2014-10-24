@@ -93,6 +93,16 @@ public class W3CGUI extends Application {
 				" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 			}
 
+			if (sv.getPreviousEditors() != null) {
+				current.getChildren().add(new Label("Previous Editors (Rule: " + sv.getRules().get("previousEditors").getClass().getSimpleName() + "):"));
+
+				for (Person editor : sv.getPreviousEditors()) {
+					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				}
+			}
 
 			ScrollPane sp1 = new ScrollPane();
 			sp1.setContent(current);
@@ -128,6 +138,15 @@ public class W3CGUI extends Application {
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
 							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				}
+				if (s.getPreviousEditors() != null) {
+					all.getChildren().add(new Label("Previous Editors: "));
+					for (Person editor : s.getPreviousEditors()) {
+						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+					}
 				}
 
 				all.getChildren().add(new Label("Previous: "));

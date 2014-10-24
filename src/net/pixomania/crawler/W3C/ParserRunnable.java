@@ -124,6 +124,11 @@ public class ParserRunnable implements Runnable {
 		sv.setStatus((String) status.getResult());
 		sv.getRules().put("status", status.getRule());
 
+		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc);
+		ArrayList<Person> prevEditors = (ArrayList<Person>) prevEd.getResult();
+		sv.setPreviousEditors(prevEditors);
+		sv.getRules().put("previousEditors", prevEd.getRule());
+
 		Result ed = W3C.getParsers().get("editors").parse(url, doc);
 		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
 		sv.setEditors(editors);
