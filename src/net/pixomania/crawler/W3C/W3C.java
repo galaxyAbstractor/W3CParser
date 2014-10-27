@@ -8,6 +8,8 @@ package net.pixomania.crawler.W3C;
 import javafx.application.Application;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
+import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule1;
+import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule2;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule2;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
@@ -15,9 +17,8 @@ import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule2;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule2;
-import net.pixomania.crawler.W3C.parser.rules.status.StatusRule1;
-import net.pixomania.crawler.W3C.parser.rules.status.StatusRule2;
-import net.pixomania.crawler.W3C.parser.rules.status.StatusRule3;
+import net.pixomania.crawler.W3C.parser.rules.seriesEditors.SeriesEditorsRule1;
+import net.pixomania.crawler.W3C.parser.rules.status.*;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
 import net.pixomania.crawler.parser.Parser;
@@ -64,9 +65,12 @@ public class W3C {
 
 		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
-		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3()));
+		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
+				new StatusRule5(), new StatusRule6()));
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
+		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
+		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 
 		//standards.add(new Standard("MathML", "http://www.w3.org/TR/MathML/"));
@@ -79,7 +83,13 @@ public class W3C {
 		//standards.add(new Standard("xqueryx-30", "http://www.w3.org/TR/xqueryx-30/"));
 		//standards.add(new Standard("xslt-xquery-serialization-30", "http://www.w3.org/TR/xslt-xquery-serialization-30/"));
 		//standards.add(new Standard("css-namespaces-3", "http://www.w3.org/TR/css-namespaces-3/"));
-		standards.add(new Standard("wai-aria", "http://www.w3.org/TR/2009/WD-wai-aria-20090224/"));
+		//standards.add(new Standard("wai-aria", "http://www.w3.org/TR/2009/WD-wai-aria"));
+		//standards.add(new Standard("wai-aria-implementation", "http://www.w3.org/TR/wai-aria-implementation/"));
+		//standards.add(new Standard("mediaont-api", "http://www.w3.org/TR/2011/WD-mediaont-api-1.0/"));
+		//standards.add(new Standard("rdf-schema", "http://www.w3.org/TR/rdf-schema/"));
+		//standards.add(new Standard("rdf-syntax-grammar", "http://www.w3.org/TR/rdf-syntax-grammar/"));
+		//standards.add(new Standard("rdf11-concepts", "http://www.w3.org/TR/rdf11-concepts/"));
+		standards.add(new Standard("turtle", "http://www.w3.org/TR/turtle/"));
 
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 

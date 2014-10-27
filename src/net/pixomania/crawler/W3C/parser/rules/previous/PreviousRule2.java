@@ -17,6 +17,31 @@ public class PreviousRule2 implements Rule<ArrayList<String>> {
 	@Override
 	public ArrayList<String> run(String url, Document doc) {
 		ArrayList<String> urls = new ArrayList<>();
+
+		Elements wrongLinks = doc.select("dt:contains(Previous editors) ~dd");
+
+		if (wrongLinks.size() != 0) {
+			wrongLinks.remove();
+		}
+
+		wrongLinks = doc.select("dt:contains(Latest recommendation) ~dd");
+
+		if (wrongLinks.size() != 0) {
+			wrongLinks.remove();
+		}
+
+		wrongLinks = doc.select("dt:contains(Editors) ~dd");
+
+		if (wrongLinks.size() != 0) {
+			wrongLinks.remove();
+		}
+
+		wrongLinks = doc.select("dt:contains(Previous recommendation) ~dd");
+
+		if (wrongLinks.size() != 0) {
+			wrongLinks.remove();
+		}
+
 		Elements dt = doc.select("dt:contains(previous) ~ dd");
 
 		if (dt.size() == 0) return null;

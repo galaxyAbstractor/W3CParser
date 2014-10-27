@@ -3,22 +3,19 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.editors;
+package net.pixomania.crawler.W3C.parser.rules.authors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class EditorsRule2 implements Rule<ArrayList<Person>> {
+public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -41,7 +38,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
-		wrongEditors = doc.select("dt:contains(Authors) ~dd");
+		wrongEditors = doc.select("dt:contains(Editor) ~dd");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
@@ -65,7 +62,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
-		Elements editors = doc.select("dl").get(0).select("dt:contains(Editor) ~ dd");
+		Elements editors = doc.select("dl").get(0).select("dt:contains(Author) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {

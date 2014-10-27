@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.editors;
+package net.pixomania.crawler.W3C.parser.rules.authors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.parser.name.NameParser;
@@ -13,10 +13,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class EditorsRule1 implements Rule<ArrayList<Person>> {
+public class AuthorsRule1 implements Rule<ArrayList<Person>> {
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -33,11 +31,7 @@ public class EditorsRule1 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
-		wrongEditors = doc.select("dt:contains(Author) ~dd");
 
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
 
 		Elements editors = doc.select(".p-author");
 		if (editors.size() == 0) return null;

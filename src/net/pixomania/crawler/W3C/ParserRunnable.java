@@ -112,24 +112,34 @@ public class ParserRunnable implements Runnable {
 
 		sv.setLink(url);
 
-		Result date = W3C.getParsers().get("date").parse(url, doc);
+		Result date = W3C.getParsers().get("date").parse(url, doc.clone());
 		sv.setDate((String) date.getResult());
 		sv.getRules().put("date", date.getRule());
 
-		Result title = W3C.getParsers().get("title").parse(url, doc);
+		Result title = W3C.getParsers().get("title").parse(url, doc.clone());
 		sv.setTitle((String) title.getResult());
 		sv.getRules().put("title", title.getRule());
 
-		Result status = W3C.getParsers().get("status").parse(url, doc);
+		Result status = W3C.getParsers().get("status").parse(url, doc.clone());
 		sv.setStatus((String) status.getResult());
 		sv.getRules().put("status", status.getRule());
 
-		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc);
+		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc.clone());
 		ArrayList<Person> prevEditors = (ArrayList<Person>) prevEd.getResult();
 		sv.setPreviousEditors(prevEditors);
 		sv.getRules().put("previousEditors", prevEd.getRule());
 
-		Result ed = W3C.getParsers().get("editors").parse(url, doc);
+		Result seriesEd = W3C.getParsers().get("seriesEditors").parse(url, doc.clone());
+		ArrayList<Person> seriesEditors = (ArrayList<Person>) seriesEd.getResult();
+		sv.setSeriesEditors(seriesEditors);
+		sv.getRules().put("seriesEditors", seriesEd.getRule());
+
+		Result authors = W3C.getParsers().get("authors").parse(url, doc.clone());
+		ArrayList<Person> authorsList = (ArrayList<Person>) authors.getResult();
+		sv.setAuthors(authorsList);
+		sv.getRules().put("authors", authors.getRule());
+
+		Result ed = W3C.getParsers().get("editors").parse(url, doc.clone());
 		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
@@ -140,7 +150,7 @@ public class ParserRunnable implements Runnable {
 			}
 		}
 
-		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc).getResult();
+		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc.clone()).getResult();
 
 		if (!url.contains(standard.getName())) {
 			synchronized (this) {
