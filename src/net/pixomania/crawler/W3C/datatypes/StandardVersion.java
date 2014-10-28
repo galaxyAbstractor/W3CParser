@@ -18,6 +18,7 @@ public class StandardVersion {
 	private ArrayList<Person> previousEditors = new ArrayList<>();
 	private ArrayList<Person> seriesEditors = new ArrayList<>();
 	private ArrayList<Person> authors = new ArrayList<>();
+	private ArrayList<Person> contributors = new ArrayList<>();
 
 	private String link;
 
@@ -100,5 +101,13 @@ public class StandardVersion {
 
 	public void setAuthors(ArrayList<Person> authors) {
 		this.authors = authors;
+	}
+
+	public ArrayList<Person> getContributors() {
+		return contributors;
+	}
+
+	public void setContributors(ArrayList<Person> contributors) {
+		this.contributors = contributors;
 	}
 }

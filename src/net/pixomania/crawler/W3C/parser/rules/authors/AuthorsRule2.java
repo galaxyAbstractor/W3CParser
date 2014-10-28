@@ -71,42 +71,36 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 
 			if (splitted.length < 2) {
 				Person result = NameParser.parse(editor.text());
+				if (result == null) return null;
 
 				for (int i = 0; i < editor.select("a").size(); i++) {
 					if (!editor.select("a").get(i).attr("href").isEmpty()) {
 						if (editor.select("a").get(i).attr("href").contains("@")){
 							result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
 						} else {
-							result.setWebsite(editor.select("a").get(i).attr("href"));
+							result.addWebsite(editor.select("a").get(i).attr("href"));
 						}
 					}
 				}
 
-				if (result == null) {
-					System.out.println("No name could parse " + editor.text());
-					return null;
-				}
 				editorList.add(result);
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());
+						if (result == null) return null;
 
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
 									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.setWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(editor.select("a").get(i).attr("href"));
 								}
 							}
 						}
 
-						if (result == null) {
-							System.out.println("No name could parse " + editor.text());
-							return null;
-						}
 						editorList.add(result);
 					}
 				}

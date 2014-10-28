@@ -9,17 +9,21 @@ import java.util.ArrayList;
 
 public class Standard {
 
-	private final String name;
+	private final String[] names;
 	private final String link;
 	private final ArrayList<StandardVersion> versions = new ArrayList<>();
 
-	public Standard(String name, String link) {
-		this.name = name;
+	public Standard(String names[], String link) {
+		this.names = names;
 		this.link = link;
 	}
 
-	public String getName() {
-		return name;
+	public String[] getNames() {
+		return names;
+	}
+
+	public String getMainName() {
+		return names[0];
 	}
 
 	public String getLink() {
@@ -28,5 +32,14 @@ public class Standard {
 
 	public ArrayList<StandardVersion> getVersions() {
 		return versions;
+	}
+
+	public boolean nameContains(String prevUrl) {
+		for (String name : names) {
+			if (prevUrl.contains(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

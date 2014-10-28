@@ -5,6 +5,8 @@
 
 package net.pixomania.crawler.W3C.datatypes;
 
+import java.util.ArrayList;
+
 public class Person {
 	public String name;
 	public String currentAffiliation;
@@ -14,7 +16,7 @@ public class Person {
 	public String viaAffiliation;
 	public String email;
 	public String workgroup;
-	public String website;
+	public ArrayList<String> website;
 
 	public String getName() {
 		return name;
@@ -80,11 +82,17 @@ public class Person {
 		this.workgroup = workgroup;
 	}
 
-	public String getWebsite() {
+	public ArrayList<String> getWebsite() {
 		return website;
 	}
 
-	public void setWebsite(String website) {
+	public void setWebsite(ArrayList<String> website) {
 		this.website = website;
+	}
+
+	public void addWebsite(String website) {
+		if (this.website == null) this.website = new ArrayList<>();
+
+		if (!this.website.contains(website)) this.website.add(website);
 	}
 }

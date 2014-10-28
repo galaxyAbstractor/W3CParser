@@ -23,6 +23,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
+		// UGH. I should probably figure out a better way to ignore irrelevant DDs and data
 		Elements wrongEditors = doc.select("dt:contains(Editor')");
 
 		if (wrongEditors.size() != 0) {
@@ -47,6 +48,12 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
+		wrongEditors = doc.select("dt:contains(Author) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
 		wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
 
 		if (wrongEditors.size() != 0) {
@@ -65,6 +72,20 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
+		wrongEditors = doc.select("dt:contains(Contributor) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt ~ dd, dt:contains(Editor)");
+
+		for (int i = 0; i < wrongEditors.size(); i++) {
+			if (wrongEditors.get(i).text().contains("Editor:")) break;
+			if (wrongEditors.get(i).text().contains("Editors:")) break;
+			wrongEditors.get(i).remove();
+		}
+
 		Elements editors = doc.select("dl").get(0).select("dt:contains(Editor) ~ dd");
 		if (editors.size() == 0) return null;
 
@@ -74,42 +95,36 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 
 			if (splitted.length < 2) {
 				Person result = NameParser.parse(editor.text());
+				if (result == null) return null;
 
 				for (int i = 0; i < editor.select("a").size(); i++) {
 					if (!editor.select("a").get(i).attr("href").isEmpty()) {
 						if (editor.select("a").get(i).attr("href").contains("@")){
 							result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
 						} else {
-							result.setWebsite(editor.select("a").get(i).attr("href"));
+							result.addWebsite(editor.select("a").get(i).attr("href"));
 						}
 					}
 				}
 
-				if (result == null) {
-					System.out.println("No name could parse " + editor.text());
-					return null;
-				}
 				editorList.add(result);
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());
+						if (result == null) return null;
 
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
 									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.setWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(editor.select("a").get(i).attr("href"));
 								}
 							}
 						}
 
-						if (result == null) {
-							System.out.println("No name could parse " + editor.text());
-							return null;
-						}
 						editorList.add(result);
 					}
 				}

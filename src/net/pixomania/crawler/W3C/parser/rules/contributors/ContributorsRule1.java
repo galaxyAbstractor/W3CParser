@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.previousEditors;
+package net.pixomania.crawler.W3C.parser.rules.contributors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.parser.name.NameParser;
@@ -14,15 +14,16 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class PreviousEditorsRule2 implements Rule<ArrayList<Person>> {
+public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements editors = doc.select("dt:contains(Previous Editor) ~ dd");
+		Elements editors = doc.select("dt:contains(Contributor) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
+
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
@@ -31,8 +32,8 @@ public class PreviousEditorsRule2 implements Rule<ArrayList<Person>> {
 				if (result == null) return null;
 
 				if (editor.select("a").size() != 0 &&
-					!editor.select("a").first().attr("href").isEmpty() &&
-					!editor.select("a").first().attr("href").contains("@")) {
+						!editor.select("a").first().attr("href").isEmpty() &&
+						!editor.select("a").first().attr("href").contains("@")) {
 
 					result.addWebsite(editor.select("a").first().attr("href"));
 				}

@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class AuthorsRule1 implements Rule<ArrayList<Person>> {
+public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class AuthorsRule1 implements Rule<ArrayList<Person>> {
 			wrongEditors.get(i).remove();
 		}
 
-		Elements editors = doc.select(".p-author");
+		Elements editors = doc.select("dt:contains(Author) ~ dd:has(a)");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {

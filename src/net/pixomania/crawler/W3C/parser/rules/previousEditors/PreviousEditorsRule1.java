@@ -29,29 +29,29 @@ public class PreviousEditorsRule1 implements Rule<ArrayList<Person>> {
 
 			if (splitted.length < 2) {
 				Person result = NameParser.parse(editor.text());
+				if (result == null) return null;
 
 				if (editor.select("a").size() != 0 &&
 						!editor.select("a").first().attr("href").isEmpty() &&
 						!editor.select("a").first().attr("href").contains("@")) {
 
-					result.setWebsite(editor.select("a").first().attr("href"));
+					result.addWebsite(editor.select("a").first().attr("href"));
 				}
 
-				if (result == null) return null;
 				editorList.add(result);
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
 						Person result = NameParser.parse(split.replaceAll("\n", ""));
+						if (result == null) return null;
 
 						if (editor.select("a").size() != 0 &&
 								!editor.select("a").first().attr("href").isEmpty() &&
 								!editor.select("a").first().attr("href").contains("@")) {
 
-							result.setWebsite(editor.select("a").first().attr("href"));
+							result.addWebsite(editor.select("a").first().attr("href"));
 						}
 
-						if (result == null) return null;
 						editorList.add(result);
 					}
 				}

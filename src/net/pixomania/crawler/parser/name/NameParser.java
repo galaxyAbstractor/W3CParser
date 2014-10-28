@@ -39,6 +39,10 @@ public class NameParser {
 	}
 
 	public static Person parse(String name) {
+		// We can make a guess that names, affiliations etc will not be longer than 100 characters
+		// if a specification does have this, it can be tweaked. Ugly hack, I know, but eh
+		if (name.length() > 100) return null;
+
 		for (String re : preproc) {
 			name = name.replaceAll(re, "");
 		}
@@ -53,6 +57,14 @@ public class NameParser {
 				Field[] fields = Person.class.getDeclaredFields();
 				Person person = new Person();
 				for (int i = 0; i < re.group.length; i++){
+					// Website is not a string anymore, so it can't be populated
+					// by reflection
+					if (i == 8) {
+						if (re.group[i] != 0) {
+							person.addWebsite(m.group(re.group[i]).trim());
+						}
+						continue;
+					}
 					try {
 
 						if (re.group[i] != 0) {

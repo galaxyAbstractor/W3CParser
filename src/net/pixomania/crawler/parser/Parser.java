@@ -68,14 +68,14 @@ public class Parser {
 
 		if(specificRule == null) {
 			for (Rule rule : rules) {
-				result.setResult(rule.run(url, doc));
+				result.setResult(rule.run(url, doc.clone()));
 				if (result.getResult() != null) {
 					result.setRule(rule);
 					break;
 				}
 			}
 		} else {
-			result.setResult(specificRule.run(url, doc));
+			result.setResult(specificRule.run(url, doc.clone()));
 			result.setRule(specificRule);
 		}
 
@@ -96,7 +96,7 @@ public class Parser {
 		Result result = new Result();
 
 		for (Rule rule : rules) {
-			result.setResult(rule.run(url, doc));
+			result.setResult(rule.run(url, doc.clone()));
 			if (result.getResult() != null) {
 				result.setRule(rule);
 				break;

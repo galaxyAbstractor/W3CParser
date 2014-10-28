@@ -112,34 +112,39 @@ public class ParserRunnable implements Runnable {
 
 		sv.setLink(url);
 
-		Result date = W3C.getParsers().get("date").parse(url, doc.clone());
+		Result date = W3C.getParsers().get("date").parse(url, doc);
 		sv.setDate((String) date.getResult());
 		sv.getRules().put("date", date.getRule());
 
-		Result title = W3C.getParsers().get("title").parse(url, doc.clone());
+		Result title = W3C.getParsers().get("title").parse(url, doc);
 		sv.setTitle((String) title.getResult());
 		sv.getRules().put("title", title.getRule());
 
-		Result status = W3C.getParsers().get("status").parse(url, doc.clone());
+		Result status = W3C.getParsers().get("status").parse(url, doc);
 		sv.setStatus((String) status.getResult());
 		sv.getRules().put("status", status.getRule());
 
-		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc.clone());
+		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc);
 		ArrayList<Person> prevEditors = (ArrayList<Person>) prevEd.getResult();
 		sv.setPreviousEditors(prevEditors);
 		sv.getRules().put("previousEditors", prevEd.getRule());
 
-		Result seriesEd = W3C.getParsers().get("seriesEditors").parse(url, doc.clone());
+		Result seriesEd = W3C.getParsers().get("seriesEditors").parse(url, doc);
 		ArrayList<Person> seriesEditors = (ArrayList<Person>) seriesEd.getResult();
 		sv.setSeriesEditors(seriesEditors);
 		sv.getRules().put("seriesEditors", seriesEd.getRule());
 
-		Result authors = W3C.getParsers().get("authors").parse(url, doc.clone());
+		Result authors = W3C.getParsers().get("authors").parse(url, doc);
 		ArrayList<Person> authorsList = (ArrayList<Person>) authors.getResult();
 		sv.setAuthors(authorsList);
 		sv.getRules().put("authors", authors.getRule());
 
-		Result ed = W3C.getParsers().get("editors").parse(url, doc.clone());
+		Result contributors = W3C.getParsers().get("contributors").parse(url, doc);
+		ArrayList<Person> contributorsList = (ArrayList<Person>) contributors.getResult();
+		sv.setContributors(contributorsList);
+		sv.getRules().put("contributors", contributors.getRule());
+
+		Result ed = W3C.getParsers().get("editors").parse(url, doc);
 		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
@@ -150,12 +155,20 @@ public class ParserRunnable implements Runnable {
 			}
 		}
 
-		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc.clone()).getResult();
+		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc).getResult();
 
-		if (!url.contains(standard.getName())) {
+		boolean contain = false;
+		for (String name : standard.getNames()) {
+			if (url.contains(name)) {
+				contain = true;
+				break;
+			}
+		}
+
+		if (!contain) {
 			synchronized (this) {
 				try {
-					Platform.runLater(() -> W3CGUI.confirmDialog(standard.getName(), url));
+					Platform.runLater(() -> W3CGUI.confirmDialog(standard.getMainName(), url));
 
 					this.wait();
 				} catch (InterruptedException e1) {
@@ -172,7 +185,7 @@ public class ParserRunnable implements Runnable {
 		}
 
 		final StandardVersion innerSv = sv;
-		Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getName(), innerSv));
+		Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
 
 		if(wait) {
 			synchronized (this) {
@@ -207,7 +220,7 @@ public class ParserRunnable implements Runnable {
 							if (prevUrl.contains("w3.org/TR")) {
 								sv.getPrev().add(parseVersion(prevUrl, standard, sv));
 							}
-						} else if (prevUrl.contains(standard.getName()) && prevUrl.contains("w3.org/TR")) {
+						} else if (standard.nameContains(prevUrl) && prevUrl.contains("w3.org/TR")) {
 						/*
 						 	This is an orphan, so let's crawl it, but only if it belongs to the correct standard
 							For example, web database version 1 and 2 may contain a link to web storage

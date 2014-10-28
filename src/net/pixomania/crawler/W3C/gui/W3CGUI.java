@@ -24,8 +24,6 @@ import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Browser;
 
-import java.util.ArrayList;
-
 public class W3CGUI extends Application {
 
 	public static Browser getBrowser() {
@@ -126,6 +124,17 @@ public class W3CGUI extends Application {
 				}
 			}
 
+			if (sv.getContributors() != null) {
+				current.getChildren().add(new Label("Contributors (Rule: " + sv.getRules().get("contributors").getClass().getSimpleName() + "):"));
+
+				for (Person editor : sv.getContributors()) {
+					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				}
+			}
+
 			ScrollPane sp1 = new ScrollPane();
 			sp1.setContent(current);
 			sp1.setPrefWidth(500);
@@ -148,7 +157,7 @@ public class W3CGUI extends Application {
 		VBox all = new VBox();
 
 		for (Standard standard : W3C.getStandards()) {
-			all.getChildren().add(new Label("Name: " + standard.getName()));
+			all.getChildren().add(new Label("Name: " + standard.getMainName()));
 			for (StandardVersion s : standard.getVersions()) {
 				all.getChildren().add(new Label("Name: " + s.getTitle()));
 				all.getChildren().add(new Label("Date: " + s.getDate()));
@@ -186,6 +195,16 @@ public class W3CGUI extends Application {
 				if (s.getAuthors() != null) {
 					all.getChildren().add(new Label("Authors: "));
 					for (Person editor : s.getAuthors()) {
+						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+					}
+				}
+
+				if (s.getContributors() != null) {
+					all.getChildren().add(new Label("Contributors: "));
+					for (Person editor : s.getContributors()) {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
