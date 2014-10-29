@@ -144,6 +144,11 @@ public class ParserRunnable implements Runnable {
 		sv.setContributors(contributorsList);
 		sv.getRules().put("contributors", contributors.getRule());
 
+		Result contributingAuthors = W3C.getParsers().get("contributingAuthors").parse(url, doc);
+		ArrayList<Person> contributingAuthorsList = (ArrayList<Person>) contributingAuthors.getResult();
+		sv.setContributingAuthors(contributingAuthorsList);
+		sv.getRules().put("contributingAuthors", contributingAuthors.getRule());
+
 		Result ed = W3C.getParsers().get("editors").parse(url, doc);
 		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
 		sv.setEditors(editors);

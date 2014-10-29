@@ -12,9 +12,9 @@ import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule2;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule3;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule4;
+import net.pixomania.crawler.W3C.parser.rules.contributingAuthors.ContributingAuthorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.contributors.ContributorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
-import net.pixomania.crawler.W3C.parser.rules.date.DateRule2;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
@@ -65,15 +65,16 @@ public class W3C {
 			}
 		}
 
-		parsers.put("date", new Parser(new DateRule1(), new DateRule2()));
+		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
 				new StatusRule5(), new StatusRule6()));
-		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2()));
+		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
 		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(), new AuthorsRule4()));
 		parsers.put("contributors", new Parser(new ContributorsRule1()));
+		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
 		//standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
@@ -102,7 +103,21 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"cors", "access-control"}, "http://www.w3.org/TR/2008/WD-access-control-20080912/"));
 		//standards.add(new Standard(new String[]{"json-ld-api"}, "http://www.w3.org/TR/json-ld-api/"));
 		//standards.add(new Standard(new String[]{"vocab-data-cube"}, "http://www.w3.org/TR/vocab-data-cube/"));
-
+		//standards.add(new Standard(new String[]{"vocab-org"}, "http://www.w3.org/TR/vocab-org/"));
+		//standards.add(new Standard(new String[]{"json-ld"}, "http://www.w3.org/TR/json-ld/"));
+		//standards.add(new Standard(new String[]{"performance-timeline"}, "http://www.w3.org/TR/performance-timeline/"));
+		//standards.add(new Standard(new String[]{"user-timing"}, "http://www.w3.org/TR/user-timing/"));
+		//standards.add(new Standard(new String[]{"css-style-attr"}, "http://www.w3.org/TR/css-style-attr/"));
+		//standards.add(new Standard(new String[]{"widgets-apis"}, "http://www.w3.org/TR/widgets-apis/"));
+		//standards.add(new Standard(new String[]{"page-visibility"}, "http://www.w3.org/TR/page-visibility/"));
+		//standards.add(new Standard(new String[]{"its20"}, "http://www.w3.org/TR/its20/"));
+		//standards.add(new Standard(new String[]{"geolocation-API"}, "http://www.w3.org/TR/geolocation-API/"));
+		//standards.add(new Standard(new String[]{"touch-events"}, "http://www.w3.org/TR/touch-events/"));
+		//standards.add(new Standard(new String[]{"ttml1", "ttaf1"}, "http://www.w3.org/TR/ttml1/"));
+		//standards.add(new Standard(new String[]{"rdfa-core"}, "http://www.w3.org/TR/rdfa-core/"));
+		//standards.add(new Standard(new String[]{"xhtml-rdfa"}, "http://www.w3.org/TR/xhtml-rdfa/"));
+		//standards.add(new Standard(new String[]{"html-rdfa", "rdfa-in-html"}, "http://www.w3.org/TR/html-rdfa/"));
+		standards.add(new Standard(new String[]{"webstorage"}, "http://www.w3.org/TR/webstorage/"));
 
 //		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 

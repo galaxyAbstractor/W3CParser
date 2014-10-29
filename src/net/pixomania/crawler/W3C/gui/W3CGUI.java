@@ -135,6 +135,17 @@ public class W3CGUI extends Application {
 				}
 			}
 
+			if (sv.getContributingAuthors() != null) {
+				current.getChildren().add(new Label("Contributing Authors (Rule: " + sv.getRules().get("contributingAuthors").getClass().getSimpleName() + "):"));
+
+				for (Person editor : sv.getContributingAuthors()) {
+					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				}
+			}
+
 			ScrollPane sp1 = new ScrollPane();
 			sp1.setContent(current);
 			sp1.setPrefWidth(500);
@@ -211,6 +222,17 @@ public class W3CGUI extends Application {
 								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
+
+				if (s.getContributingAuthors() != null) {
+					all.getChildren().add(new Label("Contributing Authors: "));
+					for (Person editor : s.getContributingAuthors()) {
+						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+					}
+				}
+
 
 				all.getChildren().add(new Label("Previous: "));
 
