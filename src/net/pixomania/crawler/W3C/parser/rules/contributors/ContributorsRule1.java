@@ -23,33 +23,44 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
-
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
+				if (editor.text().equals("(In alphabetical order)")
+						|| editor.text().equals("See Acknowledgements")
+						|| editor.text().equals("See participants.")) continue;
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
-				if (editor.select("a").size() != 0 &&
-						!editor.select("a").first().attr("href").isEmpty() &&
-						!editor.select("a").first().attr("href").contains("@")) {
-
-					result.addWebsite(editor.select("a").first().attr("href"));
+				for (int i = 0; i < editor.select("a").size(); i++) {
+					if (!editor.select("a").get(i).attr("href").isEmpty()) {
+						if (editor.select("a").get(i).attr("href").contains("@")){
+							result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+						} else {
+							result.addWebsite(editor.select("a").get(i).attr("href"));
+						}
+					}
 				}
 
 				editorList.add(result);
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
+						if (split.equals("(In alphabetical order)")
+								|| split.equals("See Acknowledgements")
+								|| split.equals("See participants.")) continue;
 						Person result = NameParser.parse(split.replaceAll("\n", ""));
 						if (result == null) return null;
 
-						if (editor.select("a").size() != 0 &&
-								!editor.select("a").first().attr("href").isEmpty() &&
-								!editor.select("a").first().attr("href").contains("@")) {
-
-							result.addWebsite(editor.select("a").first().attr("href"));
+						for (int i = 0; i < editor.select("a").size(); i++) {
+							if (!editor.select("a").get(i).attr("href").isEmpty()) {
+								if (editor.select("a").get(i).attr("href").contains("@")){
+									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+								} else {
+									result.addWebsite(editor.select("a").get(i).attr("href"));
+								}
+							}
 						}
 
 						editorList.add(result);

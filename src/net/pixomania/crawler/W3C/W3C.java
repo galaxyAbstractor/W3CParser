@@ -117,9 +117,24 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"rdfa-core"}, "http://www.w3.org/TR/rdfa-core/"));
 		//standards.add(new Standard(new String[]{"xhtml-rdfa"}, "http://www.w3.org/TR/xhtml-rdfa/"));
 		//standards.add(new Standard(new String[]{"html-rdfa", "rdfa-in-html"}, "http://www.w3.org/TR/html-rdfa/"));
-		standards.add(new Standard(new String[]{"webstorage"}, "http://www.w3.org/TR/webstorage/"));
+		//standards.add(new Standard(new String[]{"webstorage"}, "http://www.w3.org/TR/webstorage/"));
+		//standards.add(new Standard(new String[]{"html5"}, "http://www.w3.org/TR/html5/"));
+		//standards.add(new Standard(new String[]{"prov-dm"}, "http://www.w3.org/TR/prov-dm/"));
+		//standards.add(new Standard(new String[]{"prov-o"}, "http://www.w3.org/TR/prov-o/"));
+		//standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
+		//standards.add(new Standard(new String[]{"prov-n"}, "http://www.w3.org/TR/prov-n/"));
+		//standards.add(new Standard(new String[]{"widgets-digsig"}, "http://www.w3.org/TR/widgets-digsig/"));
+		//standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/2009/WD-xmldsig-core1-20090730/"));
+		//standards.add(new Standard(new String[]{"xmldsig-properties"}, "http://www.w3.org/TR/xmldsig-properties/"));
+		//standards.add(new Standard(new String[]{"xmlenc-core1"}, "http://www.w3.org/TR/2009/WD-xmlenc-core1-20090730/"));
+		//standards.add(new Standard(new String[]{"role-attribute"}, "http://www.w3.org/TR/role-attribute/"));
+		//standards.add(new Standard(new String[]{"rdf-sparql-XMLres"}, "http://www.w3.org/TR/rdf-sparql-XMLres/"));
+		//standards.add(new Standard(new String[]{"sparql11-entailment"}, "http://www.w3.org/TR/sparql11-entailment/"));
+		//standards.add(new Standard(new String[]{"sparql11-protocol"}, "http://www.w3.org/TR/sparql11-protocol/"));
+		//standards.add(new Standard(new String[]{"sparql11-query"}, "http://www.w3.org/TR/sparql11-query/"));
+		//standards.add(new Standard(new String[]{"sparql11-service-description"}, "http://www.w3.org/TR/sparql11-service-description/"));
 
-//		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
+// parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 
 		parserThread.start();
 	}

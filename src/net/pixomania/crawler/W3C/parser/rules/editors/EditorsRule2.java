@@ -81,12 +81,16 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 		wrongEditors = doc.select("dt ~ dd, dt:contains(Editor)");
 
 		for (int i = 0; i < wrongEditors.size(); i++) {
-			if (wrongEditors.get(i).text().contains("Editor:")) break;
-			if (wrongEditors.get(i).text().contains("Editors:")) break;
+			if (wrongEditors.get(i).text().equals("Editor:")
+					|| wrongEditors.get(i).text().equals("Editors:")
+					|| wrongEditors.get(i).text().equals("Editor")
+					|| wrongEditors.get(i).text().equals("Editors")
+					|| wrongEditors.get(i).text().contains("Edition Editor")
+					) break;
 			wrongEditors.get(i).remove();
 		}
 
-		Elements editors = doc.select("dl").get(0).select("dt:contains(Editor) ~ dd");
+		Elements editors = doc.select("dl").get(0).select("dt:contains(Editor) ~ dd, dt:contains(Edition Editor) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
@@ -94,6 +98,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
+				if (editor.text().equals("WHATWG:") || editor.text().equals("W3C:")) continue;
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
@@ -111,6 +116,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
+						if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());
 						if (result == null) return null;
@@ -118,9 +124,9 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
-									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+									result.setEmail(newdoc.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.addWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(newdoc.select("a").get(i).attr("href"));
 								}
 							}
 						}

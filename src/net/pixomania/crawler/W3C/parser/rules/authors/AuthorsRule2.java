@@ -38,11 +38,11 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
-		wrongEditors = doc.select("dt:contains(Editor) ~dd");
+/*		wrongEditors = doc.select("dt:contains(Editor) ~dd");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
-		}
+		}*/
 
 		wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
 
@@ -57,6 +57,12 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 		}
 
 		wrongEditors = doc.select("dt:contains(Series) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
+		wrongEditors = doc.select("dt:contains(Contributors) ~dd");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
@@ -94,9 +100,9 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
-									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+									result.setEmail(newdoc.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.addWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(newdoc.select("a").get(i).attr("href"));
 								}
 							}
 						}

@@ -52,9 +52,9 @@ public class AuthorsRule3 implements Rule<ArrayList<Person>> {
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
-									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+									result.setEmail(newdoc.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.addWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(newdoc.select("a").get(i).attr("href"));
 								}
 							}
 						}

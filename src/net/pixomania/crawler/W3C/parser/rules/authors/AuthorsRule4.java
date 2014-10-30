@@ -31,6 +31,12 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
+		wrongEditors = doc.select("dt:contains(Contributors) ~dd");
+
+		if (wrongEditors.size() != 0) {
+			wrongEditors.remove();
+		}
+
 		wrongEditors = doc.select("dt:contains(Editor) ~ dd, dt:contains(Author)");
 
 		for (int i = 0; i < wrongEditors.size(); i++) {
@@ -38,7 +44,7 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 			wrongEditors.get(i).remove();
 		}
 
-		Elements editors = doc.select("dt:contains(Author) ~ dd:has(a)");
+		Elements editors = doc.select(".head dt:contains(Author) ~ dd:has(a)");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {

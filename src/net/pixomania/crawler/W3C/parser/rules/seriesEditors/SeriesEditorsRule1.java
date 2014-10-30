@@ -31,11 +31,14 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
-				if (editor.select("a").size() != 0 &&
-						!editor.select("a").first().attr("href").isEmpty() &&
-						!editor.select("a").first().attr("href").contains("@")) {
-
-					result.addWebsite(editor.select("a").first().attr("href"));
+				for (int i = 0; i < editor.select("a").size(); i++) {
+					if (!editor.select("a").get(i).attr("href").isEmpty()) {
+						if (editor.select("a").get(i).attr("href").contains("@")){
+							result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+						} else {
+							result.addWebsite(editor.select("a").get(i).attr("href"));
+						}
+					}
 				}
 
 				editorList.add(result);
@@ -45,11 +48,14 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 						Person result = NameParser.parse(split.replaceAll("\n", ""));
 						if (result == null) return null;
 
-						if (editor.select("a").size() != 0 &&
-								!editor.select("a").first().attr("href").isEmpty() &&
-								!editor.select("a").first().attr("href").contains("@")) {
-
-							result.addWebsite(editor.select("a").first().attr("href"));
+						for (int i = 0; i < editor.select("a").size(); i++) {
+							if (!editor.select("a").get(i).attr("href").isEmpty()) {
+								if (editor.select("a").get(i).attr("href").contains("@")){
+									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+								} else {
+									result.addWebsite(editor.select("a").get(i).attr("href"));
+								}
+							}
 						}
 
 						editorList.add(result);
