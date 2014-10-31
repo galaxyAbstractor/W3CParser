@@ -44,9 +44,9 @@ public class NameParser {
 	}
 
 	public static Person parse(String name) {
-		// We can make a guess that names, affiliations etc will not be longer than 100 characters
+		// We can make a guess that names, affiliations etc will not be longer than 200 characters
 		// if a specification does have this, it can be tweaked. Ugly hack, I know, but eh
-		if (name.length() > 100) return null;
+		if (name.length() > 200) return null;
 
 		for (String re : preproc) {
 			name = name.replaceAll(re, "");

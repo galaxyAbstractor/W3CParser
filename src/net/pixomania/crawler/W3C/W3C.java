@@ -133,6 +133,12 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"sparql11-protocol"}, "http://www.w3.org/TR/sparql11-protocol/"));
 		//standards.add(new Standard(new String[]{"sparql11-query"}, "http://www.w3.org/TR/sparql11-query/"));
 		//standards.add(new Standard(new String[]{"sparql11-service-description"}, "http://www.w3.org/TR/sparql11-service-description/"));
+		//standards.add(new Standard(new String[]{"sparql11-update"}, "http://www.w3.org/TR/sparql11-update/"));
+		//standards.add(new Standard(new String[]{"sparql11-federated-query"}, "http://www.w3.org/TR/sparql11-federated-query/"));
+		//standards.add(new Standard(new String[]{"sparql11-overview"}, "http://www.w3.org/TR/sparql11-overview/"));
+		//standards.add(new Standard(new String[]{"sparql11-results-csv-tsv"}, "http://www.w3.org/TR/sparql11-results-csv-tsv/"));
+		//standards.add(new Standard(new String[]{"sparql11-results-json"}, "http://www.w3.org/TR/sparql11-results-json/"));
+		standards.add(new Standard(new String[]{"selectors-api"}, "http://www.w3.org/TR/selectors-api/"));
 
 // parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 

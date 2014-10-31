@@ -8,15 +8,12 @@ package net.pixomania.crawler.W3C.parser.rules.editors;
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EditorsRule2 implements Rule<ArrayList<Person>> {
 	@Override
