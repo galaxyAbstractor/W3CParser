@@ -138,8 +138,8 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"sparql11-overview"}, "http://www.w3.org/TR/sparql11-overview/"));
 		//standards.add(new Standard(new String[]{"sparql11-results-csv-tsv"}, "http://www.w3.org/TR/sparql11-results-csv-tsv/"));
 		//standards.add(new Standard(new String[]{"sparql11-results-json"}, "http://www.w3.org/TR/sparql11-results-json/"));
-		standards.add(new Standard(new String[]{"selectors-api"}, "http://www.w3.org/TR/selectors-api/"));
-
+		//standards.add(new Standard(new String[]{"selectors-api"}, "http://www.w3.org/TR/selectors-api/"));
+		standards.add(new Standard(new String[]{"rif-bld"}, "http://www.w3.org/TR/rif-bld/"));
 // parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 
 		parserThread.start();

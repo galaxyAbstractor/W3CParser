@@ -87,7 +87,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.get(i).remove();
 		}
 
-		Elements editors = doc.select("dl").get(0).select("dt:contains(Editor) ~ dd, dt:contains(Edition Editor) ~ dd");
+		Elements editors = doc.select("dt:contains(Editor) ~ dd, dt:contains(Edition Editor) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
