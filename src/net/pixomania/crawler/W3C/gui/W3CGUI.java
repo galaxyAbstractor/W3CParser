@@ -82,13 +82,15 @@ public class W3CGUI extends Application {
 			current.getChildren().add(new Label("Date (Rule: " + sv.getRules().get("date").getClass().getSimpleName() +"): " + sv.getDate()));
 			current.getChildren().add(new Label("Status (Rule: " + sv.getRules().get("status").getClass().getSimpleName() + "): " + sv.getStatus()));
 			current.getChildren().add(new Label("Link:" + sv.getLink()));
-			current.getChildren().add(new Label("Editors (Rule: " + sv.getRules().get("editors").getClass().getSimpleName() + "):"));
 
-			for (Person editor : sv.getEditors()) {
-				current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-				" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-				" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-				" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+			if (sv.getEditors() != null) {
+				current.getChildren().add(new Label("Editors (Rule: " + sv.getRules().get("editors").getClass().getSimpleName() + "):"));
+				for (Person editor : sv.getEditors()) {
+					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				}
 			}
 
 			if (sv.getPreviousEditors() != null) {
@@ -98,7 +100,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 			}
 
@@ -109,7 +111,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 			}
 
@@ -120,7 +122,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 			}
 
@@ -131,7 +133,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 			}
 
@@ -142,7 +144,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 				}
 			}
 
@@ -174,13 +176,16 @@ public class W3CGUI extends Application {
 				all.getChildren().add(new Label("Date: " + s.getDate()));
 				all.getChildren().add(new Label("Status: " + s.getStatus()));
 				all.getChildren().add(new Label("Link: " + s.getLink()));
-				all.getChildren().add(new Label("Editors: "));
 
-				for (Person editor : s.getEditors()) {
-					all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+				if (s.getEditors() != null) {
+					all.getChildren().add(new Label("Editors: "));
+
+					for (Person editor : s.getEditors()) {
+						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
+								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
+								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+					}
 				}
 
 				if (s.getPreviousEditors() != null) {
@@ -189,7 +194,7 @@ public class W3CGUI extends Application {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
 
@@ -199,7 +204,7 @@ public class W3CGUI extends Application {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
 
@@ -209,7 +214,7 @@ public class W3CGUI extends Application {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
 
@@ -219,7 +224,7 @@ public class W3CGUI extends Application {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
 
@@ -229,7 +234,7 @@ public class W3CGUI extends Application {
 						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
 					}
 				}
 

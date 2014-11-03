@@ -17,6 +17,7 @@ public class Person {
 	public String email;
 	public String workgroup;
 	public ArrayList<String> website;
+	public String formerAffiliation;
 
 	public String getName() {
 		return name;
@@ -94,5 +95,13 @@ public class Person {
 		if (this.website == null) this.website = new ArrayList<>();
 
 		if (!this.website.contains(website)) this.website.add(website);
+	}
+
+	public String getFormerAffiliation() {
+		return formerAffiliation;
+	}
+
+	public void setFormerAffiliation(String formerAffiliation) {
+		this.formerAffiliation = formerAffiliation;
 	}
 }

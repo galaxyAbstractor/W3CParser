@@ -18,7 +18,7 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 	public ArrayList<String> run(String url, Document doc) {
 		ArrayList<String> urls = new ArrayList<>();
 
-		Elements wrongLinks = doc.select("dt:contains(Previous editors) ~dd");
+/*		Elements wrongLinks = doc.select("dt:contains(Previous editors) ~dd");
 
 		if (wrongLinks.size() != 0) {
 			wrongLinks.remove();
@@ -35,8 +35,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 		if (wrongLinks.size() != 0) {
 			wrongLinks.remove();
 		}
-
-		wrongLinks = doc.select("dt:contains(Previous recommendation) ~dd");
+		*/
+		Elements wrongLinks = doc.select("dt:contains(Previous recommendation) ~dd");
 
 		if (wrongLinks.size() != 0) {
 			wrongLinks.remove();
@@ -50,6 +50,7 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 			Elements a = d.select("a");
 
 			for (Element link : a) {
+				if (link.text().contains("color-coded")) continue;
 				urls.add(link.attr("href"));
 			}
 		}

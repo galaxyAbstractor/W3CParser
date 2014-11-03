@@ -154,9 +154,11 @@ public class ParserRunnable implements Runnable {
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
-		for (Person editor : editors) {
-			if (!PeopleMap.personExists(editor.getName())) {
-				unmappedEditors.add(editor.getName());
+		if (editors != null) {
+			for (Person editor : editors) {
+				if (!PeopleMap.personExists(editor.getName())) {
+					unmappedEditors.add(editor.getName());
+				}
 			}
 		}
 

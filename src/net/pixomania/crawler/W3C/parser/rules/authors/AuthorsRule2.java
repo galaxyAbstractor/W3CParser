@@ -20,7 +20,7 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements wrongEditors = doc.select("dt:contains(Editor')");
+/*		Elements wrongEditors = doc.select("dt:contains(Editor')");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
@@ -38,11 +38,11 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 			wrongEditors.remove();
 		}
 
-/*		wrongEditors = doc.select("dt:contains(Editor) ~dd");
+*//*		wrongEditors = doc.select("dt:contains(Editor) ~dd");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
-		}*/
+		}*//*
 
 		wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
 
@@ -66,12 +66,13 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
-		}
+		}*/
 
-		Elements editors = doc.select("dl").get(0).select("dt:contains(Author) ~ dd");
+		Elements editors = doc.select(".head dt:contains(Author) ~ dd");
 		if (editors.size() == 0) return null;
 
 		for (Element editor : editors) {
+
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
@@ -111,6 +112,9 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 					}
 				}
 			}
+
+			Element next = editor.nextElementSibling();
+			if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;

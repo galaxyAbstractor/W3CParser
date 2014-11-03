@@ -139,7 +139,29 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"sparql11-results-csv-tsv"}, "http://www.w3.org/TR/sparql11-results-csv-tsv/"));
 		//standards.add(new Standard(new String[]{"sparql11-results-json"}, "http://www.w3.org/TR/sparql11-results-json/"));
 		//standards.add(new Standard(new String[]{"selectors-api"}, "http://www.w3.org/TR/selectors-api/"));
-		standards.add(new Standard(new String[]{"rif-bld"}, "http://www.w3.org/TR/rif-bld/"));
+		//standards.add(new Standard(new String[]{"rif-bld"}, "http://www.w3.org/TR/rif-bld/"));
+		//standards.add(new Standard(new String[]{"rif-core"}, "http://www.w3.org/TR/rif-core/"));
+		//standards.add(new Standard(new String[]{"rif-rdf-owl"}, "http://www.w3.org/TR/rif-rdf-owl/"));
+		//standards.add(new Standard(new String[]{"rif-dtb"}, "http://www.w3.org/TR/rif-dtb/"));
+		//standards.add(new Standard(new String[]{"rif-fld"}, "http://www.w3.org/TR/rif-fld/"));
+		//standards.add(new Standard(new String[]{"rif-prd"}, "http://www.w3.org/TR/rif-prd/"));
+		//standards.add(new Standard(new String[]{"navigation-timing"}, "http://www.w3.org/TR/navigation-timing/"));
+		//standards.add(new Standard(new String[]{"hr-time"}, "http://www.w3.org/TR/hr-time/"));
+		//standards.add(new Standard(new String[]{"WOFF"}, "http://www.w3.org/TR/WOFF/"));
+		//standards.add(new Standard(new String[]{"owl2-mapping-to-rdf"}, "http://www.w3.org/TR/owl2-mapping-to-rdf/"));
+		//standards.add(new Standard(new String[]{"owl2-new-features"}, "http://www.w3.org/TR/owl2-new-features/"));
+		//standards.add(new Standard(new String[]{"owl2-primer"}, "http://www.w3.org/TR/owl2-primer/"));
+		//standards.add(new Standard(new String[]{"owl2-profiles"}, "http://www.w3.org/TR/owl2-profiles/"));
+		//standards.add(new Standard(new String[]{"owl2-quick-reference"}, "http://www.w3.org/TR/owl2-quick-reference/"));
+		//standards.add(new Standard(new String[]{"owl2-rdf-based-semantics"}, "http://www.w3.org/TR/owl2-rdf-based-semantics/"));
+		//standards.add(new Standard(new String[]{"owl2-syntax"}, "http://www.w3.org/TR/owl2-syntax/"));
+		//standards.add(new Standard(new String[]{"owl2-xml-serialization"}, "http://www.w3.org/TR/owl2-xml-serialization/"));
+		//standards.add(new Standard(new String[]{"owl2-conformance", "owl2-test"}, "http://www.w3.org/TR/owl2-conformance/"));
+		//standards.add(new Standard(new String[]{"owl2-direct-semantics", "owl2-semantics"}, "http://www.w3.org/TR/owl2-direct-semantics/"));
+		//standards.add(new Standard(new String[]{"rdf-plain-literal", "rdf-text"}, "http://www.w3.org/TR/rdf-plain-literal/"));
+		//standards.add(new Standard(new String[]{"owl2-overview"}, "http://www.w3.org/TR/owl2-overview/"));
+		standards.add(new Standard(new String[]{"widgets"}, "http://www.w3.org/TR/widgets/"));
+
 // parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
 
 		parserThread.start();

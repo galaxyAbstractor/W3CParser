@@ -19,7 +19,7 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
+/*		Elements wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
 
 		if (wrongEditors.size() != 0) {
 			wrongEditors.remove();
@@ -42,7 +42,7 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 		for (int i = 0; i < wrongEditors.size(); i++) {
 			if (wrongEditors.get(i).text().contains("Author")) break;
 			wrongEditors.get(i).remove();
-		}
+		}*/
 
 		Elements editors = doc.select(".head dt:contains(Author) ~ dd:has(a)");
 		if (editors.size() == 0) return null;
@@ -62,6 +62,9 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 			}
 
 			editorList.add(result);
+
+			Element next = editor.nextElementSibling();
+			if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;

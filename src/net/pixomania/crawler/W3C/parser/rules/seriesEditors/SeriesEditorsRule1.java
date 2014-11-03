@@ -62,6 +62,8 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 					}
 				}
 			}
+			Element next = editor.nextElementSibling();
+			if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;
