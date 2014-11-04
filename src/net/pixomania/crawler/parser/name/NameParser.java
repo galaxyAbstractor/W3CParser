@@ -36,6 +36,8 @@ public class NameParser {
 		regex.add(new RegexRule("(([^,]+), ([^@]+@.+))", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(now at (.+)\\))", new int[]{2, 4, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), formerly at (.+))", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 3}));
+		regex.add(new RegexRule("(([^\\(]+) \\(until (\\d{4}), while at ([^\\)]+)\\))", new int[]{2, 0, 0, 4, 3, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(until (\\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
 
 		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));

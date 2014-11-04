@@ -160,9 +160,37 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"owl2-direct-semantics", "owl2-semantics"}, "http://www.w3.org/TR/owl2-direct-semantics/"));
 		//standards.add(new Standard(new String[]{"rdf-plain-literal", "rdf-text"}, "http://www.w3.org/TR/rdf-plain-literal/"));
 		//standards.add(new Standard(new String[]{"owl2-overview"}, "http://www.w3.org/TR/owl2-overview/"));
-		standards.add(new Standard(new String[]{"widgets"}, "http://www.w3.org/TR/widgets/"));
+		//standards.add(new Standard(new String[]{"widgets"}, "http://www.w3.org/TR/widgets/"));
+		//standards.add(new Standard(new String[]{"mmi-arch"}, "http://www.w3.org/TR/mmi-arch/"));
+		//standards.add(new Standard(new String[]{"r2rml"}, "http://www.w3.org/TR/r2rml/"));
+		//standards.add(new Standard(new String[]{"rdb-direct-mapping"}, "http://www.w3.org/TR/rdb-direct-mapping/"));
+		//standards.add(new Standard(new String[]{"media-frags"}, "http://www.w3.org/TR/media-frags/"));
+		//standards.add(new Standard(new String[]{"css3-mediaqueries"}, "http://www.w3.org/TR/css3-mediaqueries/"));
+		//standards.add(new Standard(new String[]{"view-mode", "widgets-vmmf"}, "http://www.w3.org/TR/view-mode/"));
+		//standards.add(new Standard(new String[]{"rdfa-lite"}, "http://www.w3.org/TR/rdfa-lite/"));
+		//standards.add(new Standard(new String[]{"xmlschema11-1"}, "http://www.w3.org/TR/2009/WD-xmlschema11-1-20090130/"));
+		//standards.add(new Standard(new String[]{"xmlschema11-2"}, "http://www.w3.org/TR/xmlschema11-2/"));
+		standards.add(new Standard(new String[]{"soapjms"}, "http://www.w3.org/TR/soapjms/"));
 
-// parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/", new SpecificEditorsRule1());
+		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2012/PR-xmlschema11-1-20120119/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2011/CR-xmlschema11-1-20110721/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-xmlschema11-1-20091203/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/CR-xmlschema11-1-20090430/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-2/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2012/PR-xmlschema11-2-20120119/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2011/CR-xmlschema11-2-20110721/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-xmlschema11-2-20091203/", spE2);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/CR-xmlschema11-2-20090430/", spE2);
+
+		SpecificEditorsRule3 spE3 = new SpecificEditorsRule3();
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-xmlschema11-1-20090130/", spE3);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2008/WD-xmlschema11-1-20080620/", spE3);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2007/WD-xmlschema11-1-20070830/", spE3);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2009/WD-xmlschema11-2-20090130/", spE3);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2008/WD-xmlschema11-2-20080620/", spE3);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2007/WD-xmlschema11-2-20070830/", spE3);
 
 		parserThread.start();
 	}

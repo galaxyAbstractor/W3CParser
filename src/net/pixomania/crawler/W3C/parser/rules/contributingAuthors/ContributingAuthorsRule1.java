@@ -20,10 +20,31 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements editors = doc.select("dt:contains(Contributing Authors:) ~ dd");
+		Elements editors = doc.select("dt:contains(Contributing Author) ~ dd");
 		if (editors.size() == 0) return null;
 
+		boolean skip = false;
 		for (Element editor : editors) {
+			Element prev = editor.previousElementSibling();
+			if (prev.tagName().equals("dt")) {
+				if (!prev.text().equals("Contributing Author:")
+						&& !prev.text().equals("Contributing Authors:")) {
+					skip = true;
+				}
+			}
+
+			if (skip) {
+				Element next = editor.nextElementSibling();
+				if (next != null) {
+					if (next.text().equals("Contributing Author:")
+							|| next.text().equals("Contributing Authors:")) {
+						skip = false;
+						continue;
+					}
+				}
+				continue;
+			}
+
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
@@ -64,7 +85,7 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 				}
 			}
 			Element next = editor.nextElementSibling();
-			if (next.tag().getName().equals("dt")) break;
+			if (next != null) if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;

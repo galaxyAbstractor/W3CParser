@@ -19,35 +19,31 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-/*		Elements wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Former Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Contributors) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Editor) ~ dd, dt:contains(Author)");
-
-		for (int i = 0; i < wrongEditors.size(); i++) {
-			if (wrongEditors.get(i).text().contains("Author")) break;
-			wrongEditors.get(i).remove();
-		}*/
-
 		Elements editors = doc.select(".head dt:contains(Author) ~ dd:has(a)");
 		if (editors.size() == 0) return null;
 
+		boolean skip = false;
 		for (Element editor : editors) {
+			Element prev = editor.previousElementSibling();
+			if (prev.tagName().equals("dt")) {
+				if (!prev.text().equals("Author:")
+						&& !prev.text().equals("Authors:")) {
+					skip = true;
+				}
+			}
+
+			if (skip) {
+				Element next = editor.nextElementSibling();
+				if (next != null) {
+					if (next.text().equals("Author:")
+							|| next.text().equals("Authors:")) {
+						skip = false;
+						continue;
+					}
+				}
+				continue;
+			}
+
 			Person result = NameParser.parse(editor.text());
 			if (result == null) return null;
 
@@ -64,7 +60,7 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 			editorList.add(result);
 
 			Element next = editor.nextElementSibling();
-			if (next.tag().getName().equals("dt")) break;
+			if (next != null) if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;

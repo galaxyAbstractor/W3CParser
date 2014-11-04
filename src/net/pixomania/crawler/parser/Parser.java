@@ -8,9 +8,8 @@ package net.pixomania.crawler.parser;
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.nodes.Document;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
+import java.util.function.BiConsumer;
 
 /**
  * The Parser class is a holder for specific parser Rules used to gather data
@@ -24,7 +23,7 @@ import java.util.HashMap;
  */
 public class Parser {
 	private final ArrayList<Rule> rules = new ArrayList<>();
-	private final HashMap<String, Rule> specificRules = new HashMap<>();
+	private final TreeMap<String, Rule> specificRules = new TreeMap<>();
 
 	/**
 	 * @param rules Rules that are added when the Parser is initialized

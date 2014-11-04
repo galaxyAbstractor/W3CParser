@@ -22,7 +22,27 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 		Elements editors = doc.select("dt:contains(Series editor) ~ dd");
 		if (editors.size() == 0) return null;
 
+		boolean skip = false;
 		for (Element editor : editors) {
+			Element prev = editor.previousElementSibling();
+			if (prev.tagName().equals("dt")) {
+				if (!prev.text().equals("Series Editor:")
+						&& !prev.text().equals("Series Editors:")) {
+					skip = true;
+				}
+			}
+
+			if (skip) {
+				Element next = editor.nextElementSibling();
+				if (next != null) {
+					if (next.text().equals("Series Editor:")
+							|| next.text().equals("Series Editors:")) {
+						skip = false;
+						continue;
+					}
+				}
+				continue;
+			}
 
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
@@ -63,7 +83,7 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 				}
 			}
 			Element next = editor.nextElementSibling();
-			if (next.tag().getName().equals("dt")) break;
+			if (next != null) if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;

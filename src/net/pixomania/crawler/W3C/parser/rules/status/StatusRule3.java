@@ -36,6 +36,6 @@ public class StatusRule3 implements Rule<String> {
 		return status.get(0).text().replace("W3C", "").
 				replace(m.group(5), "").
 				replace(m.group(3), "").
-				replace(m.group(1), "").trim();
+				replace(m.group(1), "").trim().replace(",", "");
 	}
 }

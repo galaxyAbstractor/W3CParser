@@ -20,77 +20,33 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		/*// UGH. I should probably figure out a better way to ignore irrelevant DDs and data
-		Elements wrongEditors = doc.select("dt:contains(Editor')");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Principal Authors:) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Editors')");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Authors) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Author) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Previous Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Former Editor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Series) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt:contains(Contributor) ~dd");
-
-		if (wrongEditors.size() != 0) {
-			wrongEditors.remove();
-		}
-
-		wrongEditors = doc.select("dt ~ dd, dt:contains(Editor)");
-
-		for (int i = 0; i < wrongEditors.size(); i++) {
-			if (wrongEditors.get(i).text().equals("Editor:")
-					|| wrongEditors.get(i).text().equals("Editors:")
-					|| wrongEditors.get(i).text().equals("Editor")
-					|| wrongEditors.get(i).text().equals("Editors")
-					|| wrongEditors.get(i).text().contains("Edition Editor")
-					) break;
-			wrongEditors.get(i).remove();
-		}*/
-
 		Elements editors = doc.select("dt:contains(Editor) ~ dd, dt:contains(Edition Editor) ~ dd");
 		if (editors.size() == 0) return null;
 
+		boolean skip = false;
 		for (Element editor : editors) {
+			Element prev = editor.previousElementSibling();
+			if (prev.tagName().equals("dt")) {
+				if (!prev.text().equals("Editor:")
+						&& !prev.text().equals("Editors:")
+						&& !prev.text().contains("Edition Editor")) {
+					skip = true;
+				}
+			}
+
+			if (skip) {
+				Element next = editor.nextElementSibling();
+				if (next != null) {
+					if (next.text().equals("Editor:")
+							|| next.text().equals("Editors:")
+							|| next.text().contains("Edition Editor")) {
+						skip = false;
+						continue;
+					}
+				}
+				continue;
+			}
+
 			String[] splitted = editor.html().split("<br />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
@@ -134,7 +90,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			}
 
 			Element next = editor.nextElementSibling();
-			if (next.tag().getName().equals("dt")) break;
+			if (next != null) if (next.tag().getName().equals("dt")) break;
 		}
 
 		if (editorList.size() == 0) return null;
