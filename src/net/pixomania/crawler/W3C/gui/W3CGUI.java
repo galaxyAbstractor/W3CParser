@@ -150,7 +150,6 @@ public class W3CGUI extends Application {
 
 			ScrollPane sp1 = new ScrollPane();
 			sp1.setContent(current);
-			sp1.setPrefWidth(500);
 			container.getChildren().add(sp1);
 
 			Button btn = new Button("Correct");
@@ -167,105 +166,6 @@ public class W3CGUI extends Application {
 			current.getChildren().add(btn);
 		}
 
-		VBox all = new VBox();
-
-		for (Standard standard : W3C.getStandards()) {
-			all.getChildren().add(new Label("Name: " + standard.getMainName()));
-			for (StandardVersion s : standard.getVersions()) {
-				all.getChildren().add(new Label("Name: " + s.getTitle()));
-				all.getChildren().add(new Label("Date: " + s.getDate()));
-				all.getChildren().add(new Label("Status: " + s.getStatus()));
-				all.getChildren().add(new Label("Link: " + s.getLink()));
-
-				if (s.getEditors() != null) {
-					all.getChildren().add(new Label("Editors: "));
-
-					for (Person editor : s.getEditors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-				if (s.getPreviousEditors() != null) {
-					all.getChildren().add(new Label("Previous Editors: "));
-					for (Person editor : s.getPreviousEditors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-				if (s.getSeriesEditors() != null) {
-					all.getChildren().add(new Label("Series Editors: "));
-					for (Person editor : s.getSeriesEditors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-				if (s.getAuthors() != null) {
-					all.getChildren().add(new Label("Authors: "));
-					for (Person editor : s.getAuthors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-				if (s.getContributors() != null) {
-					all.getChildren().add(new Label("Contributors: "));
-					for (Person editor : s.getContributors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-				if (s.getContributingAuthors() != null) {
-					all.getChildren().add(new Label("Contributing Authors: "));
-					for (Person editor : s.getContributingAuthors()) {
-						all.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
-								" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
-								" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-								" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
-					}
-				}
-
-
-				all.getChildren().add(new Label("Previous: "));
-
-				for (StandardVersion prev : s.getPrev()) {
-					all.getChildren().add(new Label("  " + prev.getLink()));
-				}
-
-				all.getChildren().add(new Label("Next: "));
-
-				for (StandardVersion next : s.getNext()) {
-					all.getChildren().add(new Label("  " + next.getLink()));
-				}
-
-				Separator sep = new Separator();
-				sep.setPrefWidth(500);
-				all.getChildren().add(sep);
-			}
-			Separator sep = new Separator();
-			sep.setStyle("-fx-background-color: #000000;-fx-background-radius: 3px;");
-			sep.setPrefWidth(500);
-			all.getChildren().add(sep);
-
-		}
-
-		ScrollPane sp = new ScrollPane();
-		sp.setContent(all);
-		sp.setPrefWidth(500);
-		container.getChildren().add(sp);
 
 		infopanel.getChildren().add(container);
 	}

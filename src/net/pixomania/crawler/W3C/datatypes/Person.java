@@ -18,6 +18,7 @@ public class Person {
 	public String workgroup;
 	public ArrayList<String> website;
 	public String formerAffiliation;
+	public long id;
 
 	public String getName() {
 		return name;
@@ -103,5 +104,13 @@ public class Person {
 
 	public void setFormerAffiliation(String formerAffiliation) {
 		this.formerAffiliation = formerAffiliation;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

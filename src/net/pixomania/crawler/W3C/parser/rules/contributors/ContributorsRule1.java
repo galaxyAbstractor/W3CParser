@@ -48,10 +48,11 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
-				if (editor.text().equals("(In alphabetical order)")
-						|| editor.text().equals("See Acknowledgements")
-						|| editor.text().equals("See participants.")
-						|| editor.text().contains("Note:")) continue;
+				if (editor.text().toLowerCase().equals("(in alphabetical order)")
+						|| editor.text().toLowerCase().equals("(in alphabetic order)")
+						|| editor.text().toLowerCase().equals("see Acknowledgements")
+						|| editor.text().toLowerCase().equals("see participants.")
+						|| editor.text().toLowerCase().contains("note:")) continue;
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
@@ -69,10 +70,11 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
-						if (split.equals("(In alphabetical order)")
-								|| split.equals("See Acknowledgements")
-								|| split.equals("See participants.")
-								|| editor.text().contains("Note:")) continue;
+						if (split.toLowerCase().equals("(in alphabetical order)")
+								|| split.toLowerCase().equals("(in alphabetic order)")
+								|| split.toLowerCase().equals("see Acknowledgements")
+								|| split.toLowerCase().equals("see participants.")
+								|| split.toLowerCase().contains("note:")) continue;
 						Person result = NameParser.parse(split.replaceAll("\n", ""));
 						if (result == null) return null;
 

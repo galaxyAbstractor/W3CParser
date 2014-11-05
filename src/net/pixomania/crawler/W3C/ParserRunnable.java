@@ -12,14 +12,18 @@ import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
+import net.pixomania.crawler.db.HibernateUtil;
 import net.pixomania.crawler.mapper.PeopleMap;
 import net.pixomania.crawler.parser.Result;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 /**
  * The ParserRunnable class is the startpoint of the parsing.
@@ -39,15 +43,28 @@ public class ParserRunnable implements Runnable {
 		this.orphan = orphan;
 	}
 
-	private boolean wait = true;
+	private boolean wait = false;
 
 	private final HashSet<String> unmappedEditors = new HashSet<>();
 
 	@Override
 	public void run() {
-		for (Standard standard : W3C.getStandards()) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+
+		LinkedList<Standard> standards = W3C.getStandards();
+
+		Standard standard = standards.pop();
+		while (standard != null) {
 			parseVersion(standard.getLink(), standard, null);
+			session.beginTransaction();
+			session.save(standard);
+			session.getTransaction().commit();
+
+			standard = standards.pop();
 		}
+
+		session.close();
 
 		Platform.runLater(() -> {
 			if (orphans.size() != 0) {
@@ -58,8 +75,8 @@ public class ParserRunnable implements Runnable {
 		});
 
 		Platform.runLater(() -> W3CGUI.redrawInfopanel("Done", null));
-		CSVExport.export(W3C.getStandards());
-		CSVExport.exportLinkability(W3C.getStandards());
+		//CSVExport.export(W3C.getStandards());
+		//CSVExport.exportLinkability(W3C.getStandards());
 
 		System.out.println("Unmapped editors");
 		unmappedEditors.forEach(System.out::println);
@@ -173,14 +190,18 @@ public class ParserRunnable implements Runnable {
 		}
 
 		if (!contain) {
-			synchronized (this) {
-				try {
-					Platform.runLater(() -> W3CGUI.confirmDialog(standard.getMainName(), url));
+			if (wait) {
+				synchronized (this) {
+					try {
+						Platform.runLater(() -> W3CGUI.confirmDialog(standard.getMainName(), url));
 
-					this.wait();
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
+						this.wait();
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 				}
+			} else {
+				orphan = true;
 			}
 		}
 
