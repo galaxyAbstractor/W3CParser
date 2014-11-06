@@ -53,7 +53,7 @@ public class W3C {
 	}
 
 	public W3C() {
-		Runnable runGUI = () -> {
+		/*Runnable runGUI = () -> {
 			Application.launch(W3CGUI.class);
 		};
 
@@ -67,7 +67,7 @@ public class W3C {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 
 		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
@@ -81,7 +81,7 @@ public class W3C {
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
-		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+/*		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -93,7 +93,7 @@ public class W3C {
 		standards.add(new Standard(new String[]{"css-namespaces-3"}, "http://www.w3.org/TR/css-namespaces-3/"));
 		standards.add(new Standard(new String[]{"wai-aria"}, "http://www.w3.org/TR/wai-aria/"));
 		standards.add(new Standard(new String[]{"wai-aria-implementation"}, "http://www.w3.org/TR/wai-aria-implementation/"));
-		standards.add(new Standard(new String[]{"mediaont-api"}, "http://www.w3.org/TR/WD-mediaont-api-1.0/"));
+		standards.add(new Standard(new String[]{"mediaont-api"}, "http://www.w3.org/TR/mediaont-api-1.0/"));
 		standards.add(new Standard(new String[]{"rdf-schema"}, "http://www.w3.org/TR/rdf-schema/"));
 		standards.add(new Standard(new String[]{"rdf-syntax-grammar"}, "http://www.w3.org/TR/rdf-syntax-grammar/"));
 		standards.add(new Standard(new String[]{"rdf11-concepts"}, "http://www.w3.org/TR/rdf11-concepts/"));
@@ -104,7 +104,7 @@ public class W3C {
 		standards.add(new Standard(new String[]{"trig"}, "http://www.w3.org/TR/trig/"));
 		standards.add(new Standard(new String[]{"exi"}, "http://www.w3.org/TR/exi/"));
 		standards.add(new Standard(new String[]{"progress-events"}, "http://www.w3.org/TR/progress-events/"));
-		standards.add(new Standard(new String[]{"cors", "access-control"}, "http://www.w3.org/TR/WD-access-control/"));
+		standards.add(new Standard(new String[]{"cors", "access-control"}, "http://www.w3.org/TR/access-control/"));
 		standards.add(new Standard(new String[]{"json-ld-api"}, "http://www.w3.org/TR/json-ld-api/"));
 		standards.add(new Standard(new String[]{"vocab-data-cube"}, "http://www.w3.org/TR/vocab-data-cube/"));
 		standards.add(new Standard(new String[]{"vocab-org"}, "http://www.w3.org/TR/vocab-org/"));
@@ -128,10 +128,10 @@ public class W3C {
 		standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
 		standards.add(new Standard(new String[]{"prov-n"}, "http://www.w3.org/TR/prov-n/"));
 		standards.add(new Standard(new String[]{"widgets-digsig"}, "http://www.w3.org/TR/widgets-digsig/"));
-		standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/WD-xmldsig-core1/"));
+		standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/xmldsig-core1/"));
 		standards.add(new Standard(new String[]{"xmldsig-properties"}, "http://www.w3.org/TR/xmldsig-properties/"));
-		standards.add(new Standard(new String[]{"xmlenc-core1"}, "http://www.w3.org/TR/WD-xmlenc-core1/"));
-		standards.add(new Standard(new String[]{"role-attribute"}, "http://www.w3.org/TR/role-attribute/"));
+		standards.add(new Standard(new String[]{"xmlenc-core1"}, "http://www.w3.org/TR/xmlenc-core1/"));
+		standards.add(new Standard(new String[]{"role-attribute"}, "http://www.w3.org/TR/role-attribute/"));*/
 		standards.add(new Standard(new String[]{"rdf-sparql-XMLres"}, "http://www.w3.org/TR/rdf-sparql-XMLres/"));
 		standards.add(new Standard(new String[]{"sparql11-entailment"}, "http://www.w3.org/TR/sparql11-entailment/"));
 		standards.add(new Standard(new String[]{"sparql11-protocol"}, "http://www.w3.org/TR/sparql11-protocol/"));
@@ -172,7 +172,7 @@ public class W3C {
 		standards.add(new Standard(new String[]{"css3-mediaqueries"}, "http://www.w3.org/TR/css3-mediaqueries/"));
 		standards.add(new Standard(new String[]{"view-mode", "widgets-vmmf"}, "http://www.w3.org/TR/view-mode/"));
 		standards.add(new Standard(new String[]{"rdfa-lite"}, "http://www.w3.org/TR/rdfa-lite/"));
-		standards.add(new Standard(new String[]{"xmlschema11-1"}, "http://www.w3.org/TR/WD-xmlschema11-1/"));
+		standards.add(new Standard(new String[]{"xmlschema11-1"}, "http://www.w3.org/TR/xmlschema11-1/"));
 		standards.add(new Standard(new String[]{"xmlschema11-2"}, "http://www.w3.org/TR/xmlschema11-2/"));
 		standards.add(new Standard(new String[]{"soapjms"}, "http://www.w3.org/TR/soapjms/"));
 		standards.add(new Standard(new String[]{"mediaont-10"}, "http://www.w3.org/TR/mediaont-10/"));

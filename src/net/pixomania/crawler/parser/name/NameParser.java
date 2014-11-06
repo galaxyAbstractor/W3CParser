@@ -65,7 +65,7 @@ public class NameParser {
 			Matcher m = p.matcher(name);
 
 			if (m.matches()) {
-				System.out.println(name + ": " + regex.indexOf(re));
+				//System.out.println(name + ": " + regex.indexOf(re));
 				Field[] fields = Person.class.getDeclaredFields();
 				Person person = new Person();
 				for (int i = 0; i < re.group.length; i++){

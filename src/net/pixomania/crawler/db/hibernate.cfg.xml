@@ -26,7 +26,7 @@
         <property name="hibernate.cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
 
         <mapping resource="net/pixomania/crawler/db/StandardVersion.hbm.xml"/>
         <mapping resource="net/pixomania/crawler/db/Standard.hbm.xml"/>

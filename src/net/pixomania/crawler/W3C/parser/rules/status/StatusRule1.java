@@ -13,6 +13,7 @@ public class StatusRule1 implements Rule<String> {
 	@Override
 	public String run(String url, Document doc) {
 		Elements status = doc.select("h2");
+
 		if (status.get(0).select("abbr").size() != 0 &&
 				status.get(0).select("time").size() != 0) {
 			// The newer versions have abbr and time tags

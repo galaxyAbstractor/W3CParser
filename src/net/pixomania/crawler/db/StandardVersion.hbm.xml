@@ -20,5 +20,10 @@
         <property name="date"/>
         <property name="status"/>
 
+        <bag name="prev" cascade="all" table="standardversions_standardversions">
+            <key column="sv"/>
+            <many-to-many column="sv_prev" class="net.pixomania.crawler.W3C.datatypes.StandardVersion"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

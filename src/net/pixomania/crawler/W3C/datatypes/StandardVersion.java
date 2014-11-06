@@ -9,6 +9,7 @@ import net.pixomania.crawler.parser.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class StandardVersion {
 	private String title;
@@ -24,10 +25,10 @@ public class StandardVersion {
 
 	private long id;
 
-	private final ArrayList<StandardVersion> next = new ArrayList<>();
-	private final ArrayList<StandardVersion> prev = new ArrayList<>();
+	private ArrayList<StandardVersion> next = new ArrayList<>();
+	private List<StandardVersion> prev = new ArrayList<>();
 
-	private final HashMap<String, Rule> rules = new HashMap<>();
+	private HashMap<String, Rule> rules = new HashMap<>();
 
 	public String getTitle() {
 		return title;
@@ -77,8 +78,12 @@ public class StandardVersion {
 		return next;
 	}
 
-	public ArrayList<StandardVersion> getPrev() {
+	public List<StandardVersion> getPrev() {
 		return prev;
+	}
+
+	public void setPrev(List<StandardVersion> prev) {
+		this.prev = prev;
 	}
 
 	public ArrayList<Person> getPreviousEditors() {
