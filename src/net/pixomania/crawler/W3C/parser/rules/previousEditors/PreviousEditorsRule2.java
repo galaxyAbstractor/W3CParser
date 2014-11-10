@@ -26,8 +26,8 @@ public class PreviousEditorsRule2 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().equals("Previous Editor:")
-						&& !prev.text().equals("Previous Editors:")) {
+				if (!prev.text().replaceAll(":", "").equals("Previous Editor")
+						&& !prev.text().replaceAll(":", "").equals("Previous Editors")) {
 					skip = true;
 				}
 			}
@@ -35,8 +35,8 @@ public class PreviousEditorsRule2 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().equals("Previous Editor:")
-							|| next.text().equals("Previous Editors:")) {
+					if (next.text().replaceAll(":", "").equals("Previous Editor")
+							|| next.text().replaceAll(":", "").equals("Previous Editors")) {
 						skip = false;
 						continue;
 					}

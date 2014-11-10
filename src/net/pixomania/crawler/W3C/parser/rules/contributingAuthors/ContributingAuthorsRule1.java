@@ -27,8 +27,8 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().equals("Contributing Author:")
-						&& !prev.text().equals("Contributing Authors:")) {
+				if (!prev.text().replaceAll(":", "").equals("Contributing Author")
+						&& !prev.text().replaceAll(":", "").equals("Contributing Authors")) {
 					skip = true;
 				}
 			}
@@ -36,8 +36,8 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().equals("Contributing Author:")
-							|| next.text().equals("Contributing Authors:")) {
+					if (next.text().replaceAll(":", "").equals("Contributing Author")
+							|| next.text().replaceAll(":", "").equals("Contributing Authors")) {
 						skip = false;
 						continue;
 					}

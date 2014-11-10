@@ -27,8 +27,8 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().equals("Editor:")
-						&& !prev.text().equals("Editors:")
+				if (!prev.text().replaceAll(":", "").equals("Editor")
+						&& !prev.text().replaceAll(":", "").equals("Editors")
 						&& !prev.text().contains("Edition Editor")) {
 					skip = true;
 				}
@@ -37,9 +37,9 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().equals("Editor:")
-							|| next.text().equals("Editors:")
-							|| next.text().contains("Edition Editor")) {
+					if (next.text().replaceAll(":", "").equals("Editor")
+							|| next.text().replaceAll(":", "").equals("Editors")
+							|| next.text().replaceAll(":", "").contains("Edition Editor")) {
 						skip = false;
 						continue;
 					}

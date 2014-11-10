@@ -15,17 +15,16 @@ public class StandardVersion {
 	private String title;
 	private String date;
 	private String status;
-	private ArrayList<Person> editors = new ArrayList<>();
-	private ArrayList<Person> previousEditors = new ArrayList<>();
-	private ArrayList<Person> seriesEditors = new ArrayList<>();
-	private ArrayList<Person> authors = new ArrayList<>();
-	private ArrayList<Person> contributors = new ArrayList<>();
-	private ArrayList<Person> contributingAuthors = new ArrayList<>();
+	private List<Person> editors = new ArrayList<>();
+	private List<Person> previousEditors = new ArrayList<>();
+	private List<Person> seriesEditors = new ArrayList<>();
+	private List<Person> authors = new ArrayList<>();
+	private List<Person> contributors = new ArrayList<>();
+	private List<Person> contributingAuthors = new ArrayList<>();
 	private String link;
 
 	private long id;
 
-	private ArrayList<StandardVersion> next = new ArrayList<>();
 	private List<StandardVersion> prev = new ArrayList<>();
 
 	private HashMap<String, Rule> rules = new HashMap<>();
@@ -54,11 +53,11 @@ public class StandardVersion {
 		this.status = status;
 	}
 
-	public ArrayList<Person> getEditors() {
+	public List<Person> getEditors() {
 		return editors;
 	}
 
-	public void setEditors(ArrayList<Person> editors) {
+	public void setEditors(List<Person> editors) {
 		this.editors = editors;
 	}
 
@@ -74,10 +73,6 @@ public class StandardVersion {
 		return rules;
 	}
 
-	public ArrayList<StandardVersion> getNext() {
-		return next;
-	}
-
 	public List<StandardVersion> getPrev() {
 		return prev;
 	}
@@ -86,43 +81,43 @@ public class StandardVersion {
 		this.prev = prev;
 	}
 
-	public ArrayList<Person> getPreviousEditors() {
+	public List<Person> getPreviousEditors() {
 		return previousEditors;
 	}
 
-	public void setPreviousEditors(ArrayList<Person> previousEditors) {
+	public void setPreviousEditors(List<Person> previousEditors) {
 		this.previousEditors = previousEditors;
 	}
 
-	public ArrayList<Person> getSeriesEditors() {
+	public List<Person> getSeriesEditors() {
 		return seriesEditors;
 	}
 
-	public void setSeriesEditors(ArrayList<Person> seriesEditors) {
+	public void setSeriesEditors(List<Person> seriesEditors) {
 		this.seriesEditors = seriesEditors;
 	}
 
-	public ArrayList<Person> getAuthors() {
+	public List<Person> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(ArrayList<Person> authors) {
+	public void setAuthors(List<Person> authors) {
 		this.authors = authors;
 	}
 
-	public ArrayList<Person> getContributors() {
+	public List<Person> getContributors() {
 		return contributors;
 	}
 
-	public void setContributors(ArrayList<Person> contributors) {
+	public void setContributors(List<Person> contributors) {
 		this.contributors = contributors;
 	}
 
-	public ArrayList<Person> getContributingAuthors() {
+	public List<Person> getContributingAuthors() {
 		return contributingAuthors;
 	}
 
-	public void setContributingAuthors(ArrayList<Person> contributingAuthors) {
+	public void setContributingAuthors(List<Person> contributingAuthors) {
 		this.contributingAuthors = contributingAuthors;
 	}
 

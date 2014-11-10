@@ -21,7 +21,11 @@ public class StatusRule6 implements Rule<String> {
 			Pattern p = Pattern.compile("(W3C ([^\\d]+) (.*))", Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(status.get(1).text());
 
-			if(!m.find()) return null;
+			if(!m.find()) {
+				m = p.matcher(status.get(0).text());
+				if(!m.find()) return null;
+			}
+
 			return m.group(2);
 		} else {
 			return null;

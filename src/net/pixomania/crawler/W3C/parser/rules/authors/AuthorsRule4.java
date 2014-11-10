@@ -26,8 +26,8 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().equals("Author:")
-						&& !prev.text().equals("Authors:")) {
+				if (!prev.text().replaceAll(":", "").equals("Author")
+						&& !prev.text().replaceAll(":", "").equals("Authors")) {
 					skip = true;
 				}
 			}
@@ -35,8 +35,8 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().equals("Author:")
-							|| next.text().equals("Authors:")) {
+					if (next.text().replaceAll(":", "").equals("Author")
+							|| next.text().replaceAll(":", "").equals("Authors")) {
 						skip = false;
 						continue;
 					}

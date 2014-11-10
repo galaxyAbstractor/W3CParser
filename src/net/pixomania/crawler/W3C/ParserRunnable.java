@@ -13,6 +13,8 @@ import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.db.HibernateUtil;
+import net.pixomania.crawler.logger.Log;
+import net.pixomania.crawler.logger.LogWriter;
 import net.pixomania.crawler.mapper.PeopleMap;
 import net.pixomania.crawler.parser.Result;
 import org.hibernate.Session;
@@ -52,6 +54,7 @@ public class ParserRunnable implements Runnable {
 
 	@Override
 	public void run() {
+		LogWriter.createLogFile();
 		LinkedList<Standard> standards = W3C.getStandards();
 
 		Standard standard = standards.pop();
@@ -81,6 +84,7 @@ public class ParserRunnable implements Runnable {
 		unmappedEditors.forEach(System.out::println);
 
 		session.close();
+		LogWriter.closeLogFile();
 	}
 
 	/**
@@ -199,50 +203,53 @@ public class ParserRunnable implements Runnable {
 			}
 		}*/
 
-		if(contain) {
+		Log.log("info", "[+][SV] New StandardVersion", sv);
+
+		if(contain || true) {
 			//urlsCrawled.add(sv);
 			standard.getVersions().add(sv);
+
+
+			//final StandardVersion innerSv = sv;
+			//Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
+
+			if(wait) {
+				synchronized (this) {
+					try {
+						this.wait();
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+
+			if (urls != null) {
+				for (String prevUrl : urls) {
+					// Have we already crawled this link? If so, prev will contain it
+					StandardVersion prev = alreadyCrawled(prevUrl);
+					if (prev == null) {
+						// We have never crawled d.text(), so let's start
+
+						// We have never crawled this before
+						// let's crawl it if it contains w3.org
+						if (prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) {
+							sv.getPrev().add(parseVersion(prevUrl, standard));
+							session.beginTransaction();
+							session.save(sv);
+							session.getTransaction().commit();
+						}
+
+					} else {
+						// We already crawled this link, so let's add it to the lists
+						sv.getPrev().add(prev);
+				/*		session.beginTransaction();
+						session.save(sv);
+						session.getTransaction().commit();*/
+					}
+				}
+			}
 		} else {
 			//orphans.add(sv);
-		}
-
-		//final StandardVersion innerSv = sv;
-		//Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
-
-		if(wait) {
-			synchronized (this) {
-				try {
-					this.wait();
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-
-		if (urls != null) {
-			for (String prevUrl : urls) {
-				// Have we already crawled this link? If so, prev will contain it
-				StandardVersion prev = alreadyCrawled(prevUrl);
-				if (prev == null) {
-					// We have never crawled d.text(), so let's start
-
-					// We have never crawled this before
-					// let's crawl it if it contains w3.org
-					if (prevUrl.contains("w3.org/TR")) {
-						sv.getPrev().add(parseVersion(prevUrl, standard));
-						session.beginTransaction();
-						session.save(sv);
-						session.getTransaction().commit();
-					}
-
-				} else {
-					// We already crawled this link, so let's add it to the lists
-					sv.getPrev().add(prev);
-			/*		session.beginTransaction();
-					session.save(sv);
-					session.getTransaction().commit();*/
-				}
-			}
 		}
 
 		return sv;

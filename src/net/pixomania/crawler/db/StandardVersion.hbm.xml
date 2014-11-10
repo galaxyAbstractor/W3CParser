@@ -25,5 +25,35 @@
             <many-to-many column="sv_prev" class="net.pixomania.crawler.W3C.datatypes.StandardVersion"/>
         </bag>
 
+        <bag name="editors" cascade="all">
+            <key column="sv_editor"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="authors" cascade="all">
+            <key column="sv_author"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="contributors" cascade="all">
+            <key column="sv_contributor"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="previousEditors" cascade="all">
+            <key column="sv_previousEditors"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="seriesEditors" cascade="all">
+            <key column="sv_seriesEditors"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="contributingAuthors" cascade="all">
+            <key column="sv_contributingAuthors"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
     </class>
 </hibernate-mapping>
