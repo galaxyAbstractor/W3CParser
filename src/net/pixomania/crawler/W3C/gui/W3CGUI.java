@@ -187,7 +187,7 @@ public class W3CGUI extends Application {
 
 		ParserRunnable parser = W3C.getParser();
 
-		yes.setOnAction((event) -> {
+	/*	yes.setOnAction((event) -> {
 				synchronized (parser) {
 					parser.setOrphan(false);
 					parser.notify();
@@ -199,7 +199,7 @@ public class W3CGUI extends Application {
 					parser.setOrphan(true);
 					parser.notify();
 				}
-		});
+		});*/
 
 		infopanel.getChildren().addAll(yes, no);
 	}

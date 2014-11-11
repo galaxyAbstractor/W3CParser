@@ -15,6 +15,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class SpecificEditorsRule2 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		Elements dt = doc.select("dt:contains(Version 1.1)");

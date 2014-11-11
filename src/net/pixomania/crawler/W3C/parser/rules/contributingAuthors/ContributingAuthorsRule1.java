@@ -16,6 +16,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -27,8 +29,8 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().replaceAll(":", "").equals("Contributing Author")
-						&& !prev.text().replaceAll(":", "").equals("Contributing Authors")) {
+				if (!prev.text().replaceAll(":", "").toLowerCase().equals("contributing author")
+						&& !prev.text().replaceAll(":", "").toLowerCase().equals("contributing authors")) {
 					skip = true;
 				}
 			}
@@ -36,8 +38,8 @@ public class ContributingAuthorsRule1 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().replaceAll(":", "").equals("Contributing Author")
-							|| next.text().replaceAll(":", "").equals("Contributing Authors")) {
+					if (next.text().replaceAll(":", "").toLowerCase().equals("contributing author")
+							|| next.text().replaceAll(":", "").toLowerCase().equals("contributing authors")) {
 						skip = false;
 						continue;
 					}

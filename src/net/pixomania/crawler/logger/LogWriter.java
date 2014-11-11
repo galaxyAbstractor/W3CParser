@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class LogWriter {
-	private static File logFile = new File("log.json");
+	private static File logFile = new File("src/net/pixomania/crawler/log.json");
 
 	public static void createLogFile() {
 		if (!logFile.exists()) {
@@ -36,7 +36,11 @@ public class LogWriter {
 			Gson gson = new Gson();
 
 			FileWriter fileWriter = new FileWriter(logFile, true);
-			fileWriter.write(gson.toJson(logMessage) + ",");
+			if (logFile.length() < 10) {
+				fileWriter.write(gson.toJson(logMessage));
+			} else {
+				fileWriter.write("," + gson.toJson(logMessage));
+			}
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

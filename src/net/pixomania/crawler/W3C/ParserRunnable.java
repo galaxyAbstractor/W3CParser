@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The ParserRunnable class is the startpoint of the parsing.
@@ -35,19 +36,7 @@ import java.util.LinkedList;
  */
 public class ParserRunnable implements Runnable {
 
-	//private final ArrayList<StandardVersion> urlsCrawled = new ArrayList<>();
-
-	// Sigh
-	//private final ArrayList<StandardVersion> orphans = new ArrayList<>();
-
-	private boolean orphan = false;
-	public void setOrphan(boolean orphan) {
-		this.orphan = orphan;
-	}
-
 	private boolean wait = false;
-
-	private final HashSet<String> unmappedEditors = new HashSet<>();
 
 	private SessionFactory sf = HibernateUtil.getSessionFactory();
 	private Session session = sf.openSession();
@@ -59,14 +48,26 @@ public class ParserRunnable implements Runnable {
 
 		Standard standard = standards.pop();
 		while (standard != null) {
+			Log.log("info", "[i] Started parsing standard " + standard.getMainName());
 			System.out.println("STANDARD " + standard.getMainName() + " IS BEING PARSED\n================");
 			parseVersion(standard.getLink(), standard);
 			session.beginTransaction();
 			session.save(standard);
 			session.getTransaction().commit();
 
-			standard = standards.pop();
+			Log.log("standard", "[+] New Standard: " + standard.getMainName(), standard);
+
+			if(standard.getVersions().size() < 3) {
+				Log.log("warning", "Standard " + standard.getMainName() + " has 2 or less versions");
+			}
+
+			standard = null;
+			if (standards.size() > 0) standard = standards.pop();
 		}
+
+		Standard orphans = new Standard(new String[]{"orphans"}, "");
+		orphans.setVersions(allOrphans());
+		Log.log("orphans", "Orphans!", orphans);
 
 		/*Platform.runLater(() -> {
 			if (orphans.size() != 0) {
@@ -79,9 +80,6 @@ public class ParserRunnable implements Runnable {
 		Platform.runLater(() -> W3CGUI.redrawInfopanel("Done", null));*/
 		//CSVExport.export(W3C.getStandards());
 		//CSVExport.exportLinkability(W3C.getStandards());
-
-		System.out.println("Unmapped editors");
-		unmappedEditors.forEach(System.out::println);
 
 		session.close();
 		LogWriter.closeLogFile();
@@ -98,6 +96,7 @@ public class ParserRunnable implements Runnable {
 	 * @return The resulting StandardVersion
 	 */
 	private StandardVersion parseVersion(String url, Standard standard) {
+		Log.log("info", "[i] Parsing version: " + url);
 		System.out.println("PARSING: " + url);
 		//Platform.runLater(() -> W3CGUI.getBrowser().load(url));
 		System.out.println("Standards left:" + W3C.getStandards().size());
@@ -118,6 +117,9 @@ public class ParserRunnable implements Runnable {
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).get();
+		} catch (org.jsoup.HttpStatusException e) {
+			Log.log("warning", "Version " + url + " gave error code: " + e.getStatusCode());
+			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -168,12 +170,57 @@ public class ParserRunnable implements Runnable {
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
-		if (editors != null) {
-			for (Person editor : editors) {
-				if (!PeopleMap.personExists(editor.getName())) {
-					unmappedEditors.add(editor.getName());
+		boolean noPeople = true;
+		// while loop is because once we find one list that is not null
+		// and contains persons, we do not need to check the rest of the lists
+		while (true) {
+			if (sv.getEditors() != null) {
+				if (sv.getEditors().size() > 0) {
+					noPeople = false;
+					break;
 				}
 			}
+
+			if (sv.getAuthors() != null) {
+				if (sv.getAuthors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getContributors() != null) {
+				if (sv.getContributors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getContributingAuthors() != null) {
+				if (sv.getContributingAuthors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getSeriesEditors() != null) {
+				if (sv.getSeriesEditors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getPreviousEditors() != null) {
+				if (sv.getPreviousEditors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			break;
+		}
+
+		if (noPeople) {
+			Log.log("error", "No persons were found associated with spec " + url);
 		}
 
 		ArrayList<String> urls = (ArrayList<String>) W3C.getParsers().get("previous").parse(url, doc).getResult();
@@ -203,8 +250,9 @@ public class ParserRunnable implements Runnable {
 			}
 		}*/
 
-		Log.log("info", "[+][SV] New StandardVersion", sv);
 
+
+		Log.log("info", "Completed parsing " + url);
 		if(contain || true) {
 			//urlsCrawled.add(sv);
 			standard.getVersions().add(sv);
@@ -233,10 +281,14 @@ public class ParserRunnable implements Runnable {
 						// We have never crawled this before
 						// let's crawl it if it contains w3.org
 						if (prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) {
-							sv.getPrev().add(parseVersion(prevUrl, standard));
-							session.beginTransaction();
-							session.save(sv);
-							session.getTransaction().commit();
+							StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
+
+							if (nextToCrawl != null) {
+								sv.getPrev().add(nextToCrawl);
+								session.beginTransaction();
+								session.save(sv);
+								session.getTransaction().commit();
+							}
 						}
 
 					} else {
@@ -260,5 +312,11 @@ public class ParserRunnable implements Runnable {
 				"from StandardVersion where link = :link")
 				.setParameter("link", link)
 				.uniqueResult();
+	}
+
+	private List<StandardVersion> allOrphans() {
+		return (List<StandardVersion>) session.createQuery(
+				"from StandardVersion where standard_id is null").list();
+
 	}
 }

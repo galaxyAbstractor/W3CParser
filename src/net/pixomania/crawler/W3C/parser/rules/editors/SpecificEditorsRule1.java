@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 // http://www.w3.org/TR/2009/WD-WebSimpleDB-20090929/ should return Nikunj Mehta, Oracle Corp
 public class SpecificEditorsRule1 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editors = new ArrayList<>();

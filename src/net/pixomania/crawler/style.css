@@ -1,0 +1,43 @@
+body {
+	font-family: 'Source Code Pro';
+	font-size: 12px;
+}
+
+.standard {
+	color: green;
+	text-decoration: underline;
+}
+
+.standardinfo {
+	background-color: #f4f4f4;
+	margin-left: 30px;
+	border: 1px solid #ddd;
+}
+
+.svinfo {
+	background-color: #f0f0f0;
+	margin-left: 20px;
+	border: 1px solid #ddd;
+}
+
+.editorinfo {
+	background-color: #e4e4e4;
+	margin-left: 20px;
+	border: 1px solid #ddd;
+}
+
+.info {
+	color:#666;
+}
+
+.error {
+	color: red;
+}
+
+.warning, .orphans {
+	color: orange;
+}
+
+.indent {
+	margin-left: 15px
+}

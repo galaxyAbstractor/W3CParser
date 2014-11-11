@@ -15,6 +15,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -26,8 +28,8 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().replaceAll(":", "").equals("Series Editor")
-						&& !prev.text().replaceAll(":", "").equals("Series Editors")) {
+				if (!prev.text().replaceAll(":", "").toLowerCase().equals("series editor")
+						&& !prev.text().replaceAll(":", "").toLowerCase().equals("series editors")) {
 					skip = true;
 				}
 			}
@@ -35,8 +37,8 @@ public class SeriesEditorsRule1 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().replaceAll(":", "").equals("Series Editor")
-							|| next.text().replaceAll(":", "").equals("Series Editors")) {
+					if (next.text().replaceAll(":", "").toLowerCase().equals("series editor")
+							|| next.text().replaceAll(":", "").toLowerCase().equals("series editors")) {
 						skip = false;
 						continue;
 					}

@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class PreviousRule1 implements Rule<ArrayList<String>> {
+	public String name = this.getClass().getSimpleName();
 
 	@Override
 	public ArrayList<String> run(String url, Document doc) {
@@ -26,8 +27,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 		for (Element d : dt) {
 			Element prev = d.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().equals("Previous version:")
-						&& !prev.text().equals("Previous versions:")) {
+				if (!prev.text().toLowerCase().startsWith("previous version")
+						&& !prev.text().toLowerCase().startsWith("previous versions")) {
 					skip = true;
 				}
 			}
@@ -35,8 +36,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 			if (skip) {
 				Element next = d.nextElementSibling();
 				if (next != null) {
-					if (next.text().equals("Previous version:")
-							|| next.text().equals("Previous versions:")) {
+					if (next.text().toLowerCase().startsWith("previous version")
+							|| next.text().toLowerCase().startsWith("previous versions")) {
 						skip = false;
 						continue;
 					}

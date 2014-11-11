@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StatusRule4 implements Rule<String> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public String run(String url, Document doc) {
 		Elements status = doc.select(".maturity");

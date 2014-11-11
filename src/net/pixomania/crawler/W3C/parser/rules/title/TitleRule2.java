@@ -10,6 +10,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class TitleRule2 implements Rule<String> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public String run(String url, Document doc) {
 		Elements title = doc.select("h1");

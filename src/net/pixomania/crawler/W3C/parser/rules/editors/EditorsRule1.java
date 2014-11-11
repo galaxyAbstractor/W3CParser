@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EditorsRule1 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();

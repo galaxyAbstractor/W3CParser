@@ -10,6 +10,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class StatusRule2 implements Rule<String> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public String run(String url, Document doc) {
 		Elements status = doc.select("h2");

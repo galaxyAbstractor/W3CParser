@@ -4,13 +4,141 @@
   ~ @license BSD - $root/license
   -->
 
-<html>
+<html ng-app="logApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Log</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+<div ng-controller="logCtrl">
+    <button ng-click="expand = !expand">Expand all</button><br>
+    <button ng-click="filter = ''">Filter all</button>
+    <button ng-click="filter = 'info'">Filter info</button>
+    <button ng-click="filter = 'standard'">Filter standard</button>
+    <button ng-click="filter = 'warning'">Filter warning</button>
+    <button ng-click="filter = 'error'">Filter error</button>
+    <button ng-click="filter = 'orphans'">Show orphans</button>
+    <div ng-repeat="logrow in log | filter:{level: filter}">
+        <span class="{{logrow.level}}" ng-click="logrow.show = !logrow.show">{{logrow.message}}</span>
+        <div ng-if="logrow.level == 'standard'">
+            <div ng-show="logrow.show || expand" class="standardinfo">
+                ID: {{logrow.standard.id}}<br>
+                Names: {{logrow.standard.names}}<br>
+                Link: <a href="{{logrow.standard.link}}" target="_blank">{{logrow.standard.link}}</a><br>
+                Versions: <br>
+                <div ng-repeat="sv in logrow.standard.versions" class="indent">
+                    <span ng-click="sv.show = !sv.show" style="text-decoration: underline;">{{sv.date}}</span>
+                    <div ng-show="sv.show || expand" class="svinfo">
+                        Title: {{sv.title}}<br>
+                        Date: {{sv.date}}<br>
+                        Status: {{sv.status}}<br>
+                        Link: <a href="{{sv.link}}" target="_blank">{{sv.link}}</a><br>
+                        Editors:
+                        <div ng-repeat="editor in sv.editors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                        Previous Editors:
+                        <div ng-repeat="editor in sv.previousEditors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                        Series Editors:
+                        <div ng-repeat="editor in sv.seriesEditors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                        Authors:
+                        <div ng-repeat="editor in sv.authors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                        Contributors:
+                        <div ng-repeat="editor in sv.contributors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                        Contributing Authors:
+                        <div ng-repeat="editor in sv.contributingAuthors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
 </body>
 </html>

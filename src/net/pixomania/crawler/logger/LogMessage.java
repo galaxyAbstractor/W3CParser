@@ -5,16 +5,16 @@
 
 package net.pixomania.crawler.logger;
 
-import net.pixomania.crawler.W3C.datatypes.StandardVersion;
+import net.pixomania.crawler.W3C.datatypes.Standard;
 
 public class LogMessage {
 	public String level;
 	public String message;
-	public StandardVersion standardVersion;
+	public Standard standard;
 
-	public LogMessage(String level, String message, StandardVersion standardVersion) {
+	public LogMessage(String level, String message, Standard standard) {
 		this.level = level;
 		this.message = message;
-		this.standardVersion = standardVersion;
+		this.standard = standard;
 	}
 }

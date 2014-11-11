@@ -13,6 +13,8 @@ import org.jsoup.nodes.Document;
 import java.util.ArrayList;
 
 public class EditorsRule3 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		EditorsRule2 editorsRule2 = new EditorsRule2();

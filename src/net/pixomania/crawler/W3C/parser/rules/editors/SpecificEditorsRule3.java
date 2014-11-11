@@ -16,6 +16,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class SpecificEditorsRule3 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		Elements dl = doc.select("dl dd dl");

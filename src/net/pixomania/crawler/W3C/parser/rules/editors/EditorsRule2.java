@@ -16,6 +16,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class EditorsRule2 implements Rule<ArrayList<Person>> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
@@ -27,9 +29,9 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().replaceAll(":", "").equals("Editor")
-						&& !prev.text().replaceAll(":", "").equals("Editors")
-						&& !prev.text().contains("Edition Editor")) {
+				if (!prev.text().replaceAll(":", "").toLowerCase().equals("editor")
+						&& !prev.text().replaceAll(":", "").toLowerCase().equals("editors")
+						&& !prev.text().toLowerCase().contains("edition editor")) {
 					skip = true;
 				}
 			}
@@ -37,9 +39,9 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().replaceAll(":", "").equals("Editor")
-							|| next.text().replaceAll(":", "").equals("Editors")
-							|| next.text().replaceAll(":", "").contains("Edition Editor")) {
+					if (next.text().replaceAll(":", "").toLowerCase().equals("editor")
+							|| next.text().replaceAll(":", "").toLowerCase().equals("editors")
+							|| next.text().replaceAll(":", "").toLowerCase().contains("edition editor")) {
 						skip = false;
 						continue;
 					}

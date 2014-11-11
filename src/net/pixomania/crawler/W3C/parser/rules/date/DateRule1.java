@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DateRule1 implements Rule<String> {
+	public String name = this.getClass().getSimpleName();
+
 	@Override
 	public String run(String url, Document doc) {
 		// Standard used different format where <time> tag was not present

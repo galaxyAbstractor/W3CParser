@@ -5,9 +5,7 @@
 
 package net.pixomania.crawler.W3C;
 
-import javafx.application.Application;
 import net.pixomania.crawler.W3C.datatypes.Standard;
-import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule2;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule3;
@@ -23,12 +21,8 @@ import net.pixomania.crawler.W3C.parser.rules.seriesEditors.SeriesEditorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.status.*;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
-import net.pixomania.crawler.db.HibernateUtil;
 import net.pixomania.crawler.parser.Parser;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -81,7 +75,7 @@ public class W3C {
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
-/*		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -131,7 +125,7 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/xmldsig-core1/"));
 		standards.add(new Standard(new String[]{"xmldsig-properties"}, "http://www.w3.org/TR/xmldsig-properties/"));
 		standards.add(new Standard(new String[]{"xmlenc-core1"}, "http://www.w3.org/TR/xmlenc-core1/"));
-		standards.add(new Standard(new String[]{"role-attribute"}, "http://www.w3.org/TR/role-attribute/"));*/
+		standards.add(new Standard(new String[]{"role-attribute"}, "http://www.w3.org/TR/role-attribute/"));
 		standards.add(new Standard(new String[]{"rdf-sparql-XMLres"}, "http://www.w3.org/TR/rdf-sparql-XMLres/"));
 		standards.add(new Standard(new String[]{"sparql11-entailment"}, "http://www.w3.org/TR/sparql11-entailment/"));
 		standards.add(new Standard(new String[]{"sparql11-protocol"}, "http://www.w3.org/TR/sparql11-protocol/"));

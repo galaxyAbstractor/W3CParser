@@ -5,6 +5,7 @@
 
 package net.pixomania.crawler.logger;
 
+import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 
 import java.util.LinkedList;
@@ -20,7 +21,7 @@ public class Log {
 		log(level, message, null);
 	}
 
-	public static void log(String level, String message, StandardVersion sv) {
-		LogWriter.appendRow(new LogMessage(level, message, sv));
+	public static void log(String level, String message, Standard standard) {
+		LogWriter.appendRow(new LogMessage(level, message, standard));
 	}
 }
