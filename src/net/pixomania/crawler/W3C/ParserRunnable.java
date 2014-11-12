@@ -253,55 +253,52 @@ public class ParserRunnable implements Runnable {
 
 
 		Log.log("info", "Completed parsing " + url);
-		if(contain || true) {
-			//urlsCrawled.add(sv);
+
+		if (contain) {
 			standard.getVersions().add(sv);
+		}
 
+		//final StandardVersion innerSv = sv;
+		//Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
 
-			//final StandardVersion innerSv = sv;
-			//Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
-
-			if(wait) {
-				synchronized (this) {
-					try {
-						this.wait();
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
+		if(wait) {
+			synchronized (this) {
+				try {
+					this.wait();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
 				}
 			}
+		}
 
-			if (urls != null) {
-				for (String prevUrl : urls) {
-					// Have we already crawled this link? If so, prev will contain it
-					StandardVersion prev = alreadyCrawled(prevUrl);
-					if (prev == null) {
-						// We have never crawled d.text(), so let's start
+		if (urls != null) {
+			for (String prevUrl : urls) {
+				// Have we already crawled this link? If so, prev will contain it
+				StandardVersion prev = alreadyCrawled(prevUrl);
+				if (prev == null) {
+					// We have never crawled d.text(), so let's start
 
-						// We have never crawled this before
-						// let's crawl it if it contains w3.org
-						if (prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) {
-							StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
+					// We have never crawled this before
+					// let's crawl it if it contains w3.org
+					if (prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) {
+						StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
 
-							if (nextToCrawl != null) {
-								sv.getPrev().add(nextToCrawl);
-								session.beginTransaction();
-								session.save(sv);
-								session.getTransaction().commit();
-							}
+						if (nextToCrawl != null) {
+							sv.getPrev().add(nextToCrawl);
+							session.beginTransaction();
+							session.save(sv);
+							session.getTransaction().commit();
 						}
-
-					} else {
-						// We already crawled this link, so let's add it to the lists
-						sv.getPrev().add(prev);
-				/*		session.beginTransaction();
-						session.save(sv);
-						session.getTransaction().commit();*/
 					}
+
+				} else {
+					// We already crawled this link, so let's add it to the lists
+					sv.getPrev().add(prev);
+					session.beginTransaction();
+					session.save(sv);
+					session.getTransaction().commit();
 				}
 			}
-		} else {
-			//orphans.add(sv);
 		}
 
 		return sv;

@@ -84,7 +84,7 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xquery-30"}, "http://www.w3.org/TR/xquery-30/"));
 		standards.add(new Standard(new String[]{"xqueryx-30"}, "http://www.w3.org/TR/xqueryx-30/"));
 		standards.add(new Standard(new String[]{"xslt-xquery-serialization-30"}, "http://www.w3.org/TR/xslt-xquery-serialization-30/"));
-		standards.add(new Standard(new String[]{"css-namespaces-3"}, "http://www.w3.org/TR/css-namespaces-3/"));
+		standards.add(new Standard(new String[]{"css-namespaces-3", "css3-namespace"}, "http://www.w3.org/TR/css-namespaces-3/"));
 		standards.add(new Standard(new String[]{"wai-aria"}, "http://www.w3.org/TR/wai-aria/"));
 		standards.add(new Standard(new String[]{"wai-aria-implementation"}, "http://www.w3.org/TR/wai-aria-implementation/"));
 		standards.add(new Standard(new String[]{"mediaont-api"}, "http://www.w3.org/TR/mediaont-api-1.0/"));

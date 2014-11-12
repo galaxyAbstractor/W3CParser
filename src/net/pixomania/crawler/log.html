@@ -24,7 +24,7 @@
     <button ng-click="filter = 'orphans'">Show orphans</button>
     <div ng-repeat="logrow in log | filter:{level: filter}">
         <span class="{{logrow.level}}" ng-click="logrow.show = !logrow.show">{{logrow.message}}</span>
-        <div ng-if="logrow.level == 'standard'">
+        <div ng-if="logrow.level == 'standard' || logrow.level == 'orphans'">
             <div ng-show="logrow.show || expand" class="standardinfo">
                 ID: {{logrow.standard.id}}<br>
                 Names: {{logrow.standard.names}}<br>
@@ -33,11 +33,11 @@
                 <div ng-repeat="sv in logrow.standard.versions" class="indent">
                     <span ng-click="sv.show = !sv.show" style="text-decoration: underline;">{{sv.date}}</span>
                     <div ng-show="sv.show || expand" class="svinfo">
-                        Title: {{sv.title}}<br>
-                        Date: {{sv.date}}<br>
-                        Status: {{sv.status}}<br>
+                        Title ({{sv.rules.title.name}}): {{sv.title}}<br>
+                        Date ({{sv.rules.date.name}}): {{sv.date}}<br>
+                        Status ({{sv.rules.status.name}}): {{sv.status}}<br>
                         Link: <a href="{{sv.link}}" target="_blank">{{sv.link}}</a><br>
-                        Editors:
+                        <span ng-if="sv.editors.length > 0">Editors ({{sv.rules.editors.name}}):</span>
                         <div ng-repeat="editor in sv.editors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
@@ -53,7 +53,7 @@
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
                             </div>
                         </div>
-                        Previous Editors:
+                        <span ng-if="sv.previousEditors.length > 0">Previous Editors ({{sv.rules.previousEditors.name}}):</span>
                         <div ng-repeat="editor in sv.previousEditors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
@@ -69,7 +69,7 @@
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
                             </div>
                         </div>
-                        Series Editors:
+                        <span ng-if="sv.seriesEditors.length > 0">Series Editors ({{sv.rules.seriesEditors.name}}):</span>
                         <div ng-repeat="editor in sv.seriesEditors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
@@ -85,7 +85,7 @@
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
                             </div>
                         </div>
-                        Authors:
+                        <span ng-if="sv.authors.length > 0">Authors ({{sv.rules.authors.name}}):</span>
                         <div ng-repeat="editor in sv.authors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
@@ -101,7 +101,7 @@
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
                             </div>
                         </div>
-                        Contributors:
+                        <span ng-if="sv.contributors.length > 0">Contributors ({{sv.rules.contributors.name}}):</span>
                         <div ng-repeat="editor in sv.contributors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
@@ -117,7 +117,7 @@
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
                             </div>
                         </div>
-                        Contributing Authors:
+                        <span ng-if="sv.contributingAuthors.length > 0">Contributing Authors ({{sv.rules.contributingAuthors.name}}):</span>
                         <div ng-repeat="editor in sv.contributingAuthors" class="indent">
                             <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
                             <div ng-show="editor.show || expand" class="editorinfo">
