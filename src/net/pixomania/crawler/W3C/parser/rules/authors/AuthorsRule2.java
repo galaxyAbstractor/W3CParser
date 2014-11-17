@@ -47,7 +47,7 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 				continue;
 			}
 
-			String[] splitted = editor.html().split("<br />");
+			String[] splitted = editor.html().split("<br />|<br clear=\"none\" />");
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {

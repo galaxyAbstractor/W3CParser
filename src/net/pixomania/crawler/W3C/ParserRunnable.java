@@ -228,7 +228,7 @@ public class ParserRunnable implements Runnable {
 		System.out.println(urls);
 		boolean contain = false;
 		for (String name : standard.getNames()) {
-			if (url.contains(name)) {
+			if (url.toLowerCase().contains(name.toLowerCase())) {
 				contain = true;
 				break;
 			}

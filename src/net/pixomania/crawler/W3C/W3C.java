@@ -75,7 +75,7 @@ public class W3C {
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1()));
 
-		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -172,6 +172,16 @@ public class W3C {
 		standards.add(new Standard(new String[]{"mediaont-10"}, "http://www.w3.org/TR/mediaont-10/"));
 		standards.add(new Standard(new String[]{"widgets-access"}, "http://www.w3.org/TR/widgets-access/"));
 		standards.add(new Standard(new String[]{"ws-enumeration"}, "http://www.w3.org/TR/ws-enumeration/"));
+*/
+		//standards.add(new Standard(new String[]{"ws-eventing"}, "http://www.w3.org/TR/ws-eventing/"));
+		//standards.add(new Standard(new String[]{"ws-fragment"}, "http://www.w3.org/TR/ws-fragment/"));
+		//standards.add(new Standard(new String[]{"ws-metadata-exchange"}, "http://www.w3.org/TR/ws-metadata-exchange/"));
+		//standards.add(new Standard(new String[]{"ws-transfer"}, "http://www.w3.org/TR/ws-transfer/"));
+		//standards.add(new Standard(new String[]{"ws-event-descriptions"}, "http://www.w3.org/TR/ws-event-descriptions/"));
+		//standards.add(new Standard(new String[]{"ws-soap-assertions"}, "http://www.w3.org/TR/ws-soap-assertions/"));
+		//standards.add(new Standard(new String[]{"css3-selectors"}, "http://www.w3.org/TR/css3-selectors/"));
+		standards.add(new Standard(new String[]{"InkML"}, "http://www.w3.org/TR/InkML/"));
+
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);

@@ -22,11 +22,16 @@ public class NameParser {
 		// former affiliation
 		regex.add(new RegexRule("(([^\\(]+) \\((until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4}),? while [with|at]+ ([^\\(]+))\\))", new int[]{2, 0, 0, 5, 4, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\((while at (.+?(?=, currently)), currently ([^\\(]+)\\)))", new int[]{2, 5, 0, 4, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\((until (\\d{4}) while [with|at]+ ([^\\)]+))\\))", new int[]{2, 0, 0, 5, 4, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(former editor, formerly of ([^\\)]+)\\))", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 3}));
+		regex.add(new RegexRule("(([^\\(]+) \\(formerly of ([^\\)]+)\\))", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 3}));
+		regex.add(new RegexRule("(([^\\(]+) \\(formerly of\\S([^\\)]+)\\), <([^@]+@[^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 4, 0, 0, 3}));
 		regex.add(new RegexRule("(([^,]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 0, 3, 5, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <([^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 5, 3, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^,]+), via (.+))", new int[]{2, 0, 0, 3, 0, 4, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 4, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\), <([^@]+@[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+) <([^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+) <([^>]+)> \\(.+\\))", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
@@ -38,7 +43,9 @@ public class NameParser {
 		regex.add(new RegexRule("(([^,]+), formerly at (.+))", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 3}));
 		regex.add(new RegexRule("(([^\\(]+) \\(until (\\d{4}), while at ([^\\)]+)\\))", new int[]{2, 0, 0, 4, 3, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(until (\\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\,]+), ([^\\(]+) \\(editor\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 
+		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
@@ -65,7 +72,7 @@ public class NameParser {
 			Matcher m = p.matcher(name);
 
 			if (m.matches()) {
-				//System.out.println(name + ": " + regex.indexOf(re));
+				System.out.println(name + ": " + regex.indexOf(re));
 				Field[] fields = Person.class.getDeclaredFields();
 				Person person = new Person();
 				for (int i = 0; i < re.group.length; i++){
