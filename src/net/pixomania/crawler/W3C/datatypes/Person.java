@@ -18,6 +18,8 @@ public class Person {
 	public String workgroup;
 	public ArrayList<String> website;
 	public String formerAffiliation;
+	public String full;
+	public int rule;
 	public long id;
 
 	public String getName() {
@@ -112,5 +114,21 @@ public class Person {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getFull() {
+		return full;
+	}
+
+	public void setFull(String full) {
+		this.full = full;
+	}
+
+	public int getRule() {
+		return rule;
+	}
+
+	public void setRule(int rule) {
+		this.rule = rule;
 	}
 }

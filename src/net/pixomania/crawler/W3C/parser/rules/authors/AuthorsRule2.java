@@ -6,6 +6,7 @@
 package net.pixomania.crawler.W3C.parser.rules.authors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
+import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.Jsoup;
@@ -30,7 +31,8 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
 				if (!prev.text().replaceAll(":", "").toLowerCase().equals("author")
-						&& !prev.text().replaceAll(":", "").toLowerCase().equals("authors")) {
+						&& !prev.text().replaceAll(":", "").toLowerCase().equals("authors")
+						&& !prev.text().toLowerCase().startsWith("additional author")) {
 					skip = true;
 				}
 			}
@@ -39,7 +41,8 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
 					if (next.text().replaceAll(":", "").toLowerCase().equals("author")
-							|| next.text().replaceAll(":", "").toLowerCase().equals("authors")) {
+							|| next.text().replaceAll(":", "").toLowerCase().equals("authors")
+							|| next.text().toLowerCase().startsWith("additional author")) {
 						skip = false;
 						continue;
 					}
@@ -55,7 +58,11 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 						|| editor.text().toLowerCase().equals("(in alphabetic order)")
 						|| editor.text().toLowerCase().equals("see Acknowledgements")
 						|| editor.text().toLowerCase().equals("see participants.")
-						|| editor.text().toLowerCase().contains("note:")) continue;
+						|| editor.text().toLowerCase().equals("see author list")
+						|| editor.text().toLowerCase().contains("note:")) {
+					Log.log("warning", "Spec " + url + " may refer to a different section!");
+					continue;
+				}
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
@@ -77,7 +84,11 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 								|| split.toLowerCase().equals("(in alphabetic order)")
 								|| split.toLowerCase().equals("see Acknowledgements")
 								|| split.toLowerCase().equals("see participants.")
-								|| split.toLowerCase().contains("note:")) continue;
+								|| split.toLowerCase().equals("see author list")
+								|| split.toLowerCase().contains("note:")){
+							Log.log("warning", "Spec " + url + " may refer to a different section!");
+							continue;
+						}
 
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());

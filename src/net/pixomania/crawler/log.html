@@ -51,6 +51,8 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                         <span ng-if="sv.previousEditors.length > 0">Previous Editors ({{sv.rules.previousEditors.name}}):</span>
@@ -67,6 +69,8 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                         <span ng-if="sv.seriesEditors.length > 0">Series Editors ({{sv.rules.seriesEditors.name}}):</span>
@@ -83,6 +87,8 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                         <span ng-if="sv.authors.length > 0">Authors ({{sv.rules.authors.name}}):</span>
@@ -99,6 +105,8 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                         <span ng-if="sv.contributors.length > 0">Contributors ({{sv.rules.contributors.name}}):</span>
@@ -115,6 +123,8 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                         <span ng-if="sv.contributingAuthors.length > 0">Contributing Authors ({{sv.rules.contributingAuthors.name}}):</span>
@@ -131,6 +141,26 @@
                                 workgroup: {{editor.workgroup}}<br>
                                 website: {{editor.website}}<br>
                                 formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
+                            </div>
+                        </div>
+                        <span ng-if="sv.editorInChief.length > 0">Editor in Chief ({{sv.rules.editorInChief.name}}):</span>
+                        <div ng-repeat="editor in sv.editorInChief" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                website: {{editor.website}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
                             </div>
                         </div>
                     </div>

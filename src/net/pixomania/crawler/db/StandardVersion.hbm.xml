@@ -55,5 +55,10 @@
             <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
         </bag>
 
+        <bag name="editorInChief" cascade="all">
+            <key column="sv_editorInChief"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

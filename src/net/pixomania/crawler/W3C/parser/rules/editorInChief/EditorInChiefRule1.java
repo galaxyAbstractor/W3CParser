@@ -3,34 +3,34 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.contributors;
+package net.pixomania.crawler.W3C.parser.rules.editorInChief;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
-import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class ContributorsRule1 implements Rule<ArrayList<Person>> {
+public class EditorInChiefRule1 implements Rule<ArrayList<Person>> {
 	public String name = this.getClass().getSimpleName();
 
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements editors = doc.select("dt:contains(Contributor) ~ dd");
+		Elements editors = doc.select("dt:contains(Editor in Chief) ~ dd");
 		if (editors.size() == 0) return null;
 
 		boolean skip = false;
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().replaceAll(":", "").toLowerCase().equals("contributor")
-						&& !prev.text().replaceAll(":", "").toLowerCase().equals("contributors")) {
+				if (!prev.text().replaceAll(":", "").toLowerCase().equals("editor in chief")
+						&& !prev.text().replaceAll(":", "").toLowerCase().equals("editors in chief")) {
 					skip = true;
 				}
 			}
@@ -38,8 +38,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().replaceAll(":", "").toLowerCase().equals("contributor")
-							|| next.text().replaceAll(":", "").toLowerCase().equals("contributors")) {
+					if (next.text().replaceAll(":", "").toLowerCase().equals("editor in chief")
+							|| next.text().replaceAll(":", "").toLowerCase().equals("editors in chief")) {
 						skip = false;
 						continue;
 					}
@@ -51,15 +51,7 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
-				if (editor.text().toLowerCase().equals("(in alphabetical order)")
-						|| editor.text().toLowerCase().equals("(in alphabetic order)")
-						|| editor.text().toLowerCase().equals("see Acknowledgements")
-						|| editor.text().toLowerCase().equals("see participants.")
-						|| editor.text().toLowerCase().contains("note:")
-						|| editor.text().toLowerCase().startsWith("there are")) {
-					Log.log("warning", "Spec " + url + " may refer to a different section!");
-					continue;
-				}
+				if (editor.text().equals("WHATWG:") || editor.text().equals("W3C:")) continue;
 				Person result = NameParser.parse(editor.text());
 				if (result == null) return null;
 
@@ -77,24 +69,17 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
-						if (split.toLowerCase().equals("(in alphabetical order)")
-								|| split.toLowerCase().equals("(in alphabetic order)")
-								|| split.toLowerCase().equals("see Acknowledgements")
-								|| split.toLowerCase().equals("see participants.")
-								|| split.toLowerCase().contains("note:")
-								|| split.toLowerCase().startsWith("there are")) {
-							Log.log("warning", "Spec " + url + " may refer to a different section!");
-							continue;
-						}
-						Person result = NameParser.parse(split.replaceAll("\n", ""));
+						if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
+						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
+						Person result = NameParser.parse(newdoc.text());
 						if (result == null) return null;
 
-						for (int i = 0; i < editor.select("a").size(); i++) {
-							if (!editor.select("a").get(i).attr("href").isEmpty()) {
-								if (editor.select("a").get(i).attr("href").contains("@")){
-									result.setEmail(editor.select("a").get(i).attr("href").replace("mailto:", ""));
+						for (int i = 0; i < newdoc.select("a").size(); i++) {
+							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
+								if (newdoc.select("a").get(i).attr("href").contains("@")){
+									result.setEmail(newdoc.select("a").get(i).attr("href").replace("mailto:", ""));
 								} else {
-									result.addWebsite(editor.select("a").get(i).attr("href"));
+									result.addWebsite(newdoc.select("a").get(i).attr("href"));
 								}
 							}
 						}
@@ -103,6 +88,7 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 					}
 				}
 			}
+
 			Element next = editor.nextElementSibling();
 			if (next != null) if (next.tag().getName().equals("dt")) break;
 		}

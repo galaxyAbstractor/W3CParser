@@ -24,5 +24,6 @@
         <property name="email"/>
         <property name="workgroup"/>
         <property name="formerAffiliation"/>
+        <property name="full"/>
     </class>
 </hibernate-mapping>

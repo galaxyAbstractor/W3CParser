@@ -64,6 +64,7 @@ public class ParserRunnable implements Runnable {
 			standard = null;
 			if (standards.size() > 0) standard = standards.pop();
 		}
+		System.out.println("No more standards!");
 
 		Standard orphans = new Standard(new String[]{"orphans"}, "");
 		orphans.setVersions(allOrphans());
@@ -170,6 +171,11 @@ public class ParserRunnable implements Runnable {
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
+		Result editorInChief = W3C.getParsers().get("editorInChief").parse(url, doc);
+		ArrayList<Person> eic = (ArrayList<Person>) editorInChief.getResult();
+		sv.setEditorInChief(eic);
+		sv.getRules().put("editorInChief", editorInChief.getRule());
+
 		boolean noPeople = true;
 		// while loop is because once we find one list that is not null
 		// and contains persons, we do not need to check the rest of the lists
@@ -216,6 +222,12 @@ public class ParserRunnable implements Runnable {
 				}
 			}
 
+			if (sv.getEditorInChief() != null) {
+				if (sv.getEditorInChief().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
 			break;
 		}
 
@@ -280,7 +292,7 @@ public class ParserRunnable implements Runnable {
 
 					// We have never crawled this before
 					// let's crawl it if it contains w3.org
-					if (prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) {
+					if ((prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) || W3C.extraLinks.contains(prevUrl)) {
 						StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
 
 						if (nextToCrawl != null) {

@@ -21,6 +21,7 @@ public class StandardVersion {
 	private List<Person> authors = new ArrayList<>();
 	private List<Person> contributors = new ArrayList<>();
 	private List<Person> contributingAuthors = new ArrayList<>();
+	private List<Person> editorInChief = new ArrayList<>();
 	private String link;
 
 	private long id;
@@ -127,5 +128,13 @@ public class StandardVersion {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public List<Person> getEditorInChief() {
+		return editorInChief;
+	}
+
+	public void setEditorInChief(List<Person> editorInChief) {
+		this.editorInChief = editorInChief;
 	}
 }
