@@ -22,6 +22,10 @@ public class Log {
 	}
 
 	public static void log(String level, String message, Standard standard) {
-		LogWriter.appendRow(new LogMessage(level, message, standard));
+		if (standard != null) {
+			LogWriter.appendStandard(new LogMessage(level, message), standard);
+		} else {
+			LogWriter.appendRow(new LogMessage(level, message));
+		}
 	}
 }

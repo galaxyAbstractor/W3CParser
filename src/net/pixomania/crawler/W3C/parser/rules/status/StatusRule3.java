@@ -18,7 +18,7 @@ public class StatusRule3 implements Rule<String> {
 	@Override
 	public String run(String url, Document doc) {
 		Elements status = doc.select("h2");
-
+		if (status.size() == 0) return null;
 		// There is no em tag, let's remove the date with regex
 
 		String re1 = ".*?";    // Non-greedy match on filler

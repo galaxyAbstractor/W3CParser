@@ -9,7 +9,7 @@ import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class SpecificStatusRule1 implements Rule<String> {
+public class StatusRule7 implements Rule<String> {
 	public String name = this.getClass().getSimpleName();
 
 	@Override

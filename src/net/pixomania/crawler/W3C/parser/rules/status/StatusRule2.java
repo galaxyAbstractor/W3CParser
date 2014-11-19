@@ -15,7 +15,7 @@ public class StatusRule2 implements Rule<String> {
 	@Override
 	public String run(String url, Document doc) {
 		Elements status = doc.select("h2");
-
+		if (status.size() == 0) return null;
 		if (status.get(0).select("em").size() != 0) {
 			// The time and abbr tags are missing, but the date is
 			// surrounded by em

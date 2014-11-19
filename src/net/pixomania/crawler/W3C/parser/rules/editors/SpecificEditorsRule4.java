@@ -24,6 +24,7 @@ public class SpecificEditorsRule4 implements Rule<ArrayList<Person>> {
 		p1.addWebsite("http://www.w3.org/People/Bos/");
 		p1.setStandardAffiliation("W3C");
 		p1.setEmail("bbos@w3.org");
+		p1.setFull("Bert Bos <bbos@w3.org>");
 		persons.add(p1);
 
 		Person p2 = new Person();
@@ -31,6 +32,7 @@ public class SpecificEditorsRule4 implements Rule<ArrayList<Person>> {
 		p2.addWebsite("http://www.w3.org/People/howcome/");
 		p2.setStandardAffiliation("W3C");
 		p2.setEmail("howcome@w3.org");
+		p2.setFull("Håkon Wium Lie <howcome@w3.org>");
 		persons.add(p2);
 
 		Person p3 = new Person();
@@ -38,6 +40,7 @@ public class SpecificEditorsRule4 implements Rule<ArrayList<Person>> {
 		p3.addWebsite("http://www.w3.org/People/chris/");
 		p3.setStandardAffiliation("W3C");
 		p3.setEmail("chris@w3.org");
+		p3.setFull("Chris Lilley <chris@w3.org>");
 		persons.add(p3);
 
 		Person p4 = new Person();
@@ -45,6 +48,7 @@ public class SpecificEditorsRule4 implements Rule<ArrayList<Person>> {
 		p4.addWebsite("http://www.w3.org/People/Jacobs/");
 		p4.setStandardAffiliation("W3C");
 		p4.setEmail("ij@w3.org");
+		p4.setFull("Ian Jacobs <ij@w3.org>");
 		persons.add(p4);
 
 

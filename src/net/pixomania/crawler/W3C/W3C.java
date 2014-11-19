@@ -14,7 +14,6 @@ import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule4;
 import net.pixomania.crawler.W3C.parser.rules.contributingAuthors.ContributingAuthorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.contributors.ContributorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
-import net.pixomania.crawler.W3C.parser.rules.date.SpecificDateRule1;
 import net.pixomania.crawler.W3C.parser.rules.editorInChief.EditorInChiefRule1;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
@@ -72,7 +71,7 @@ public class W3C {
 		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
-				new StatusRule5(), new StatusRule6()));
+				new StatusRule5(), new StatusRule6(), new StatusRule7()));
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
@@ -192,7 +191,12 @@ public class W3C {
 		//standards.add(new Standard(new String[]{"ccxml"}, "http://www.w3.org/TR/ccxml/"));
 		//standards.add(new Standard(new String[]{"css3-color"}, "http://www.w3.org/TR/css3-color/"));
 		//standards.add(new Standard(new String[]{"mathml-for-css"}, "http://www.w3.org/TR/mathml-for-css/"));
-		standards.add(new Standard(new String[]{"CSS2"}, "http://www.w3.org/TR/CSS2/"));
+		//standards.add(new Standard(new String[]{"CSS2"}, "http://www.w3.org/TR/CSS2/"));
+		//standards.add(new Standard(new String[]{"xpath-fulltext-10", "xpath-full-text-10", "xquery-full-text"}, "http://www.w3.org/TR/xpath-full-text-10/"));
+		//standards.add(new Standard(new String[]{"xquery-update-10", "xqupdate"}, "http://www.w3.org/TR/xquery-update-10/"));
+		//standards.add(new Standard(new String[]{"xpath-20", "xpath20"}, "http://www.w3.org/TR/xpath20/"));
+		standards.add(new Standard(new String[]{"xquery"}, "http://www.w3.org/TR/xquery/"));
+
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);
@@ -214,14 +218,18 @@ public class W3C {
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2008/WD-xmlschema11-2-20080620/", spE3);
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/2007/WD-xmlschema11-2-20070830/", spE3);
 
-		SpecificStatusRule1 spS1 = new SpecificStatusRule1();
-		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new SpecificEditorsRule4());
-		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new SpecificTitleRule1());
-		parsers.get("status").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", spS1);
-		parsers.get("status").setRuleOnURL("http://www.w3.org/TR/1998/WD-css2-19980128", spS1);
-		parsers.get("status").setRuleOnURL("http://www.w3.org/TR/1998/PR-CSS2-19980324", spS1);
-		parsers.get("status").setRuleOnURL("http://www.w3.org/TR/1998/REC-CSS2-19980512", spS1);
-		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new SpecificDateRule1());
+		StatusRule7 spS1 = new StatusRule7();
+		SpecificEditorsRule4 spE4 = new SpecificEditorsRule4();
+		SpecificTitleRule1 spT1 = new SpecificTitleRule1();
+
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", spE4);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/1998/WD-css2-19980128", spE4);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/1998/PR-CSS2-19980324", spE4);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/1998/REC-CSS2-19980512", spE4);
+		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", spT1);
+		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/1998/WD-css2-19980128", spT1);
+		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/1998/PR-CSS2-19980324", spT1);
+		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/1998/REC-CSS2-19980512", spT1);
 		parsers.get("previous").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new ReturnNull());
 
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");

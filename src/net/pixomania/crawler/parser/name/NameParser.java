@@ -6,6 +6,7 @@
 package net.pixomania.crawler.parser.name;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
+import net.pixomania.crawler.logger.Log;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -31,8 +32,10 @@ public class NameParser {
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <([^@]+@[^>]+)> \\((for )?version[s]? [^\\)]+\\))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 0, 3, 5, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\)\\s?, ([^<]+) <([^>]+)>)", new int[]{2, 0, 0, 4, 0, 0, 5, 3, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(((.*?) wg)\\), ([^,]+), via (.+))", new int[]{2, 0, 0, 5, 0, 6, 0, 3, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^,]+), via (.+))", new int[]{2, 0, 0, 3, 0, 4, 0, 0, 0, 0}));
-		regex.add(new RegexRule("(([^\\(]+) \\(([^,]+), and before at ([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 5, 0, 0, 0, 4}));
+		regex.add(new RegexRule("(([^\\(]+) \\(([^,]+), and before at ([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 0, 0, 0, 5, 3, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(((.*?) wg)\\) <(.+@[^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 4, 3, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 4, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\), <([^@]+@[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
@@ -49,6 +52,7 @@ public class NameParser {
 		regex.add(new RegexRule("(([^\\(]+) \\(until (\\d{4}), while at ([^\\)]+)\\))", new int[]{2, 0, 0, 4, 3, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(until (\\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\,]+), ([^\\(]+) \\(editor\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(((.*?) wg)\\), ([^,]+))", new int[]{2, 0, 0, 5, 0, 0, 0, 3, 0, 0}));
 
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
@@ -102,7 +106,7 @@ public class NameParser {
 				return person;
 			}
 		}
-
+		Log.log("warning", "Name: " + name + " could not be parsed!");
 		return null;
 	}
 }

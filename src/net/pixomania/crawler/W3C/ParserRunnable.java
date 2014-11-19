@@ -5,17 +5,12 @@
 
 package net.pixomania.crawler.W3C;
 
-import com.sun.istack.internal.Nullable;
-import javafx.application.Platform;
-import net.pixomania.crawler.W3C.csv.CSVExport;
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
-import net.pixomania.crawler.W3C.gui.W3CGUI;
 import net.pixomania.crawler.db.HibernateUtil;
 import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.logger.LogWriter;
-import net.pixomania.crawler.mapper.PeopleMap;
 import net.pixomania.crawler.parser.Result;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +19,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,6 +35,7 @@ public class ParserRunnable implements Runnable {
 	private SessionFactory sf = HibernateUtil.getSessionFactory();
 	private Session session = sf.openSession();
 
+	private String prevTitle = "";
 	@Override
 	public void run() {
 		LogWriter.createLogFile();
@@ -63,8 +58,9 @@ public class ParserRunnable implements Runnable {
 
 			standard = null;
 			if (standards.size() > 0) standard = standards.pop();
+			prevTitle = "";
 		}
-		System.out.println("No more standards!");
+
 
 		Standard orphans = new Standard(new String[]{"orphans"}, "");
 		orphans.setVersions(allOrphans());
@@ -84,6 +80,8 @@ public class ParserRunnable implements Runnable {
 
 		session.close();
 		LogWriter.closeLogFile();
+
+		System.out.println("No more standards!");
 	}
 
 	/**
@@ -132,14 +130,23 @@ public class ParserRunnable implements Runnable {
 		Result date = W3C.getParsers().get("date").parse(url, doc);
 		sv.setDate((String) date.getResult());
 		sv.getRules().put("date", date.getRule());
+		if (date.getResult() == null) Log.log("error", "Spec " + url + " doesn't seem to have a date");
 
 		Result title = W3C.getParsers().get("title").parse(url, doc);
 		sv.setTitle((String) title.getResult());
 		sv.getRules().put("title", title.getRule());
+		if (title.getResult() == null) Log.log("error", "Spec " + url + " doesn't seem to have a title");
+
+		if (!prevTitle.isEmpty()) {
+			if (!prevTitle.toLowerCase().equals(sv.getTitle().toLowerCase())) Log.log("warning", "Title change: " + prevTitle + " changed to " + sv.getTitle());
+		}
+
+		prevTitle = sv.getTitle();
 
 		Result status = W3C.getParsers().get("status").parse(url, doc);
 		sv.setStatus((String) status.getResult());
 		sv.getRules().put("status", status.getRule());
+		if (status.getResult() == null) Log.log("error", "Spec " + url + " doesn't seem to have a status");
 
 		Result prevEd = W3C.getParsers().get("previousEditors").parse(url, doc);
 		ArrayList<Person> prevEditors = (ArrayList<Person>) prevEd.getResult();
@@ -240,7 +247,7 @@ public class ParserRunnable implements Runnable {
 		System.out.println(urls);
 		boolean contain = false;
 		for (String name : standard.getNames()) {
-			if (url.toLowerCase().contains(name.toLowerCase())) {
+			if (url.trim().toLowerCase().contains(name.toLowerCase())) {
 				contain = true;
 				break;
 			}
@@ -285,15 +292,17 @@ public class ParserRunnable implements Runnable {
 
 		if (urls != null) {
 			for (String prevUrl : urls) {
+				if (!prevUrl.endsWith("/")) prevUrl += "/";
+
 				// Have we already crawled this link? If so, prev will contain it
-				StandardVersion prev = alreadyCrawled(prevUrl);
+				StandardVersion prev = alreadyCrawled(prevUrl.trim().toLowerCase());
 				if (prev == null) {
 					// We have never crawled d.text(), so let's start
 
 					// We have never crawled this before
 					// let's crawl it if it contains w3.org
 					if ((prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) || W3C.extraLinks.contains(prevUrl)) {
-						StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
+						StandardVersion nextToCrawl = parseVersion(prevUrl.toLowerCase(), standard);
 
 						if (nextToCrawl != null) {
 							sv.getPrev().add(nextToCrawl);
@@ -319,7 +328,7 @@ public class ParserRunnable implements Runnable {
 	private StandardVersion alreadyCrawled(String link) {
 		return (StandardVersion) session.createQuery(
 				"from StandardVersion where link = :link")
-				.setParameter("link", link)
+				.setParameter("link", link.toLowerCase())
 				.uniqueResult();
 	}
 
