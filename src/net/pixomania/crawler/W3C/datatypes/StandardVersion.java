@@ -26,7 +26,7 @@ public class StandardVersion {
 
 	private long id;
 
-	private List<StandardVersion> prev = new ArrayList<>();
+	private transient List<StandardVersion> prev = new ArrayList<>();
 
 	private HashMap<String, Rule> rules = new HashMap<>();
 

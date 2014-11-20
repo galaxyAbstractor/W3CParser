@@ -56,7 +56,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 						|| editor.text().toLowerCase().equals("see Acknowledgements")
 						|| editor.text().toLowerCase().equals("see participants.")
 						|| editor.text().toLowerCase().contains("note:")
-						|| editor.text().toLowerCase().startsWith("there are")) {
+						|| editor.text().toLowerCase().startsWith("there are")
+						|| editor.text().toLowerCase().equals("see partipants.")) {
 					Log.log("warning", "Spec " + url + " may refer to a different section!");
 					continue;
 				}
@@ -82,7 +83,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 								|| split.toLowerCase().equals("see Acknowledgements")
 								|| split.toLowerCase().equals("see participants.")
 								|| split.toLowerCase().contains("note:")
-								|| split.toLowerCase().startsWith("there are")) {
+								|| split.toLowerCase().startsWith("there are")
+								|| split.toLowerCase().equals("see partipants.")) {
 							Log.log("warning", "Spec " + url + " may refer to a different section!");
 							continue;
 						}

@@ -81,7 +81,7 @@ public class W3C {
 		parsers.put("previous", new Parser(new PreviousRule1()));
 		parsers.put("editorInChief", new Parser(new EditorInChiefRule1()));
 
-		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+/*		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -178,25 +178,34 @@ public class W3C {
 		standards.add(new Standard(new String[]{"mediaont-10"}, "http://www.w3.org/TR/mediaont-10/"));
 		standards.add(new Standard(new String[]{"widgets-access"}, "http://www.w3.org/TR/widgets-access/"));
 		standards.add(new Standard(new String[]{"ws-enumeration"}, "http://www.w3.org/TR/ws-enumeration/"));
-*/
-		//standards.add(new Standard(new String[]{"ws-eventing"}, "http://www.w3.org/TR/ws-eventing/"));
-		//standards.add(new Standard(new String[]{"ws-fragment"}, "http://www.w3.org/TR/ws-fragment/"));
-		//standards.add(new Standard(new String[]{"ws-metadata-exchange"}, "http://www.w3.org/TR/ws-metadata-exchange/"));
-		//standards.add(new Standard(new String[]{"ws-transfer"}, "http://www.w3.org/TR/ws-transfer/"));
-		//standards.add(new Standard(new String[]{"ws-event-descriptions"}, "http://www.w3.org/TR/ws-event-descriptions/"));
-		//standards.add(new Standard(new String[]{"ws-soap-assertions"}, "http://www.w3.org/TR/ws-soap-assertions/"));
-		//standards.add(new Standard(new String[]{"css3-selectors"}, "http://www.w3.org/TR/css3-selectors/"));
-		//standards.add(new Standard(new String[]{"InkML"}, "http://www.w3.org/TR/InkML/"));
-		//standards.add(new Standard(new String[]{"SVG11"}, "http://www.w3.org/TR/SVG11/"));
-		//standards.add(new Standard(new String[]{"ccxml"}, "http://www.w3.org/TR/ccxml/"));
-		//standards.add(new Standard(new String[]{"css3-color"}, "http://www.w3.org/TR/css3-color/"));
-		//standards.add(new Standard(new String[]{"mathml-for-css"}, "http://www.w3.org/TR/mathml-for-css/"));
-		//standards.add(new Standard(new String[]{"CSS2"}, "http://www.w3.org/TR/CSS2/"));
-		//standards.add(new Standard(new String[]{"xpath-fulltext-10", "xpath-full-text-10", "xquery-full-text"}, "http://www.w3.org/TR/xpath-full-text-10/"));
-		//standards.add(new Standard(new String[]{"xquery-update-10", "xqupdate"}, "http://www.w3.org/TR/xquery-update-10/"));
-		//standards.add(new Standard(new String[]{"xpath-20", "xpath20"}, "http://www.w3.org/TR/xpath20/"));
-		standards.add(new Standard(new String[]{"xquery"}, "http://www.w3.org/TR/xquery/"));
 
+		standards.add(new Standard(new String[]{"ws-eventing"}, "http://www.w3.org/TR/ws-eventing/"));
+		standards.add(new Standard(new String[]{"ws-fragment"}, "http://www.w3.org/TR/ws-fragment/"));
+		standards.add(new Standard(new String[]{"ws-metadata-exchange"}, "http://www.w3.org/TR/ws-metadata-exchange/"));
+		standards.add(new Standard(new String[]{"ws-transfer"}, "http://www.w3.org/TR/ws-transfer/"));
+		standards.add(new Standard(new String[]{"ws-event-descriptions"}, "http://www.w3.org/TR/ws-event-descriptions/"));
+		standards.add(new Standard(new String[]{"ws-soap-assertions"}, "http://www.w3.org/TR/ws-soap-assertions/"));
+		standards.add(new Standard(new String[]{"css3-selectors"}, "http://www.w3.org/TR/css3-selectors/"));
+		standards.add(new Standard(new String[]{"InkML"}, "http://www.w3.org/TR/InkML/"));
+		standards.add(new Standard(new String[]{"SVG11"}, "http://www.w3.org/TR/SVG11/"));
+		standards.add(new Standard(new String[]{"ccxml"}, "http://www.w3.org/TR/ccxml/"));
+		standards.add(new Standard(new String[]{"css3-color"}, "http://www.w3.org/TR/css3-color/"));
+		standards.add(new Standard(new String[]{"mathml-for-css"}, "http://www.w3.org/TR/mathml-for-css/"));
+		standards.add(new Standard(new String[]{"CSS2"}, "http://www.w3.org/TR/CSS2/"));
+		standards.add(new Standard(new String[]{"xpath-fulltext-10", "xpath-full-text-10", "xquery-full-text"}, "http://www.w3.org/TR/xpath-full-text-10/"));
+		standards.add(new Standard(new String[]{"xquery-update-10", "xqupdate"}, "http://www.w3.org/TR/xquery-update-10/"));
+		standards.add(new Standard(new String[]{"xpath-20", "xpath20"}, "http://www.w3.org/TR/xpath20/"));
+		standards.add(new Standard(new String[]{"xquery"}, "http://www.w3.org/TR/xquery/"));*/
+		//standards.add(new Standard(new String[]{"xpath-functions", "xquery-operators"}, "http://www.w3.org/TR/xpath-functions/"));
+		//standards.add(new Standard(new String[]{"xqueryx"}, "http://www.w3.org/TR/xqueryx/"));
+		//standards.add(new Standard(new String[]{"xpath-datamodel", "query-datamodel"}, "http://www.w3.org/TR/xpath-datamodel/"));
+		//standards.add(new Standard(new String[]{"xquery-semantics", "query-semantics"}, "http://www.w3.org/TR/xquery-semantics/"));
+		//standards.add(new Standard(new String[]{"xslt-xquery-serialization"}, "http://www.w3.org/TR/xslt-xquery-serialization/"));
+		//standards.add(new Standard(new String[]{"mwabp"}, "http://www.w3.org/TR/mwabp/"));
+		//TODO standards.add(new Standard(new String[]{"xhtml-basic"}, "http://www.w3.org/TR/xhtml-basic/"));
+		//TODO standards.add(new Standard(new String[]{"xhtml11"}, "http://www.w3.org/TR/xhtml11/"));
+		//TODO standards.add(new Standard(new String[]{"xhtml-print"}, "http://www.w3.org/TR/xhtml-print/"));
+		standards.add(new Standard(new String[]{"xml-stylesheet"}, "http://www.w3.org/TR/xml-stylesheet/"));
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);
@@ -233,6 +242,8 @@ public class W3C {
 		parsers.get("previous").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new ReturnNull());
 
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");
+		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629/");
+
 
 		parserThread.start();
 	}

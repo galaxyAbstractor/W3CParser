@@ -6,8 +6,6 @@
 package net.pixomania.crawler.logger;
 
 import net.pixomania.crawler.W3C.datatypes.Standard;
-import net.pixomania.crawler.W3C.datatypes.StandardVersion;
-
 import java.util.LinkedList;
 
 public class Log {
@@ -22,10 +20,6 @@ public class Log {
 	}
 
 	public static void log(String level, String message, Standard standard) {
-		if (standard != null) {
-			LogWriter.appendStandard(new LogMessage(level, message), standard);
-		} else {
-			LogWriter.appendRow(new LogMessage(level, message));
-		}
+		LogWriter.appendRow(new LogMessage(level, message, standard));
 	}
 }

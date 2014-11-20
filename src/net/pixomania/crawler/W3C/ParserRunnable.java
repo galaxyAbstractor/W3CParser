@@ -290,19 +290,21 @@ public class ParserRunnable implements Runnable {
 			}
 		}
 
-		if (urls != null) {
+		if (urls != null && urls.size() > 0) {
 			for (String prevUrl : urls) {
-				if (!prevUrl.endsWith("/")) prevUrl += "/";
+
+				if (prevUrl.length() < 1) continue;
+				if ((!prevUrl.contains("w3.org/TR") || prevUrl.endsWith(".txt")) && !W3C.extraLinks.contains(prevUrl)) continue;
 
 				// Have we already crawled this link? If so, prev will contain it
-				StandardVersion prev = alreadyCrawled(prevUrl.trim().toLowerCase());
+				StandardVersion prev = alreadyCrawled(prevUrl.trim());
 				if (prev == null) {
 					// We have never crawled d.text(), so let's start
 
 					// We have never crawled this before
 					// let's crawl it if it contains w3.org
 					if ((prevUrl.contains("w3.org/TR") && !prevUrl.endsWith(".txt")) || W3C.extraLinks.contains(prevUrl)) {
-						StandardVersion nextToCrawl = parseVersion(prevUrl.toLowerCase(), standard);
+						StandardVersion nextToCrawl = parseVersion(prevUrl, standard);
 
 						if (nextToCrawl != null) {
 							sv.getPrev().add(nextToCrawl);
@@ -326,9 +328,11 @@ public class ParserRunnable implements Runnable {
 	}
 
 	private StandardVersion alreadyCrawled(String link) {
+		if (link.endsWith("/")) link = link.substring(0, link.length() - 1);
+		String lastPart = link.substring(link.lastIndexOf("/"), link.length());
 		return (StandardVersion) session.createQuery(
-				"from StandardVersion where link = :link")
-				.setParameter("link", link.toLowerCase())
+				"from StandardVersion where link like :link")
+				.setParameter("link", "%" + lastPart + "%")
 				.uniqueResult();
 	}
 
