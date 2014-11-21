@@ -328,7 +328,7 @@ public class ParserRunnable implements Runnable {
 	}
 
 	private StandardVersion alreadyCrawled(String link) {
-		if (link.endsWith("/")) link = link.substring(0, link.length() - 1);
+		while (link.endsWith("/")) link = link.substring(0, link.length() - 1); // W3C occasionally has a LOT of /
 		String lastPart = link.substring(link.lastIndexOf("/"), link.length());
 		return (StandardVersion) session.createQuery(
 				"from StandardVersion where link like :link")

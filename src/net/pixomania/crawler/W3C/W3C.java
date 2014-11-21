@@ -5,6 +5,7 @@
 
 package net.pixomania.crawler.W3C;
 
+import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.parser.rules.ReturnNull;
 import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule1;
@@ -17,6 +18,7 @@ import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
 import net.pixomania.crawler.W3C.parser.rules.editorInChief.EditorInChiefRule1;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
+import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule2;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule2;
 import net.pixomania.crawler.W3C.parser.rules.seriesEditors.SeriesEditorsRule1;
@@ -25,7 +27,10 @@ import net.pixomania.crawler.W3C.parser.rules.title.SpecificTitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
 import net.pixomania.crawler.parser.Parser;
+import net.pixomania.crawler.parser.rules.Rule;
+import org.jsoup.nodes.Document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -72,16 +77,16 @@ public class W3C {
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
 				new StatusRule5(), new StatusRule6(), new StatusRule7()));
-		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3()));
+		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(), new EditorsRule4()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
 		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(), new AuthorsRule4()));
 		parsers.put("contributors", new Parser(new ContributorsRule1()));
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
-		parsers.put("previous", new Parser(new PreviousRule1()));
+		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 		parsers.put("editorInChief", new Parser(new EditorInChiefRule1()));
 
-/*		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -195,17 +200,37 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xpath-fulltext-10", "xpath-full-text-10", "xquery-full-text"}, "http://www.w3.org/TR/xpath-full-text-10/"));
 		standards.add(new Standard(new String[]{"xquery-update-10", "xqupdate"}, "http://www.w3.org/TR/xquery-update-10/"));
 		standards.add(new Standard(new String[]{"xpath-20", "xpath20"}, "http://www.w3.org/TR/xpath20/"));
-		standards.add(new Standard(new String[]{"xquery"}, "http://www.w3.org/TR/xquery/"));*/
-		//standards.add(new Standard(new String[]{"xpath-functions", "xquery-operators"}, "http://www.w3.org/TR/xpath-functions/"));
-		//standards.add(new Standard(new String[]{"xqueryx"}, "http://www.w3.org/TR/xqueryx/"));
-		//standards.add(new Standard(new String[]{"xpath-datamodel", "query-datamodel"}, "http://www.w3.org/TR/xpath-datamodel/"));
-		//standards.add(new Standard(new String[]{"xquery-semantics", "query-semantics"}, "http://www.w3.org/TR/xquery-semantics/"));
-		//standards.add(new Standard(new String[]{"xslt-xquery-serialization"}, "http://www.w3.org/TR/xslt-xquery-serialization/"));
-		//standards.add(new Standard(new String[]{"mwabp"}, "http://www.w3.org/TR/mwabp/"));
+		standards.add(new Standard(new String[]{"xquery"}, "http://www.w3.org/TR/xquery/"));
+		standards.add(new Standard(new String[]{"xpath-functions", "xquery-operators"}, "http://www.w3.org/TR/xpath-functions/"));
+		standards.add(new Standard(new String[]{"xqueryx"}, "http://www.w3.org/TR/xqueryx/"));
+		standards.add(new Standard(new String[]{"xpath-datamodel", "query-datamodel"}, "http://www.w3.org/TR/xpath-datamodel/"));
+		standards.add(new Standard(new String[]{"xquery-semantics", "query-semantics"}, "http://www.w3.org/TR/xquery-semantics/"));
+		standards.add(new Standard(new String[]{"xslt-xquery-serialization"}, "http://www.w3.org/TR/xslt-xquery-serialization/"));
+		standards.add(new Standard(new String[]{"mwabp"}, "http://www.w3.org/TR/mwabp/"));
 		//TODO standards.add(new Standard(new String[]{"xhtml-basic"}, "http://www.w3.org/TR/xhtml-basic/"));
 		//TODO standards.add(new Standard(new String[]{"xhtml11"}, "http://www.w3.org/TR/xhtml11/"));
 		//TODO standards.add(new Standard(new String[]{"xhtml-print"}, "http://www.w3.org/TR/xhtml-print/"));
 		standards.add(new Standard(new String[]{"xml-stylesheet"}, "http://www.w3.org/TR/xml-stylesheet/"));
+		standards.add(new Standard(new String[]{"speech-synthesis11"}, "http://www.w3.org/TR/speech-synthesis11/"));
+		standards.add(new Standard(new String[]{"wsc-ui", "wsc-xit"}, "http://www.w3.org/TR/wsc-ui/"));
+		//TODO standards.add(new Standard(new String[]{"xhtml-modularization"}, "http://www.w3.org/TR/xhtml-modularization/"));
+		standards.add(new Standard(new String[]{"xproc"}, "http://www.w3.org/TR/xproc/"));
+		standards.add(new Standard(new String[]{"xlink11"}, "http://www.w3.org/TR/xlink11/"));
+		standards.add(new Standard(new String[]{"webcgm21"}, "http://www.w3.org/TR/webcgm21/"));
+		//TODO: standards.add(new Standard(new String[]{"DSig-label"}, "http://www.w3.org/TR/REC-DSig-label/"));
+		//TODO: standards.add(new Standard(new String[]{"PICS-labels"}, "http://www.w3.org/TR/REC-PICS-labels/"));
+		//TODO: standards.add(new Standard(new String[]{"PICS-services"}, "http://www.w3.org/TR/REC-PICS-services/"));
+		//TODO: standards.add(new Standard(new String[]{"PICSrules"}, "http://www.w3.org/TR/REC-PICSRules/"));
+		standards.add(new Standard(new String[]{"xforms11"}, "http://www.w3.org/TR/xforms11/"));
+		standards.add(new Standard(new String[]{"powder-grouping"}, "http://www.w3.org/TR/powder-grouping/"));
+		standards.add(new Standard(new String[]{"powder-dr"}, "http://www.w3.org/TR/powder-dr/"));
+		standards.add(new Standard(new String[]{"powder-formal"}, "http://www.w3.org/TR/powder-formal/"));
+		standards.add(new Standard(new String[]{"skos-reference"}, "http://www.w3.org/TR/skos-reference/"));
+		standards.add(new Standard(new String[]{"sml"}, "http://www.w3.org/TR/sml/"));
+		standards.add(new Standard(new String[]{"sml-if"}, "http://www.w3.org/TR/sml-if/"));
+		standards.add(new Standard(new String[]{"emma"}, "http://www.w3.org/TR/emma/"));
+		standards.add(new Standard(new String[]{"xmlbase"}, "http://www.w3.org/TR/xmlbase/"));*/
+		standards.add(new Standard(new String[]{"ElementTraversal"}, "http://www.w3.org/TR/ElementTraversal/"));
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);
@@ -241,8 +266,20 @@ public class W3C {
 		parsers.get("title").setRuleOnURL("http://www.w3.org/TR/1998/REC-CSS2-19980512", spT1);
 		parsers.get("previous").setRuleOnURL("http://www.w3.org/TR/WD-CSS2-971104", new ReturnNull());
 
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/1998/WD-xml-stylesheet-19981001", (url, doc) -> {
+			ArrayList<Person> persons = new ArrayList<>();
+
+			Person p1 = new Person();
+			p1.setName("James Clark");
+			p1.setEmail("jjc@jclark.com");
+			p1.setFull("James Clark (jjc@jclark.com)");
+
+			persons.add(p1);
+			return persons;
+		});
+
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");
-		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629/");
+		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629");
 
 
 		parserThread.start();
