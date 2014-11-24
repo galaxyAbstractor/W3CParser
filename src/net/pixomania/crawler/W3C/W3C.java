@@ -5,6 +5,7 @@
 
 package net.pixomania.crawler.W3C;
 
+import net.pixomania.crawler.W3C.csv.CSVExport;
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.parser.rules.ReturnNull;
@@ -57,6 +58,8 @@ public class W3C {
 	public static LinkedList<String> extraLinks = new LinkedList<>();
 
 	public W3C() {
+
+		//CSVExport.export();
 		/*Runnable runGUI = () -> {
 			Application.launch(W3CGUI.class);
 		};
@@ -72,7 +75,6 @@ public class W3C {
 				e.printStackTrace();
 			}
 		}*/
-
 		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
@@ -230,7 +232,10 @@ public class W3C {
 		standards.add(new Standard(new String[]{"sml-if"}, "http://www.w3.org/TR/sml-if/"));
 		standards.add(new Standard(new String[]{"emma"}, "http://www.w3.org/TR/emma/"));
 		standards.add(new Standard(new String[]{"xmlbase"}, "http://www.w3.org/TR/xmlbase/"));*/
-		standards.add(new Standard(new String[]{"ElementTraversal"}, "http://www.w3.org/TR/ElementTraversal/"));
+		//standards.add(new Standard(new String[]{"ElementTraversal"}, "http://www.w3.org/TR/ElementTraversal/"));
+		//standards.add(new Standard(new String[]{"SVGTiny12", "SVGMobile12"}, "http://www.w3.org/TR/SVGTiny12/"));
+		standards.add(new Standard(new String[]{"WCAG20"}, "http://www.w3.org/TR/WCAG20/"));
+
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
 		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/xmlschema11-1/", spE2);

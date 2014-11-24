@@ -6,26 +6,31 @@
 package net.pixomania.crawler.W3C.datatypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Standard {
 
 	private long id;
-	private String[] names;
+	private List<String> names;
 	private String link;
 	private List<StandardVersion> versions = new ArrayList<>();
 
 	public Standard(String names[], String link) {
-		this.names = names;
+		this.names = Arrays.asList(names);
 		this.link = link;
 	}
 
-	public String[] getNames() {
+	public Standard() {
+	}
+
+	public List<String> getNames() {
 		return names;
 	}
 
 	public String getMainName() {
-		return names[0];
+		if (names != null && names.size() > 0) return names.get(0);
+		return null;
 	}
 
 	public String getLink() {
@@ -53,7 +58,7 @@ public class Standard {
 		this.id = id;
 	}
 
-	public void setNames(String[] names) {
+	public void setNames(List<String> names) {
 		this.names = names;
 	}
 

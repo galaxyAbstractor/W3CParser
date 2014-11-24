@@ -13,14 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.pixomania.crawler.W3C.ParserRunnable;
 import net.pixomania.crawler.W3C.W3C;
 import net.pixomania.crawler.W3C.datatypes.Person;
-import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.datatypes.StandardVersion;
 import net.pixomania.crawler.gui.Browser;
 
@@ -89,7 +87,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 
@@ -100,7 +98,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 
@@ -111,7 +109,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 
@@ -122,7 +120,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 
@@ -133,7 +131,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 
@@ -144,7 +142,7 @@ public class W3CGUI extends Application {
 					current.getChildren().add(new Label("  " + editor.getName() + ", " + editor.getStandardAffiliation() +
 							" until " + editor.getStandardAffiliationUntil() + " current " + editor.getCurrentAffiliation() +
 							" until " + editor.getCurrentAffiliationUntil() + " via " + editor.getViaAffiliation() +
-							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " website " + editor.getWebsite()));
+							" former " + editor.getFormerAffiliation() + " email " + editor.getEmail() + " WG " + editor.getWorkgroup() + " websites " + editor.getWebsites()));
 				}
 			}
 

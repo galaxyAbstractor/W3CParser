@@ -19,7 +19,7 @@ public class NameParser {
 
 	static {
 		// name, current affiliation, current affiliation until, standard affiliation
-		// standard affiliation until, via affiliation, email, working group, website
+		// standard affiliation until, via affiliation, email, working group, websites
 		// former affiliation
 		regex.add(new RegexRule("(([^\\(]+) \\((until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4}),? while [with|at]+ ([^\\(]+))\\))", new int[]{2, 0, 0, 5, 4, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\((while at (.+?(?=, currently)), currently ([^\\(]+)\\)))", new int[]{2, 5, 0, 4, 0, 0, 0, 0, 0, 0}));
@@ -40,6 +40,9 @@ public class NameParser {
 		regex.add(new RegexRule("(([^\\(]+) \\(([^,]+), and before at ([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 0, 0, 0, 5, 3, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(((.*?) wg)\\) <(.+@[^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 4, 3, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\([^\\s]+ edition\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("(([^\\(]+) \\(([^,]+), formerly ([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 5, 0, 0, 4}));
+		regex.add(new RegexRule("(([^\\(]+) \\(formerly ([^\\)]+)\\) <(.+@{1}.+)>, until (\\d{4}))", new int[]{2, 0, 0, 0, 5, 0, 4, 0, 0, 3}));
+		regex.add(new RegexRule("(([^\\(]+) \\((.+?(?= until)) until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4})\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 4, 0, 5, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(formerly of ([^\\)]+)\\) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 5, 4}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 4, 0}));

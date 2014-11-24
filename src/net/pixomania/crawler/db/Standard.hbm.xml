@@ -22,5 +22,10 @@
             <one-to-many class="net.pixomania.crawler.W3C.datatypes.StandardVersion"/>
         </bag>
 
+        <bag name="names" cascade="all" table="standards_names">
+            <key column="standard_id"/>
+            <element type="text" column="name"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

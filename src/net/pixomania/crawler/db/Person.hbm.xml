@@ -25,5 +25,10 @@
         <property name="workgroup"/>
         <property name="formerAffiliation"/>
         <property name="full"/>
+
+        <bag name="websites" cascade="all" table="persons_websites">
+            <key column="person_id"/>
+            <element type="text" column="website"/>
+        </bag>
     </class>
 </hibernate-mapping>

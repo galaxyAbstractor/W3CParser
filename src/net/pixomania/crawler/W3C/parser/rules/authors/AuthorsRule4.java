@@ -49,7 +49,7 @@ public class AuthorsRule4 implements Rule<ArrayList<Person>> {
 				continue;
 			}
 
-			if (editor.text().toLowerCase().equals("see author list")) {
+			if (editor.text().toLowerCase().startsWith("see author")) {
 				Log.log("warning", "Spec " + url + " may refer to a different section!");
 				continue;
 			}
