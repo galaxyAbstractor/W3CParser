@@ -51,10 +51,9 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
-				if (editor.text().toLowerCase().equals("(in alphabetical order)")
-						|| editor.text().toLowerCase().equals("(in alphabetic order)")
-						|| editor.text().toLowerCase().equals("see Acknowledgements")
-						|| editor.text().toLowerCase().equals("see participants.")
+				if (editor.text().toLowerCase().startsWith("(in alphabetic")
+						|| editor.text().toLowerCase().startsWith("see acknowledgements")
+						|| editor.text().toLowerCase().startsWith("see participants")
 						|| editor.text().toLowerCase().contains("note:")
 						|| editor.text().toLowerCase().startsWith("there are")
 						|| editor.text().toLowerCase().equals("see partipants.")) {
@@ -78,13 +77,12 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			} else {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
-						if (split.toLowerCase().equals("(in alphabetical order)")
-								|| split.toLowerCase().equals("(in alphabetic order)")
-								|| split.toLowerCase().equals("see Acknowledgements")
-								|| split.toLowerCase().equals("see participants.")
+						if (split.toLowerCase().startsWith("(in alphabetic")
+								|| split.toLowerCase().startsWith("see acknowledgements")
+								|| split.toLowerCase().startsWith("see participants")
 								|| split.toLowerCase().contains("note:")
 								|| split.toLowerCase().startsWith("there are")
-								|| split.toLowerCase().equals("see partipants.")) {
+								|| split.toLowerCase().startsWith("see partipants")) {
 							Log.log("warning", "Spec " + url + " may refer to a different section!");
 							continue;
 						}

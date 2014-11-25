@@ -79,7 +79,7 @@ public class W3C {
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
 				new StatusRule5(), new StatusRule6(), new StatusRule7()));
-		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(), new EditorsRule4()));
+		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(), new EditorsRule4(), new EditorsRule5()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
 		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(), new AuthorsRule4()));
@@ -234,7 +234,35 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xmlbase"}, "http://www.w3.org/TR/xmlbase/"));*/
 		//standards.add(new Standard(new String[]{"ElementTraversal"}, "http://www.w3.org/TR/ElementTraversal/"));
 		//standards.add(new Standard(new String[]{"SVGTiny12", "SVGMobile12"}, "http://www.w3.org/TR/SVGTiny12/"));
-		standards.add(new Standard(new String[]{"WCAG20"}, "http://www.w3.org/TR/WCAG20/"));
+		//standards.add(new Standard(new String[]{"WCAG20"}, "http://www.w3.org/TR/WCAG20/"));
+		//standards.add(new Standard(new String[]{"mobileOK-basic10-tests"}, "http://www.w3.org/TR/mobileOK-basic10-tests/"));
+		//standards.add(new Standard(new String[]{"DDR-Simple-API"}, "http://www.w3.org/TR/DDR-Simple-API/"));
+		//standards.add(new Standard(new String[]{"SMIL3"}, "http://www.w3.org/TR/SMIL3/"));
+		//standards.add(new Standard(new String[]{"xml"}, "http://www.w3.org/TR/xml/"));
+		//standards.add(new Standard(new String[]{"pronunciation-lexicon"}, "http://www.w3.org/TR/pronunciation-lexicon/"));
+		//standards.add(new Standard(new String[]{"mobile-bp"}, "http://www.w3.org/TR/mobile-bp/"));
+		//standards.add(new Standard(new String[]{"xmldsig-core"}, "http://www.w3.org/TR/xmldsig-core/"));
+		//standards.add(new Standard(new String[]{"xml-c14n11"}, "http://www.w3.org/TR/xml-c14n11/"));
+		//standards.add(new Standard(new String[]{"CSS1"}, "http://www.w3.org/TR/REC-CSS1/"));
+		//standards.add(new Standard(new String[]{"rdf-sparql-query"}, "http://www.w3.org/TR/rdf-sparql-query/"));
+		//standards.add(new Standard(new String[]{"rdf-sparql-protocol"}, "http://www.w3.org/TR/rdf-sparql-protocol/"));
+		//standards.add(new Standard(new String[]{"grddl"}, "http://www.w3.org/TR/grddl/"));
+		//standards.add(new Standard(new String[]{"grddl-tests"}, "http://www.w3.org/TR/grddl-tests/"));
+		//standards.add(new Standard(new String[]{"ws-policy"}, "http://www.w3.org/TR/ws-policy/"));
+		//standards.add(new Standard(new String[]{"ws-policy-attach"}, "http://www.w3.org/TR/ws-policy-attach/"));
+		//standards.add(new Standard(new String[]{"ws-addr-metadata"}, "http://www.w3.org/TR/ws-addr-metadata/"));
+		//standards.add(new Standard(new String[]{"sawsdl"}, "http://www.w3.org/TR/sawsdl/"));
+		//standards.add(new Standard(new String[]{"wsdl20"}, "http://www.w3.org/TR/wsdl20/"));
+		//standards.add(new Standard(new String[]{"wsdl20-primer"}, "http://www.w3.org/TR/wsdl20-primer/"));
+		//standards.add(new Standard(new String[]{"wsdl20-adjuncts"}, "http://www.w3.org/TR/wsdl20-adjuncts/"));
+		//standards.add(new Standard(new String[]{"voicexml21"}, "http://www.w3.org/TR/voicexml21/"));
+		//standards.add(new Standard(new String[]{"soap12-part1"}, "http://www.w3.org/TR/soap12-part1/"));
+		//standards.add(new Standard(new String[]{"soap12-part0"}, "http://www.w3.org/TR/soap12-part0/"));
+		//standards.add(new Standard(new String[]{"soap12-part2"}, "http://www.w3.org/TR/soap12-part2/"));
+		//standards.add(new Standard(new String[]{"soap12-testcollection"}, "http://www.w3.org/TR/soap12-testcollection/"));
+		//standards.add(new Standard(new String[]{"semantic-interpretation"}, "http://www.w3.org/TR/semantic-interpretation/"));
+		//standards.add(new Standard(new String[]{"its"}, "http://www.w3.org/TR/its/"));
+		//standards.add(new Standard(new String[]{"webcgm20"}, "http://www.w3.org/TR/webcgm20/"));
 
 
 		SpecificEditorsRule2 spE2 = new SpecificEditorsRule2();
@@ -283,9 +311,19 @@ public class W3C {
 			return persons;
 		});
 
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/REC-CSS1/", (url, doc) -> "2008-04-11");
+
+		SpecificEditorsRule5 spE5 = new SpecificEditorsRule5();
+
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/REC-CSS1/", spE5);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/1999/REC-CSS1-19990111", spE5);
+		parsers.get("editors").setRuleOnURL("http://www.w3.org/TR/REC-CSS1-961217", spE5);
+
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");
 		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629");
-
+		extraLinks.add("http://www.w3.org/Signature/Drafts/WD-xmldsig-core-20000203/");
+		extraLinks.add("http://www.w3.org/Signature/Drafts/WD-xmldsig-core-20000128/");
+		// extraLinks.add("http://www.w3.org/Signature/Drafts/WD-xmldsig-core-20000114/"); // This is broken, same version as 20000128
 
 		parserThread.start();
 	}

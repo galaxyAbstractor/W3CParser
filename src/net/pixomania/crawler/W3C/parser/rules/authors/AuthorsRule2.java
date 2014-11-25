@@ -55,7 +55,7 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 
 			if (splitted.length < 2) {
 				if (editor.text().toLowerCase().startsWith("(in alphabetic")
-						|| editor.text().toLowerCase().startsWith("see Acknowledgements")
+						|| editor.text().toLowerCase().startsWith("see acknowl")
 						|| editor.text().toLowerCase().startsWith("see participants")
 						|| editor.text().toLowerCase().startsWith("see author list")
 						|| editor.text().toLowerCase().contains("note:")) {
@@ -80,7 +80,7 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
 						if (split.toLowerCase().startsWith("(in alphabetic")
-								|| split.toLowerCase().startsWith("see acknowledgements")
+								|| split.toLowerCase().startsWith("see acknowl")
 								|| split.toLowerCase().startsWith("see participants")
 								|| split.toLowerCase().startsWith("see author list")
 								|| split.toLowerCase().contains("note:")){

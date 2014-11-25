@@ -48,7 +48,12 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 
 			for (Element link : a) {
 				if (link.text().contains("color-coded")) continue;
-				urls.add(link.attr("href"));
+
+				if (!url.equals(link.attr("href"))) { // W3C...
+					urls.add(link.attr("href"));
+				} else {
+					urls.add(link.text());
+				}
 			}
 		}
 

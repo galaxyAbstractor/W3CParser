@@ -18,6 +18,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -294,6 +296,7 @@ public class ParserRunnable implements Runnable {
 			for (String prevUrl : urls) {
 
 				if (prevUrl.length() < 1) continue;
+				if (prevUrl.equals(url)) continue; // W3C...
 				if ((!prevUrl.contains("w3.org/TR") || prevUrl.endsWith(".txt")) && !W3C.extraLinks.contains(prevUrl)) continue;
 
 				// Have we already crawled this link? If so, prev will contain it
@@ -329,11 +332,23 @@ public class ParserRunnable implements Runnable {
 
 	private StandardVersion alreadyCrawled(String link) {
 		while (link.endsWith("/")) link = link.substring(0, link.length() - 1); // W3C occasionally has a LOT of /
-		String lastPart = link.substring(link.lastIndexOf("/"), link.length());
+
+		URL url = null;
+		try {
+			url = new URL(link);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		String lastPart = url.getFile();
+
+		if (lastPart.lastIndexOf(".") > 0) lastPart = lastPart.substring(0, lastPart.lastIndexOf("."));
+
 		return (StandardVersion) session.createQuery(
 				"from StandardVersion where link like :link")
 				.setParameter("link", "%" + lastPart + "%")
 				.uniqueResult();
+
 	}
 
 	private List<StandardVersion> allOrphans() {
