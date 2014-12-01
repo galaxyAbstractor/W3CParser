@@ -52,7 +52,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 
 			if (splitted.length < 2) {
 				if (editor.text().toLowerCase().startsWith("(in alphabetic")
-						|| editor.text().toLowerCase().startsWith("see acknowledgements")
+						|| editor.text().toLowerCase().startsWith("see ackn")
+						|| editor.text().toLowerCase().startsWith("see the")
 						|| editor.text().toLowerCase().startsWith("see participants")
 						|| editor.text().toLowerCase().contains("note:")
 						|| editor.text().toLowerCase().startsWith("there are")
@@ -78,7 +79,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 				for (String split : splitted) {
 					if (!split.isEmpty()) {
 						if (split.toLowerCase().startsWith("(in alphabetic")
-								|| split.toLowerCase().startsWith("see acknowledgements")
+								|| split.toLowerCase().startsWith("see ackn")
+								|| split.toLowerCase().startsWith("see the")
 								|| split.toLowerCase().startsWith("see participants")
 								|| split.toLowerCase().contains("note:")
 								|| split.toLowerCase().startsWith("there are")

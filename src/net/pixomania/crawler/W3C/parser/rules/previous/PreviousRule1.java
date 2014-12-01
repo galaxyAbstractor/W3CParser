@@ -28,7 +28,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 			Element prev = d.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
 				if (!prev.text().toLowerCase().startsWith("previous version")
-						&& !prev.text().toLowerCase().startsWith("previous versions")) {
+						&& !prev.text().toLowerCase().startsWith("previous versions")
+						&& !prev.text().toLowerCase().startsWith("previous official published version")) {
 					skip = true;
 				}
 			}
@@ -37,7 +38,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 				Element next = d.nextElementSibling();
 				if (next != null) {
 					if (next.text().toLowerCase().startsWith("previous version")
-							|| next.text().toLowerCase().startsWith("previous versions")) {
+							|| next.text().toLowerCase().startsWith("previous versions")
+							|| next.text().toLowerCase().startsWith("previous official published version")) {
 						skip = false;
 						continue;
 					}

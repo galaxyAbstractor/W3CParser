@@ -6,8 +6,10 @@
 package net.pixomania.crawler.W3C.parser.rules.editors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
+import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -49,8 +51,14 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 				continue;
 			}
 
-			String[] splitted = editor.html().split("<br />");
-			if (splitted.length < 2) splitted = editor.html().split("<br clear=\"none\" />");
+			if (StringUtils.countMatches(editor.text(), " - ") > 2) {
+				Log.log("warning", "This editor may be a list of editors separated by  - ");
+				EditorsRule5 ed5 = new EditorsRule5();
+
+				return ed5.run(url, doc);
+			}
+
+			String[] splitted = editor.html().split("<br />|<br clear=\"none\" />");
 
 			if (splitted.length < 2) {
 				if (editor.text().equals("WHATWG:") || editor.text().equals("W3C:")) continue;

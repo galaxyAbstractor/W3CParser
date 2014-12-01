@@ -51,6 +51,12 @@ public class Parser {
 		specificRules.put(url, rule);
 	}
 
+	public void setRuleOnURLs(String[] urls, Rule rule) {
+		for (String url : urls) {
+			setRuleOnURL(url, rule);
+		}
+	}
+
 	/**
 	 * This method calls the parser rules until a rule returns something other than null.
 	 * It also checks if there is a specific Rule specified for the given URL and runs that
