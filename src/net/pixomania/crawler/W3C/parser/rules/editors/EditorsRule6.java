@@ -28,7 +28,11 @@ public class EditorsRule6 implements Rule<ArrayList<Person>> {
 		try {
 			editor = doc.select(".authlist").get(0).select("p").get(0);
 		} catch (IndexOutOfBoundsException e) {
-			editor = doc.select("h4:contains(Editors) ~ p").get(0);
+			try {
+				editor = doc.select("h4:contains(Editors) ~ p").get(0);
+			} catch (IndexOutOfBoundsException e1) {
+				return null;
+			}
 		}
 
 		String[] splitted = editor.html().split("<br />");

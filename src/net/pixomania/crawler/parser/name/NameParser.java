@@ -62,11 +62,16 @@ public class NameParser {
 		regex.add(new RegexRule("(([^,]+), ([^,]+), ([^@]+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\((.+)\\), <([^@]+@.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <([^@]+@[^>]+)> \\((for )?modularization and DTD\\))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), ([^@]+@.+), (.+ \\(through (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4})\\)) \\/ (.+))", new int[]{2, 0, 0, 6, 0, 0, 3, 0, 0, 4}));
 		regex.add(new RegexRule("(([^,]+), <([^@]+@.+)>, (.+))", new int[]{2, 0, 0, 4, 0, 0, 3, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), ([^@]+@.+), (.+))", new int[]{2, 0, 0, 4, 0, 0, 3, 0, 0, 0}));
+		regex.add(new RegexRule("((.+) \\((.+)\\) ([^@]+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
+		regex.add(new RegexRule("(([^,]+), (.+),([^@]+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^@]+@.+))", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(now at (.+)\\))", new int[]{2, 4, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), formerly at (.+))", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 3}));
 		regex.add(new RegexRule("(([^\\(]+) \\(until (\\d{4}), while at ([^\\)]+)\\))", new int[]{2, 0, 0, 4, 3, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("((.+), (.+) \\(.+ edition\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(until (\\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\,]+), ([^\\(]+) \\(editor\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(((.*?) wg)\\), ([^,]+))", new int[]{2, 0, 0, 5, 0, 0, 0, 3, 0, 0}));
@@ -75,9 +80,14 @@ public class NameParser {
 		regex.add(new RegexRule("(([^—]+)—version .+, (.+))",  new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+ \\([^\\)]+\\), [^\\(]+) \\(formerly (at|with) ([^\\)]+)\\))",  new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 5}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(and before at ([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 4}));
+		regex.add(new RegexRule("((.+), (.+) \\(for dom level .+ until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("((.+), (.+) \\(for dom level .+\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("((.+), \\((.+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("((.+) \\((.+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\)]+\\)))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(formerly ([^\\)]+)\\) version \\d.\\d)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 4}));
 		regex.add(new RegexRule("(([^\\(]+) \\((.+@.+)\\))", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
+		regex.add(new RegexRule("((.+) \\((.+)\\)<(.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 
 		regex.add(new RegexRule("((.+) \\((.+)\\) (.+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));

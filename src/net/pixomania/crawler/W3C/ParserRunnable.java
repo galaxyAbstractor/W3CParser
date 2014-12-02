@@ -132,7 +132,7 @@ public class ParserRunnable implements Runnable {
 		Result date = W3C.getParsers().get("date").parse(url, doc);
 		sv.setDate((String) date.getResult());
 		sv.getRules().put("date", date.getRule());
-		if (date.getResult() == null) Log.log("error", "Spec " + url + " doesn't seem to have a date");
+		if (date.getResult() == null) System.out.println("NO DATE " + url);
 
 		Result title = W3C.getParsers().get("title").parse(url, doc);
 		sv.setTitle((String) title.getResult());
@@ -294,6 +294,7 @@ public class ParserRunnable implements Runnable {
 
 		if (urls != null && urls.size() > 0) {
 			for (String prevUrl : urls) {
+				if (W3C.linkReplacer.containsKey(prevUrl)) prevUrl = W3C.linkReplacer.get(prevUrl);
 
 				if (prevUrl.length() < 1) continue;
 				if (prevUrl.equals(url)) continue; // W3C...

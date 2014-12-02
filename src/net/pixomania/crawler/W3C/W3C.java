@@ -27,6 +27,7 @@ import net.pixomania.crawler.W3C.parser.rules.status.*;
 import net.pixomania.crawler.W3C.parser.rules.title.SpecificTitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
+import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.Parser;
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.nodes.Document;
@@ -56,6 +57,7 @@ public class W3C {
 	}
 
 	public static LinkedList<String> extraLinks = new LinkedList<>();
+	public static HashMap<String, String> linkReplacer = new HashMap<>();
 
 	public W3C() {
 
@@ -89,6 +91,7 @@ public class W3C {
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 		parsers.put("editorInChief", new Parser(new EditorInChiefRule1()));
 
+		//Log.log("warning", "MathML contains principal authors");
 		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
@@ -288,7 +291,30 @@ public class W3C {
 		//TODO standards.add(new Standard(new String[]{"DOM-Level-3-Core"}, "http://www.w3.org/TR/DOM-Level-3-Core/"));
 		//standards.add(new Standard(new String[]{"speech-grammar", "grammar-spec"}, "http://www.w3.org/TR/speech-grammar/"));
 		//standards.add(new Standard(new String[]{"voicexml20"}, "http://www.w3.org/TR/voicexml20/"));
-		standards.add(new Standard(new String[]{"rdf-mt"}, "http://www.w3.org/TR/2004/REC-rdf-mt-20040210/"));
+		//standards.add(new Standard(new String[]{"rdf-mt"}, "http://www.w3.org/TR/2004/REC-rdf-mt-20040210/"));
+		//standards.add(new Standard(new String[]{"rdf-testcases"}, "http://www.w3.org/TR/2004/REC-rdf-testcases-20040210/"));
+		//standards.add(new Standard(new String[]{"owl-features"}, "http://www.w3.org/TR/owl-features/"));
+		//standards.add(new Standard(new String[]{"owl-guide"}, "http://www.w3.org/TR/owl-guide/"));
+		//standards.add(new Standard(new String[]{"owl-ref"}, "http://www.w3.org/TR/owl-ref/"));
+		//standards.add(new Standard(new String[]{"owl-semantics", "owl-absyn"}, "http://www.w3.org/TR/owl-semantics/"));
+		//standards.add(new Standard(new String[]{"owl-test"}, "http://www.w3.org/TR/owl-test/"));
+		//standards.add(new Standard(new String[]{"rdf-concepts"}, "http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/"));
+		//standards.add(new Standard(new String[]{"rdf-primer"}, "http://www.w3.org/TR/2004/REC-rdf-primer-20040210/"));
+		//standards.add(new Standard(new String[]{"webont-req"}, "http://www.w3.org/TR/webont-req/"));
+		//standards.add(new Standard(new String[]{"xml-infoset"}, "http://www.w3.org/TR/xml-infoset/"));
+		//standards.add(new Standard(new String[]{"DOM-Level-3-Val"}, "http://www.w3.org/TR/DOM-Level-3-Val/"));
+		//standards.add(new Standard(new String[]{"CCPP-struct-vocab", "CCPP-struct", "CCPP-vocab"}, "http://www.w3.org/TR/CCPP-struct-vocab/"));
+		//standards.add(new Standard(new String[]{"PNG"}, "http://www.w3.org/TR/PNG/"));
+		//Log.log("warning", "MathML2 contains principal authors");
+		//standards.add(new Standard(new String[]{"MathML2"}, "http://www.w3.org/TR/MathML2/"));
+		//standards.add(new Standard(new String[]{"xptr-element"}, "http://www.w3.org/TR/xptr-element/"));
+		//standards.add(new Standard(new String[]{"xptr-framework"}, "http://www.w3.org/TR/xptr-framework/"));
+		//standards.add(new Standard(new String[]{"xptr-xmlns"}, "http://www.w3.org/TR/xptr-xmlns/"));
+		//standards.add(new Standard(new String[]{"SVGMobile"}, "http://www.w3.org/TR/SVGMobile/"));
+		//TODO: standards.add(new Standard(new String[]{"DOM-Level-2-HTML"}, "http://www.w3.org/TR/DOM-Level-2-HTML/"));
+		//standards.add(new Standard(new String[]{"UAAG10"}, "http://www.w3.org/TR/UAAG10/"));
+		//standards.add(new Standard(new String[]{"xmlenc-decrypt"}, "http://www.w3.org/TR/xmlenc-decrypt"));
+		standards.add(new Standard(new String[]{"xmldsig-filter2"}, "http://www.w3.org/TR/xmldsig-filter2/"));
 
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/xmlschema11-1/",
 				"http://www.w3.org/TR/2012/PR-xmlschema11-1-20120119/",
@@ -331,7 +357,7 @@ public class W3C {
 		});
 
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/2005/PR-xkms2-bindings-20050502/",
-		"http://www.w3.org/TR/2005/PR-xkms2-20050502/"}, (url, doc) -> {
+				"http://www.w3.org/TR/2005/PR-xkms2-20050502/"}, (url, doc) -> {
 			ArrayList<Person> persons = new ArrayList<>();
 
 			Person p1 = new Person();
@@ -377,6 +403,12 @@ public class W3C {
 		parsers.get("date").setRuleOnURL("http://www.w3.org/1999/05/06-xmlschema-2/", (url, doc) -> "1999-05-06");
 		parsers.get("status").setRuleOnURL("http://www.w3.org/1999/05/06-xmlschema-2/", (url, doc) -> "Working Draft");
 
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1998/WD-DOM-Level-2-19981228", (url, doc) -> "1998-12-28");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990304", (url, doc) -> "1999-03-04");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990719", (url, doc) -> "1999-07-19");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990923", (url, doc) -> "1999-09-23");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990304", (url, doc) -> "1999-03-23");
+
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");
 		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629");
 		extraLinks.add("http://www.w3.org/Signature/Drafts/WD-xmldsig-core-20000203/");
@@ -384,7 +416,19 @@ public class W3C {
 		// extraLinks.add("http://www.w3.org/Signature/Drafts/WD-xmldsig-core-20000114/"); // This is broken, same version as 20000128
 		extraLinks.add("http://www.w3.org/1999/05/06-xmlschema-1/");
 		extraLinks.add("http://www.w3.org/1999/05/06-xmlschema-2/");
+		extraLinks.add("http://www.w3.org/WAI/UA/WD-WAI-USERAGENT-19991029");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19991022");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19991005");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19991004");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990827");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990809");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990716");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990709");
+		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990611");
 
+		// Seriously
+		linkReplacer.put("http://www.w3.org/TR/1999/WD-DOM-Level-2-9990719", "http://www.w3.org/TR/1999/WD-DOM-Level-2-19990719");
+		linkReplacer.put("http://www.w3.org/TR/1999/WD-DOM-Level-2-9990304", "http://www.w3.org/TR/1999/WD-DOM-Level-2-19990304");
 
 		parserThread.start();
 	}

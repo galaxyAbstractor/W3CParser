@@ -28,7 +28,6 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 			Element prev = d.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
 				if (!prev.text().toLowerCase().startsWith("previous version")
-						&& !prev.text().toLowerCase().startsWith("previous versions")
 						&& !prev.text().toLowerCase().startsWith("previous official published version")) {
 					skip = true;
 				}
@@ -38,7 +37,6 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 				Element next = d.nextElementSibling();
 				if (next != null) {
 					if (next.text().toLowerCase().startsWith("previous version")
-							|| next.text().toLowerCase().startsWith("previous versions")
 							|| next.text().toLowerCase().startsWith("previous official published version")) {
 						skip = false;
 						continue;
@@ -52,7 +50,11 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 				if (link.text().contains("color-coded")) continue;
 
 				if (!url.equals(link.attr("href"))) { // W3C...
-					urls.add(link.attr("href"));
+					if (link.attr("href").startsWith("/")) {
+						urls.add("http://www.w3.org" + link.attr("href"));
+					} else {
+						urls.add(link.attr("href"));
+					}
 				} else {
 					urls.add(link.text());
 				}
