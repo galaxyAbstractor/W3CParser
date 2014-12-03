@@ -23,7 +23,7 @@ public class AuthorsRule2 implements Rule<ArrayList<Person>> {
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements editors = doc.select(".head dt:contains(Author) ~ dd");
+		Elements editors = doc.select(".head dt:contains(Author) ~ dd, .header dt:contains(Author) ~ dd");
 		if (editors.size() == 0) return null;
 
 		boolean skip = false;

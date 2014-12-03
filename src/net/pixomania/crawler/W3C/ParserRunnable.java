@@ -294,6 +294,7 @@ public class ParserRunnable implements Runnable {
 
 		if (urls != null && urls.size() > 0) {
 			for (String prevUrl : urls) {
+				prevUrl = prevUrl.trim(); // ...
 				if (W3C.linkReplacer.containsKey(prevUrl)) prevUrl = W3C.linkReplacer.get(prevUrl);
 
 				if (prevUrl.length() < 1) continue;

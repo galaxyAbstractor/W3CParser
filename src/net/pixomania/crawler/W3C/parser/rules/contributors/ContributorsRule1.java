@@ -29,8 +29,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().replaceAll(":", "").toLowerCase().equals("contributor")
-						&& !prev.text().replaceAll(":", "").toLowerCase().equals("contributors")) {
+				if (!prev.text().trim().toLowerCase().startsWith("contributor")
+						&& !prev.text().trim().toLowerCase().startsWith("additional contributor")) {
 					skip = true;
 				}
 			}
@@ -38,8 +38,8 @@ public class ContributorsRule1 implements Rule<ArrayList<Person>> {
 			if (skip) {
 				Element next = editor.nextElementSibling();
 				if (next != null) {
-					if (next.text().replaceAll(":", "").toLowerCase().equals("contributor")
-							|| next.text().replaceAll(":", "").toLowerCase().equals("contributors")) {
+					if (next.text().trim().toLowerCase().startsWith("contributor")
+							|| next.text().trim().toLowerCase().startsWith("additional contributor")) {
 						skip = false;
 						continue;
 					}

@@ -9,10 +9,7 @@ import net.pixomania.crawler.W3C.csv.CSVExport;
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.W3C.datatypes.Standard;
 import net.pixomania.crawler.W3C.parser.rules.ReturnNull;
-import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule1;
-import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule2;
-import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule3;
-import net.pixomania.crawler.W3C.parser.rules.authors.AuthorsRule4;
+import net.pixomania.crawler.W3C.parser.rules.authors.*;
 import net.pixomania.crawler.W3C.parser.rules.contributingAuthors.ContributingAuthorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.contributors.ContributorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
@@ -82,10 +79,11 @@ public class W3C {
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
 				new StatusRule5(), new StatusRule6(), new StatusRule7()));
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(),
-				new EditorsRule4(), new EditorsRule5(), new EditorsRule6()));
+				new EditorsRule4(), new EditorsRule5(), new EditorsRule6(), new EditorsRule7()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
-		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(), new AuthorsRule4()));
+		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(),
+				new AuthorsRule4(), new AuthorsRule5()));
 		parsers.put("contributors", new Parser(new ContributorsRule1()));
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
@@ -314,7 +312,16 @@ public class W3C {
 		//TODO: standards.add(new Standard(new String[]{"DOM-Level-2-HTML"}, "http://www.w3.org/TR/DOM-Level-2-HTML/"));
 		//standards.add(new Standard(new String[]{"UAAG10"}, "http://www.w3.org/TR/UAAG10/"));
 		//standards.add(new Standard(new String[]{"xmlenc-decrypt"}, "http://www.w3.org/TR/xmlenc-decrypt"));
-		standards.add(new Standard(new String[]{"xmldsig-filter2"}, "http://www.w3.org/TR/xmldsig-filter2/"));
+		//standards.add(new Standard(new String[]{"xmldsig-filter2"}, "http://www.w3.org/TR/xmldsig-filter2/"));
+		//TODO: standards.add(new Standard(new String[]{"xhtml1"}, "http://www.w3.org/TR/xhtml1/"));
+		//standards.add(new Standard(new String[]{"xml-exc-c14n"}, "http://www.w3.org/TR/xml-exc-c14n/"));
+		//standards.add(new Standard(new String[]{"P3P"}, "http://www.w3.org/TR/P3P/"));
+		//standards.add(new Standard(new String[]{"WebCGM"}, "http://www.w3.org/TR/REC-WebCGM/"));
+		//standards.add(new Standard(new String[]{"smil-animation"}, "http://www.w3.org/TR/smil-animation/"));
+		//standards.add(new Standard(new String[]{"xlink", "xml-link"}, "http://www.w3.org/TR/xlink/"));
+		//standards.add(new Standard(new String[]{"ruby"}, "http://www.w3.org/TR/ruby/"));
+		//standards.add(new Standard(new String[]{"xml-c14n"}, "http://www.w3.org/TR/xml-c14n"));
+		standards.add(new Standard(new String[]{"DOM-Level-2-Core"}, "http://www.w3.org/TR/DOM-Level-2-Core/"));
 
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/xmlschema11-1/",
 				"http://www.w3.org/TR/2012/PR-xmlschema11-1-20120119/",
@@ -425,6 +432,9 @@ public class W3C {
 		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990716");
 		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990709");
 		extraLinks.add("http://www.w3.org/WAI/UA/WAI-USERAGENT-19990611");
+		extraLinks.add("http://www.w3.org/1999/08/WD-smil-boston-19990803/Animation/smil-animation");
+		extraLinks.add("http://www.w3.org/1999/07/WD-xlink-19990726");
+		extraLinks.add("http://www.w3.org/1999/07/WD-xml-c14n-19990729");
 
 		// Seriously
 		linkReplacer.put("http://www.w3.org/TR/1999/WD-DOM-Level-2-9990719", "http://www.w3.org/TR/1999/WD-DOM-Level-2-19990719");

@@ -49,6 +49,7 @@ public class NameParser {
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(formerly of ([^\\)]+)\\) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 5, 4}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(http[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 4, 0}));
+		regex.add(new RegexRule("((.+) \\((until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4}))\\))", new int[]{2, 0, 0, 0, 4, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\), <([^@]+@[^>]+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^<]+) <(.+@{1}.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+) <([^>]+)>)", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
@@ -83,11 +84,14 @@ public class NameParser {
 		regex.add(new RegexRule("((.+), (.+) \\(for dom level .+ until (\\d{0,2}\\s?(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\s?\\d{0,2},? \\d{4})\\))", new int[]{2, 0, 0, 3, 4, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("((.+), (.+) \\(for dom level .+\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("((.+), \\((.+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
+		regex.add(new RegexRule("((.+), ((.+), (.+)))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("((.+) \\((.+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\)]+\\)))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), ([^\\(]+) \\(formerly ([^\\)]+)\\) version \\d.\\d)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 4}));
 		regex.add(new RegexRule("(([^\\(]+) \\((.+@.+)\\))", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
 		regex.add(new RegexRule("((.+) \\((.+)\\)<(.+)>)", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
+		regex.add(new RegexRule("((.+) \\((.+@.+)\\), (.+))", new int[]{2, 0, 0, 4, 0, 0, 3, 0, 0, 0}));
+		regex.add(new RegexRule("((.+) \\((.+)\\),)", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 
 		regex.add(new RegexRule("((.+) \\((.+)\\) (.+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
