@@ -31,8 +31,10 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
 			if (prev.tagName().equals("dt")) {
-				if (!prev.text().trim().toLowerCase().startsWith("editor")
-						&& !prev.text().trim().toLowerCase().startsWith("edition editor")) {
+				if ((!prev.text().trim().toLowerCase().startsWith("editor")
+						&& !prev.text().trim().toLowerCase().startsWith("edition editor"))
+						|| prev.text().trim().toLowerCase().endsWith("version:")
+						|| prev.text().trim().toLowerCase().endsWith("draft:")) {
 					skip = true;
 				}
 			}
@@ -69,7 +71,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 				}
 				if (editor.text().equals("WHATWG:") || editor.text().equals("W3C:")) continue;
 				Person result = NameParser.parse(editor.text());
-				if (result == null) return null;
+				if (result == null) continue;
 
 				for (int i = 0; i < editor.select("a").size(); i++) {
 					if (!editor.select("a").get(i).attr("href").isEmpty()) {
@@ -96,7 +98,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 						if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());
-						if (result == null) return null;
+						if (result == null) continue;
 
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {

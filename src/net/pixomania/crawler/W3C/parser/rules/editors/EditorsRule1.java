@@ -46,7 +46,7 @@ public class EditorsRule1 implements Rule<ArrayList<Person>> {
 
 		for (Element editor : editors) {
 			Person result = NameParser.parse(editor.text());
-			if (result == null) return null;
+			if (result == null) continue;
 
 			for (int i = 0; i < editor.select("a").size(); i++) {
 				if (!editor.select("a").get(i).attr("href").isEmpty()) {

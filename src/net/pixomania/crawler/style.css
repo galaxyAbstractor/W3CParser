@@ -41,3 +41,7 @@ body {
 .indent {
 	margin-left: 15px
 }
+
+.titlechange {
+	color: blue;
+}

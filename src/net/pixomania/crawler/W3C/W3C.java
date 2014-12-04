@@ -88,9 +88,9 @@ public class W3C {
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 		parsers.put("editorInChief", new Parser(new EditorInChiefRule1()));
-
-		//Log.log("warning", "MathML contains principal authors");
-		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+/*
+		Log.log("warning", "MathML contains principal authors");
+		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -133,8 +133,8 @@ public class W3C {
 		standards.add(new Standard(new String[]{"webstorage"}, "http://www.w3.org/TR/webstorage/"));
 		standards.add(new Standard(new String[]{"html5"}, "http://www.w3.org/TR/html5/"));
 		standards.add(new Standard(new String[]{"prov-dm"}, "http://www.w3.org/TR/prov-dm/"));
-		standards.add(new Standard(new String[]{"prov-o"}, "http://www.w3.org/TR/prov-o/"));
-		standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
+		*/standards.add(new Standard(new String[]{"prov-o"}, "http://www.w3.org/TR/prov-o/"));
+		/*standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
 		standards.add(new Standard(new String[]{"prov-n"}, "http://www.w3.org/TR/prov-n/"));
 		standards.add(new Standard(new String[]{"widgets-digsig"}, "http://www.w3.org/TR/widgets-digsig/"));
 		standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/xmldsig-core1/"));
@@ -278,51 +278,64 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xkms2-bindings"}, "http://www.w3.org/TR/xkms2-bindings/"));
 		standards.add(new Standard(new String[]{"xkms2"}, "http://www.w3.org/TR/xkms2/"));
 		standards.add(new Standard(new String[]{"charmod"}, "http://www.w3.org/TR/charmod/"));
-		standards.add(new Standard(new String[]{"soap12-mtom"}, "http://www.w3.org/TR/soap12-mtom/"));*/
-		//standards.add(new Standard(new String[]{"soap12-rep"}, "http://www.w3.org/TR/soap12-rep/"));
-		//standards.add(new Standard(new String[]{"xop10"}, "http://www.w3.org/TR/xop10/"));
-		//standards.add(new Standard(new String[]{"xmlschema-1"}, "http://www.w3.org/TR/xmlschema-1/"));
-		//standards.add(new Standard(new String[]{"xmlschema-2"}, "http://www.w3.org/TR/xmlschema-2/"));
-		//standards.add(new Standard(new String[]{"xmlschema-0"}, "http://www.w3.org/TR/xmlschema-0/"));
-		//standards.add(new Standard(new String[]{"speech-synthesis"}, "http://www.w3.org/TR/speech-synthesis/"));
-		//standards.add(new Standard(new String[]{"DOM-Level-3-LS"}, "http://www.w3.org/TR/DOM-Level-3-LS/"));
+		standards.add(new Standard(new String[]{"soap12-mtom"}, "http://www.w3.org/TR/soap12-mtom/"));
+		standards.add(new Standard(new String[]{"soap12-rep"}, "http://www.w3.org/TR/soap12-rep/"));
+		standards.add(new Standard(new String[]{"xop10"}, "http://www.w3.org/TR/xop10/"));
+		standards.add(new Standard(new String[]{"xmlschema-1"}, "http://www.w3.org/TR/xmlschema-1/"));
+		standards.add(new Standard(new String[]{"xmlschema-2"}, "http://www.w3.org/TR/xmlschema-2/"));
+		standards.add(new Standard(new String[]{"xmlschema-0"}, "http://www.w3.org/TR/xmlschema-0/"));
+		standards.add(new Standard(new String[]{"speech-synthesis"}, "http://www.w3.org/TR/speech-synthesis/"));
+		standards.add(new Standard(new String[]{"DOM-Level-3-LS"}, "http://www.w3.org/TR/DOM-Level-3-LS/"));
 		//TODO standards.add(new Standard(new String[]{"DOM-Level-3-Core"}, "http://www.w3.org/TR/DOM-Level-3-Core/"));
-		//standards.add(new Standard(new String[]{"speech-grammar", "grammar-spec"}, "http://www.w3.org/TR/speech-grammar/"));
-		//standards.add(new Standard(new String[]{"voicexml20"}, "http://www.w3.org/TR/voicexml20/"));
-		//standards.add(new Standard(new String[]{"rdf-mt"}, "http://www.w3.org/TR/2004/REC-rdf-mt-20040210/"));
-		//standards.add(new Standard(new String[]{"rdf-testcases"}, "http://www.w3.org/TR/2004/REC-rdf-testcases-20040210/"));
-		//standards.add(new Standard(new String[]{"owl-features"}, "http://www.w3.org/TR/owl-features/"));
-		//standards.add(new Standard(new String[]{"owl-guide"}, "http://www.w3.org/TR/owl-guide/"));
-		//standards.add(new Standard(new String[]{"owl-ref"}, "http://www.w3.org/TR/owl-ref/"));
-		//standards.add(new Standard(new String[]{"owl-semantics", "owl-absyn"}, "http://www.w3.org/TR/owl-semantics/"));
-		//standards.add(new Standard(new String[]{"owl-test"}, "http://www.w3.org/TR/owl-test/"));
-		//standards.add(new Standard(new String[]{"rdf-concepts"}, "http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/"));
-		//standards.add(new Standard(new String[]{"rdf-primer"}, "http://www.w3.org/TR/2004/REC-rdf-primer-20040210/"));
-		//standards.add(new Standard(new String[]{"webont-req"}, "http://www.w3.org/TR/webont-req/"));
-		//standards.add(new Standard(new String[]{"xml-infoset"}, "http://www.w3.org/TR/xml-infoset/"));
-		//standards.add(new Standard(new String[]{"DOM-Level-3-Val"}, "http://www.w3.org/TR/DOM-Level-3-Val/"));
-		//standards.add(new Standard(new String[]{"CCPP-struct-vocab", "CCPP-struct", "CCPP-vocab"}, "http://www.w3.org/TR/CCPP-struct-vocab/"));
-		//standards.add(new Standard(new String[]{"PNG"}, "http://www.w3.org/TR/PNG/"));
-		//Log.log("warning", "MathML2 contains principal authors");
-		//standards.add(new Standard(new String[]{"MathML2"}, "http://www.w3.org/TR/MathML2/"));
-		//standards.add(new Standard(new String[]{"xptr-element"}, "http://www.w3.org/TR/xptr-element/"));
-		//standards.add(new Standard(new String[]{"xptr-framework"}, "http://www.w3.org/TR/xptr-framework/"));
-		//standards.add(new Standard(new String[]{"xptr-xmlns"}, "http://www.w3.org/TR/xptr-xmlns/"));
-		//standards.add(new Standard(new String[]{"SVGMobile"}, "http://www.w3.org/TR/SVGMobile/"));
+		standards.add(new Standard(new String[]{"speech-grammar", "grammar-spec"}, "http://www.w3.org/TR/speech-grammar/"));
+		standards.add(new Standard(new String[]{"voicexml20"}, "http://www.w3.org/TR/voicexml20/"));
+		standards.add(new Standard(new String[]{"rdf-mt"}, "http://www.w3.org/TR/2004/REC-rdf-mt-20040210/"));
+		standards.add(new Standard(new String[]{"rdf-testcases"}, "http://www.w3.org/TR/2004/REC-rdf-testcases-20040210/"));
+		standards.add(new Standard(new String[]{"owl-features"}, "http://www.w3.org/TR/owl-features/"));
+		standards.add(new Standard(new String[]{"owl-guide"}, "http://www.w3.org/TR/owl-guide/"));
+		standards.add(new Standard(new String[]{"owl-ref"}, "http://www.w3.org/TR/owl-ref/"));
+		standards.add(new Standard(new String[]{"owl-semantics", "owl-absyn"}, "http://www.w3.org/TR/owl-semantics/"));
+		standards.add(new Standard(new String[]{"owl-test"}, "http://www.w3.org/TR/owl-test/"));
+		standards.add(new Standard(new String[]{"rdf-concepts"}, "http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/"));
+		standards.add(new Standard(new String[]{"rdf-primer"}, "http://www.w3.org/TR/2004/REC-rdf-primer-20040210/"));
+		standards.add(new Standard(new String[]{"webont-req"}, "http://www.w3.org/TR/webont-req/"));
+		standards.add(new Standard(new String[]{"xml-infoset"}, "http://www.w3.org/TR/xml-infoset/"));
+		standards.add(new Standard(new String[]{"DOM-Level-3-Val"}, "http://www.w3.org/TR/DOM-Level-3-Val/"));
+		standards.add(new Standard(new String[]{"CCPP-struct-vocab", "CCPP-struct", "CCPP-vocab"}, "http://www.w3.org/TR/CCPP-struct-vocab/"));
+		standards.add(new Standard(new String[]{"PNG"}, "http://www.w3.org/TR/PNG/"));
+		Log.log("warning", "MathML2 contains principal authors");
+		standards.add(new Standard(new String[]{"MathML2"}, "http://www.w3.org/TR/MathML2/"));
+		standards.add(new Standard(new String[]{"xptr-element"}, "http://www.w3.org/TR/xptr-element/"));
+		standards.add(new Standard(new String[]{"xptr-framework"}, "http://www.w3.org/TR/xptr-framework/"));
+		standards.add(new Standard(new String[]{"xptr-xmlns"}, "http://www.w3.org/TR/xptr-xmlns/"));
+		standards.add(new Standard(new String[]{"SVGMobile"}, "http://www.w3.org/TR/SVGMobile/"));
 		//TODO: standards.add(new Standard(new String[]{"DOM-Level-2-HTML"}, "http://www.w3.org/TR/DOM-Level-2-HTML/"));
-		//standards.add(new Standard(new String[]{"UAAG10"}, "http://www.w3.org/TR/UAAG10/"));
-		//standards.add(new Standard(new String[]{"xmlenc-decrypt"}, "http://www.w3.org/TR/xmlenc-decrypt"));
-		//standards.add(new Standard(new String[]{"xmldsig-filter2"}, "http://www.w3.org/TR/xmldsig-filter2/"));
+		standards.add(new Standard(new String[]{"UAAG10"}, "http://www.w3.org/TR/UAAG10/"));
+		standards.add(new Standard(new String[]{"xmlenc-decrypt"}, "http://www.w3.org/TR/xmlenc-decrypt"));
+		standards.add(new Standard(new String[]{"xmldsig-filter2"}, "http://www.w3.org/TR/xmldsig-filter2/"));
 		//TODO: standards.add(new Standard(new String[]{"xhtml1"}, "http://www.w3.org/TR/xhtml1/"));
-		//standards.add(new Standard(new String[]{"xml-exc-c14n"}, "http://www.w3.org/TR/xml-exc-c14n/"));
-		//standards.add(new Standard(new String[]{"P3P"}, "http://www.w3.org/TR/P3P/"));
-		//standards.add(new Standard(new String[]{"WebCGM"}, "http://www.w3.org/TR/REC-WebCGM/"));
-		//standards.add(new Standard(new String[]{"smil-animation"}, "http://www.w3.org/TR/smil-animation/"));
-		//standards.add(new Standard(new String[]{"xlink", "xml-link"}, "http://www.w3.org/TR/xlink/"));
-		//standards.add(new Standard(new String[]{"ruby"}, "http://www.w3.org/TR/ruby/"));
-		//standards.add(new Standard(new String[]{"xml-c14n"}, "http://www.w3.org/TR/xml-c14n"));
-		standards.add(new Standard(new String[]{"DOM-Level-2-Core"}, "http://www.w3.org/TR/DOM-Level-2-Core/"));
-
+		standards.add(new Standard(new String[]{"xml-exc-c14n"}, "http://www.w3.org/TR/xml-exc-c14n/"));
+		standards.add(new Standard(new String[]{"P3P"}, "http://www.w3.org/TR/P3P/"));
+		standards.add(new Standard(new String[]{"WebCGM"}, "http://www.w3.org/TR/REC-WebCGM/"));
+		standards.add(new Standard(new String[]{"smil-animation"}, "http://www.w3.org/TR/smil-animation/"));
+		standards.add(new Standard(new String[]{"xlink", "xml-link"}, "http://www.w3.org/TR/xlink/"));
+		standards.add(new Standard(new String[]{"ruby"}, "http://www.w3.org/TR/ruby/"));
+		standards.add(new Standard(new String[]{"xml-c14n"}, "http://www.w3.org/TR/xml-c14n"));
+		standards.add(new Standard(new String[]{"DOM-Level-2"}, "http://www.w3.org/TR/DOM-Level-2-Core/"));
+		standards.add(new Standard(new String[]{"DOM-Level-2-Events"}, "http://www.w3.org/TR/DOM-Level-2-Events/"));
+		standards.add(new Standard(new String[]{"DOM-Level-2-Style"}, "http://www.w3.org/TR/DOM-Level-2-Style/"));
+		standards.add(new Standard(new String[]{"DOM-Level-2-Traversal-Range"}, "http://www.w3.org/TR/DOM-Level-2-Traversal-Range/"));
+		standards.add(new Standard(new String[]{"DOM-Level-2-Views"}, "http://www.w3.org/TR/DOM-Level-2-Views/"));
+		standards.add(new Standard(new String[]{"ATAG10", "WAI-AUTOOLS"}, "http://www.w3.org/TR/ATAG10/"));
+		standards.add(new Standard(new String[]{"html401"}, "http://www.w3.org/TR/html401/"));
+		standards.add(new Standard(new String[]{"xpath"}, "http://www.w3.org/TR/xpath/"));
+		standards.add(new Standard(new String[]{"xslt"}, "http://www.w3.org/TR/xslt"));
+		standards.add(new Standard(new String[]{"MathML", "math"}, "http://www.w3.org/TR/REC-MathML/"));
+		//TODO: standards.add(new Standard(new String[]{"WAI-WEBCONTENT"}, "http://www.w3.org/TR/WAI-WEBCONTENT/"));
+		//TODO: standards.add(new Standard(new String[]{"DOM-Level-1"}, "http://www.w3.org/TR/REC-DOM-Level-1/"));
+		//TODO: standards.add(new Standard(new String[]{"smil"}, "http://www.w3.org/TR/REC-smil/"));
+		//TODO: standards.add(new Standard(new String[]{"html32"}, "http://www.w3.org/TR/REC-html32"));
+*/
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/xmlschema11-1/",
 				"http://www.w3.org/TR/2012/PR-xmlschema11-1-20120119/",
 				"http://www.w3.org/TR/2011/CR-xmlschema11-1-20110721/",
@@ -406,6 +419,17 @@ public class W3C {
 				"http://www.w3.org/TR/1999/REC-CSS1-19990111",
 				"http://www.w3.org/TR/REC-CSS1-961217"}, new SpecificEditorsRule5());
 
+		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/WD-html40-970917/",
+				"http://www.w3.org/TR/WD-html40-970708/cover.html"}, new SpecificEditorsRule6());
+
+		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/REC-MathML/",
+				"http://www.w3.org/TR/1998/REC-MathML-19980407",
+				"http://www.w3.org/TR/1998/PR-math-19980224",
+				"http://www.w3.org/TR/WD-math-980106",
+				"http://www.w3.org/TR/WD-math-970710",
+				"http://www.w3.org/pub/WWW/TR/WD-math-970515",
+		}, new SpecificEditorsRule7());
+
 		parsers.get("date").setRuleOnURL("http://www.w3.org/1999/05/06-xmlschema-1/", (url, doc) -> "1999-05-06");
 		parsers.get("date").setRuleOnURL("http://www.w3.org/1999/05/06-xmlschema-2/", (url, doc) -> "1999-05-06");
 		parsers.get("status").setRuleOnURL("http://www.w3.org/1999/05/06-xmlschema-2/", (url, doc) -> "Working Draft");
@@ -415,6 +439,11 @@ public class W3C {
 		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990719", (url, doc) -> "1999-07-19");
 		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990923", (url, doc) -> "1999-09-23");
 		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1999/WD-DOM-Level-2-19990304", (url, doc) -> "1999-03-23");
+
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1998/WD-WAI-PAGEAUTH-0414", (url, doc) -> "1998-04-14");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/1998/WD-WAI-PAGEAUTH-0203", (url, doc) -> "1998-02-03");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/WAI/GL/WD-WAI-PAGEAUTH-0202", (url, doc) -> "1998-02-02");
+		parsers.get("date").setRuleOnURL("http://www.w3.org/WAI/GL/WD-WAI-PAGEAUTH-0130.html", (url, doc) -> "1998-01-30");
 
 		extraLinks.add("http://www.w3.org/1999/06/WD-css3-iccprof-19990623");
 		extraLinks.add("http://www.w3.org/1999/06/REC-xml-stylesheet-19990629");
@@ -435,10 +464,17 @@ public class W3C {
 		extraLinks.add("http://www.w3.org/1999/08/WD-smil-boston-19990803/Animation/smil-animation");
 		extraLinks.add("http://www.w3.org/1999/07/WD-xlink-19990726");
 		extraLinks.add("http://www.w3.org/1999/07/WD-xml-c14n-19990729");
+		extraLinks.add("http://www.w3.org/WAI/AU/WAI-AUTOOLS-19991022");
+		extraLinks.add("http://www.w3.org/WAI/AU/WAI-AUTOOLS-19991014/");
+		extraLinks.add("http://www.w3.org/WAI/AU/WAI-AUTOOLS-19991009/");
+		extraLinks.add("http://www.w3.org/pub/WWW/TR/WD-math-970515");
+		extraLinks.add("http://www.w3.org/WAI/GL/WD-WAI-PAGEAUTH-0130.html");
+		extraLinks.add("http://www.w3.org/WAI/GL/WD-WAI-PAGEAUTH-0202");
 
 		// Seriously
 		linkReplacer.put("http://www.w3.org/TR/1999/WD-DOM-Level-2-9990719", "http://www.w3.org/TR/1999/WD-DOM-Level-2-19990719");
 		linkReplacer.put("http://www.w3.org/TR/1999/WD-DOM-Level-2-9990304", "http://www.w3.org/TR/1999/WD-DOM-Level-2-19990304");
+		linkReplacer.put("http://www.w3.org/TR/WD-html40-970708/", "http://www.w3.org/TR/WD-html40-970708/cover.html");
 
 		parserThread.start();
 	}

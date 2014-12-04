@@ -21,6 +21,7 @@
     <button ng-click="filter = 'standard'">Filter standard</button>
     <button ng-click="filter = 'warning'">Filter warning</button>
     <button ng-click="filter = 'error'">Filter error</button>
+    <button ng-click="filter = 'titlechange'">Filter Title change</button>
     <button ng-click="filter = 'orphans'">Show orphans</button>
     <div ng-repeat="logrow in log | filter:{level: filter}">
         <span class="{{logrow.level}}" ng-click="logrow.show = !logrow.show">{{logrow.message}}</span>

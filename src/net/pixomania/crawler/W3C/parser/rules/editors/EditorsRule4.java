@@ -55,7 +55,7 @@ public class EditorsRule4 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) {
 				if (editor.text().equals("WHATWG:") || editor.text().equals("W3C:")) continue;
 				Person result = NameParser.parse(editor.text());
-				if (result == null) return null;
+				if (result == null) continue;
 
 				for (int i = 0; i < editor.select("a").size(); i++) {
 					if (!editor.select("a").get(i).attr("href").isEmpty()) {
@@ -74,7 +74,7 @@ public class EditorsRule4 implements Rule<ArrayList<Person>> {
 						if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
 						Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 						Person result = NameParser.parse(newdoc.text());
-						if (result == null) return null;
+						if (result == null) continue;
 
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {

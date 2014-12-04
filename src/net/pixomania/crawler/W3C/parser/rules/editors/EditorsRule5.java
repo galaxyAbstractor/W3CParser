@@ -56,7 +56,7 @@ public class EditorsRule5 implements Rule<ArrayList<Person>> {
 					if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
 					Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 					Person result = NameParser.parse(newdoc.text());
-					if (result == null) return null;
+					if (result == null) continue;
 
 					for (int i = 0; i < newdoc.select("a").size(); i++) {
 						if (!newdoc.select("a").get(i).attr("href").isEmpty()) {

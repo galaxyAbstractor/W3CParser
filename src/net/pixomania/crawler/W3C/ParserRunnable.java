@@ -140,7 +140,7 @@ public class ParserRunnable implements Runnable {
 		if (title.getResult() == null) Log.log("error", "Spec " + url + " doesn't seem to have a title");
 
 		if (!prevTitle.isEmpty()) {
-			if (!prevTitle.toLowerCase().equals(sv.getTitle().toLowerCase())) Log.log("warning", "Title change: " + prevTitle + " changed to " + sv.getTitle());
+			if (!prevTitle.toLowerCase().equals(sv.getTitle().toLowerCase())) Log.log("titlechange", "Title change: " + prevTitle + " changed to " + sv.getTitle());
 		}
 
 		prevTitle = sv.getTitle();
