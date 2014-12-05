@@ -6,6 +6,7 @@
 package net.pixomania.crawler.W3C.parser.rules.editors;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
+import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.name.NameParser;
 import net.pixomania.crawler.parser.rules.Rule;
 import org.jsoup.Jsoup;
@@ -53,6 +54,15 @@ public class EditorsRule5 implements Rule<ArrayList<Person>> {
 
 			for (String split : splitted) {
 				if (!split.isEmpty()) {
+					if (editor.text().toLowerCase().startsWith("(in alphabetic")
+							|| editor.text().toLowerCase().startsWith("see acknowl")
+							|| editor.text().toLowerCase().startsWith("the w3")
+							|| editor.text().toLowerCase().startsWith("(see ac")
+							|| editor.text().toLowerCase().startsWith("see participants")
+							|| editor.text().toLowerCase().contains("note:")) {
+						Log.log("warning", "Spec " + url + " may refer to a different section!");
+						continue;
+					}
 					if (split.equals("WHATWG:") || split.equals("W3C:")) continue;
 					Document newdoc = Jsoup.parse(split.replaceAll("\n", ""));
 					Person result = NameParser.parse(newdoc.text());

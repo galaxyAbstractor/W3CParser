@@ -30,7 +30,7 @@ public class CSVExport {
 			if (!CSVFile.exists()) CSVFile.createNewFile();
 			writer = new FileWriter(CSVFile);
 
-			writer.append("standard_title,standard_link,version_title,date,status,versionlink,name,currentAffiliation,currentAffiliationUntil,standardAffiliation,standardAffiliationUntil,viaAffiliation,email,workgroup,websites,formerAffiliation,full,role,previous\n");
+			writer.append("standard_title;standard_link;version_title;date;status;versionlink;name;currentAffiliation;currentAffiliationUntil;standardAffiliation;standardAffiliationUntil;viaAffiliation;email;workgroup;websites;formerAffiliation;full;role;previous\n");
 
 			SessionFactory sf = HibernateUtil.getSessionFactory();
 			Session session = sf.openSession();
@@ -67,8 +67,7 @@ public class CSVExport {
 		if (sv.getEditors() != null) {
 			sv.getEditors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("editor\n");
+					writer.append(personRow(standard, sv, person, "editor"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -78,8 +77,7 @@ public class CSVExport {
 		if (sv.getAuthors() != null) {
 			sv.getAuthors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("author\n");
+					writer.append(personRow(standard, sv, person, "author"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -89,8 +87,7 @@ public class CSVExport {
 		if (sv.getContributors() != null) {
 			sv.getContributors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("contributor\n");
+					writer.append(personRow(standard, sv, person, "contributor"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -100,8 +97,7 @@ public class CSVExport {
 		if (sv.getPreviousEditors() != null) {
 			sv.getPreviousEditors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("previous editor\n");
+					writer.append(personRow(standard, sv, person, "previous editor"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -111,8 +107,7 @@ public class CSVExport {
 		if (sv.getSeriesEditors() != null) {
 			sv.getSeriesEditors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("series editor\n");
+					writer.append(personRow(standard, sv, person, "series editor"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -122,8 +117,7 @@ public class CSVExport {
 		if (sv.getContributingAuthors() != null) {
 			sv.getContributingAuthors().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("contributing author\n");
+					writer.append(personRow(standard, sv, person, "contributing author"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -133,8 +127,7 @@ public class CSVExport {
 		if (sv.getEditorInChief() != null) {
 			sv.getEditorInChief().forEach((person) -> {
 				try {
-					writer.append(personRow(standard, sv, person));
-					writer.append("editor in chief\n");
+					writer.append(personRow(standard, sv, person, "editor in chief"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -142,15 +135,15 @@ public class CSVExport {
 		}
 	}
 
-	private static String personRow(Standard standard, StandardVersion sv, Person person) {
+	private static String personRow(Standard standard, StandardVersion sv, Person person, String role) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append('"').append(standard.getMainName()).append('"').append(",");
-		sb.append('"').append(standard.getLink()).append('"').append(",");
-		sb.append('"').append(sv.getTitle()).append('"').append(",");
-		sb.append('"').append(sv.getDate()).append('"').append(",");
-		sb.append('"').append(sv.getStatus()).append('"').append(",");
-		sb.append('"').append(sv.getLink()).append('"').append(",");
+		sb.append('"').append(standard.getMainName()).append('"').append(";");
+		sb.append('"').append(standard.getLink()).append('"').append(";");
+		sb.append('"').append(sv.getTitle()).append('"').append(";");
+		sb.append('"').append(sv.getDate()).append('"').append(";");
+		sb.append('"').append(sv.getStatus()).append('"').append(";");
+		sb.append('"').append(sv.getLink()).append('"').append(";");
 
 		Field[] fields = Person.class.getDeclaredFields();
 
@@ -161,20 +154,20 @@ public class CSVExport {
 						List<String> websites = (List<String>) fields[i].get(person);
 
 						if (websites.size() == 0) {
-							sb.append("null").append(",");
+							sb.append("null").append(";");
 						} else {
 							sb.append("\"").append("[").append(websites.get(0));
 							for (int n = 1; n < websites.size(); n++) {
 								sb.append(", ").append(websites.get(n));
 							}
-							sb.append("]").append("\"").append(",");
+							sb.append("]").append("\"").append(";");
 						}
 					}
 				} else {
 					if (fields[i].get(person) != null) {
-						sb.append('"').append(((String) fields[i].get(person)).replaceAll("\"", "\"\"")).append('"').append(",");
+						sb.append('"').append(((String) fields[i].get(person)).replaceAll("\"", "\"\"")).append('"').append(";");
 					} else {
-						sb.append("null").append(",");
+						sb.append("null").append(";");
 
 					}
 				}
@@ -183,17 +176,18 @@ public class CSVExport {
 			}
 		}
 
+		sb.append(role).append(";");
+
 		if (sv.getPrev() != null){
 
-
 			if (sv.getPrev().size() == 0) {
-				sb.append("null").append(",");
+				sb.append("null").append("\n");
 			} else {
 				sb.append("\"").append("[").append(sv.getPrev().get(0).getLink());
 				for (int n = 1; n < sv.getPrev().size(); n++) {
 					sb.append(", ").append(sv.getPrev().get(n).getLink());
 				}
-				sb.append("]").append("\"").append(",");
+				sb.append("]").append("\"").append("\n");
 			}
 		}
 

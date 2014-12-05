@@ -133,8 +133,8 @@ public class W3C {
 		standards.add(new Standard(new String[]{"webstorage"}, "http://www.w3.org/TR/webstorage/"));
 		standards.add(new Standard(new String[]{"html5"}, "http://www.w3.org/TR/html5/"));
 		standards.add(new Standard(new String[]{"prov-dm"}, "http://www.w3.org/TR/prov-dm/"));
-		*/standards.add(new Standard(new String[]{"prov-o"}, "http://www.w3.org/TR/prov-o/"));
-		/*standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
+		standards.add(new Standard(new String[]{"prov-o"}, "http://www.w3.org/TR/prov-o/"));
+		standards.add(new Standard(new String[]{"prov-constraints"}, "http://www.w3.org/TR/prov-constraints/"));
 		standards.add(new Standard(new String[]{"prov-n"}, "http://www.w3.org/TR/prov-n/"));
 		standards.add(new Standard(new String[]{"widgets-digsig"}, "http://www.w3.org/TR/widgets-digsig/"));
 		standards.add(new Standard(new String[]{"xmldsig-core1"}, "http://www.w3.org/TR/xmldsig-core1/"));
@@ -221,8 +221,8 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xproc"}, "http://www.w3.org/TR/xproc/"));
 		standards.add(new Standard(new String[]{"xlink11"}, "http://www.w3.org/TR/xlink11/"));
 		standards.add(new Standard(new String[]{"webcgm21"}, "http://www.w3.org/TR/webcgm21/"));
-		//TODO: standards.add(new Standard(new String[]{"DSig-label"}, "http://www.w3.org/TR/REC-DSig-label/"));
-		//TODO: standards.add(new Standard(new String[]{"PICS-labels"}, "http://www.w3.org/TR/REC-PICS-labels/"));
+		*/standards.add(new Standard(new String[]{"DSig-label"}, "http://www.w3.org/TR/REC-DSig-label/"));
+		/*//TODO: standards.add(new Standard(new String[]{"PICS-labels"}, "http://www.w3.org/TR/REC-PICS-labels/"));
 		//TODO: standards.add(new Standard(new String[]{"PICS-services"}, "http://www.w3.org/TR/REC-PICS-services/"));
 		//TODO: standards.add(new Standard(new String[]{"PICSrules"}, "http://www.w3.org/TR/REC-PICSRules/"));
 		standards.add(new Standard(new String[]{"xforms11"}, "http://www.w3.org/TR/xforms11/"));

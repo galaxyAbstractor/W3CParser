@@ -63,6 +63,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			if (splitted.length < 2) {
 				if (editor.text().toLowerCase().startsWith("(in alphabetic")
 						|| editor.text().toLowerCase().startsWith("see acknowl")
+						|| editor.text().toLowerCase().startsWith("the w3")
 						|| editor.text().toLowerCase().startsWith("(see ac")
 						|| editor.text().toLowerCase().startsWith("see participants")
 						|| editor.text().toLowerCase().contains("note:")) {
@@ -89,6 +90,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 					if (!split.isEmpty()) {
 						if (split.toLowerCase().startsWith("(in alphabetic")
 								|| split.toLowerCase().startsWith("see acknowl")
+								|| split.toLowerCase().startsWith("the w3")
 								|| split.toLowerCase().startsWith("(see ac")
 								|| split.toLowerCase().startsWith("see participants")
 								|| split.toLowerCase().contains("note:")) {
