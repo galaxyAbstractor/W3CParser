@@ -103,6 +103,7 @@ public class NameParser {
 		regex.add(new RegexRule("((.+) - (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("((.+) \\((.+@.+)\\) \\[.+\\])", new int[]{2, 0, 0, 0, 0, 0, 3, 0, 0, 0}));
 
+		regex.add(new RegexRule("((.+) <(.+@.+)>, (.+))", new int[]{2, 0, 0, 4, 0, 0, 3, 0, 0, 0}));
 		regex.add(new RegexRule("((.+) \\((.+)\\) (.+@.+))", new int[]{2, 0, 0, 3, 0, 0, 4, 0, 0, 0}));
 		regex.add(new RegexRule("(([^\\(]+) \\(([^\\)]+)\\))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));
 		regex.add(new RegexRule("(([^,]+), (.+))", new int[]{2, 0, 0, 3, 0, 0, 0, 0, 0, 0}));

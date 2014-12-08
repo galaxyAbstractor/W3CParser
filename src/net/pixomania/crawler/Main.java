@@ -11,6 +11,5 @@ public class Main {
 
 	public static void main(String[] args) {
 		W3C w3c = new W3C();
-		//Mozilla mozilla = new Mozilla();
 	}
 }

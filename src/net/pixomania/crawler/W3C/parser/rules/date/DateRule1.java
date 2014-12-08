@@ -33,6 +33,7 @@ public class DateRule1 implements Rule<String> {
 			if (dl.size() == 0) return null;
 			Elements dd = dl.get(0).select("dd");
 
+			if (dd.size() == 0) return null;
 			m = p.matcher(dd.get(0).text()); // The first dd contains the permanent link to this version
 			if(!m.find()) return null;
 			date = m.group(1);

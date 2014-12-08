@@ -68,18 +68,6 @@ public class ParserRunnable implements Runnable {
 		orphans.setVersions(allOrphans());
 		Log.log("orphans", "Orphans!", orphans);
 
-		/*Platform.runLater(() -> {
-			if (orphans.size() != 0) {
-				W3CGUI.getBrowser().load("data:text/html,Orphans!");
-			} else {
-				W3CGUI.getBrowser().load("data:text/html,No more standards!");
-			}
-		});
-
-		Platform.runLater(() -> W3CGUI.redrawInfopanel("Done", null));*/
-		//CSVExport.export(W3C.getStandards());
-		//CSVExport.exportLinkability(W3C.getStandards());
-
 		session.close();
 		LogWriter.closeLogFile();
 
@@ -99,21 +87,9 @@ public class ParserRunnable implements Runnable {
 	private StandardVersion parseVersion(String url, Standard standard) {
 		Log.log("info", "[i] Parsing version: " + url);
 		System.out.println("PARSING: " + url);
-		//Platform.runLater(() -> W3CGUI.getBrowser().load(url));
 		System.out.println("Standards left:" + W3C.getStandards().size());
 
 		StandardVersion sv = new StandardVersion();
-
-		/*// We need to check for orphans here, since we do not want to create a new StandardVersion
-		// instance for something we already crawled, since that would destroy the
-		// relationships in the next and prev lists of a StandardVersion
-		for (int i = 0; i < orphans.size(); i++) {
-			if (orphans.get(i).getLink().equals(url)) {
-				sv = orphans.remove(i);
-				//urlsCrawled.add(sv);
-				break;
-			}
-		}*/
 
 		Document doc = null;
 		try {
@@ -255,32 +231,11 @@ public class ParserRunnable implements Runnable {
 			}
 		}
 
-/*		if (!contain) {
-			if (wait) {
-				*//*synchronized (this) {
-					try {
-						Platform.runLater(() -> W3CGUI.confirmDialog(standard.getMainName(), url));
-
-						this.wait();
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-				}*//*
-			} else {
-				orphan = true;
-			}
-		}*/
-
-
-
 		Log.log("info", "Completed parsing " + url);
 
 		if (contain) {
 			standard.getVersions().add(sv);
 		}
-
-		//final StandardVersion innerSv = sv;
-		//Platform.runLater(() -> W3CGUI.redrawInfopanel(standard.getMainName(), innerSv));
 
 		if(wait) {
 			synchronized (this) {

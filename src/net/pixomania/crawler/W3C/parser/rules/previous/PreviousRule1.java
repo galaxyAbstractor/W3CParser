@@ -52,6 +52,8 @@ public class PreviousRule1 implements Rule<ArrayList<String>> {
 				if (!url.equals(link.attr("href"))) { // W3C...
 					if (link.attr("href").startsWith("/")) {
 						urls.add("http://www.w3.org" + link.attr("href"));
+					} else if(link.attr("href").startsWith("./")) {
+						urls.add("http://www.w3.org/TR" + link.attr("href").substring(1));
 					} else {
 						urls.add(link.attr("href"));
 					}
