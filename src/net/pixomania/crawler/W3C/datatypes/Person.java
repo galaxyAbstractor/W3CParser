@@ -20,6 +20,7 @@ public class Person {
 	public List<String> websites;
 	public String formerAffiliation;
 	public String full;
+	public String version;
 	public int rule;
 	public long id;
 
@@ -131,5 +132,13 @@ public class Person {
 
 	public void setRule(int rule) {
 		this.rule = rule;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }

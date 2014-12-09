@@ -25,6 +25,7 @@
         <property name="workgroup"/>
         <property name="formerAffiliation"/>
         <property name="full"/>
+        <property name="version"/>
 
         <bag name="websites" cascade="all" table="persons_websites">
             <key column="person_id"/>

@@ -15,6 +15,7 @@ import net.pixomania.crawler.W3C.parser.rules.contributors.ContributorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.date.DateRule1;
 import net.pixomania.crawler.W3C.parser.rules.editorInChief.EditorInChiefRule1;
 import net.pixomania.crawler.W3C.parser.rules.editors.*;
+import net.pixomania.crawler.W3C.parser.rules.editors.version.VersionEditorRule1;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule2;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
@@ -26,8 +27,6 @@ import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
 import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.Parser;
-import net.pixomania.crawler.parser.rules.Rule;
-import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,22 +57,8 @@ public class W3C {
 
 	public W3C() {
 
-		//CSVExport.export();
-		/*Runnable runGUI = () -> {
-			Application.launch(W3CGUI.class);
-		};
+		CSVExport.export();
 
-		Thread thread = new Thread(runGUI);
-		thread.start();
-
-		// We need to wait for GUI to initialize before going on
-		synchronized (parsers) {
-			try {
-				parsers.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}*/
 		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
 		parsers.put("status", new Parser(new StatusRule1(), new StatusRule2(), new StatusRule3(), new StatusRule4(),
@@ -81,6 +66,7 @@ public class W3C {
 		parsers.put("editors", new Parser(new EditorsRule1(), new EditorsRule2(), new EditorsRule3(),
 				new EditorsRule4(), new EditorsRule5(), new EditorsRule6(), new EditorsRule7(),
 				new EditorsRule8()));
+		parsers.put("versionEditors", new Parser(new VersionEditorRule1()));
 		parsers.put("previousEditors", new Parser(new PreviousEditorsRule1(), new PreviousEditorsRule2()));
 		parsers.put("seriesEditors", new Parser(new SeriesEditorsRule1()));
 		parsers.put("authors", new Parser(new AuthorsRule1(), new AuthorsRule2(), new AuthorsRule3(),
@@ -212,13 +198,13 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xquery-semantics", "query-semantics"}, "http://www.w3.org/TR/xquery-semantics/"));
 		standards.add(new Standard(new String[]{"xslt-xquery-serialization"}, "http://www.w3.org/TR/xslt-xquery-serialization/"));
 		standards.add(new Standard(new String[]{"mwabp"}, "http://www.w3.org/TR/mwabp/"));
-		//TODO standards.add(new Standard(new String[]{"xhtml-basic"}, "http://www.w3.org/TR/xhtml-basic/"));
-		//TODO standards.add(new Standard(new String[]{"xhtml11"}, "http://www.w3.org/TR/xhtml11/"));
-		//TODO standards.add(new Standard(new String[]{"xhtml-print"}, "http://www.w3.org/TR/xhtml-print/"));
+		standards.add(new Standard(new String[]{"xhtml-basic"}, "http://www.w3.org/TR/xhtml-basic/"));
+		standards.add(new Standard(new String[]{"xhtml11"}, "http://www.w3.org/TR/xhtml11/"));
+		standards.add(new Standard(new String[]{"xhtml-print"}, "http://www.w3.org/TR/xhtml-print/"));
 		standards.add(new Standard(new String[]{"xml-stylesheet"}, "http://www.w3.org/TR/xml-stylesheet/"));
 		standards.add(new Standard(new String[]{"speech-synthesis11"}, "http://www.w3.org/TR/speech-synthesis11/"));
 		standards.add(new Standard(new String[]{"wsc-ui", "wsc-xit"}, "http://www.w3.org/TR/wsc-ui/"));
-		//TODO standards.add(new Standard(new String[]{"xhtml-modularization"}, "http://www.w3.org/TR/xhtml-modularization/"));
+		standards.add(new Standard(new String[]{"xhtml-modularization"}, "http://www.w3.org/TR/xhtml-modularization/"));
 		standards.add(new Standard(new String[]{"xproc"}, "http://www.w3.org/TR/xproc/"));
 		standards.add(new Standard(new String[]{"xlink11"}, "http://www.w3.org/TR/xlink11/"));
 		standards.add(new Standard(new String[]{"webcgm21"}, "http://www.w3.org/TR/webcgm21/"));
@@ -337,23 +323,6 @@ public class W3C {
 		standards.add(new Standard(new String[]{"smil"}, "http://www.w3.org/TR/REC-smil/"));
 		standards.add(new Standard(new String[]{"html32"}, "http://www.w3.org/TR/REC-html32"));
 
-		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/xmlschema11-1/",
-				"http://www.w3.org/TR/2012/PR-xmlschema11-1-20120119/",
-				"http://www.w3.org/TR/2011/CR-xmlschema11-1-20110721/",
-				"http://www.w3.org/TR/2009/WD-xmlschema11-1-20091203/",
-				"http://www.w3.org/TR/2009/CR-xmlschema11-1-20090430/",
-				"http://www.w3.org/TR/xmlschema11-2/",
-				"http://www.w3.org/TR/2012/PR-xmlschema11-2-20120119/",
-				"http://www.w3.org/TR/2011/CR-xmlschema11-2-20110721/",
-				"http://www.w3.org/TR/2009/WD-xmlschema11-2-20091203/",
-				"http://www.w3.org/TR/2009/CR-xmlschema11-2-20090430/"}, new SpecificEditorsRule2());
-
-		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/2009/WD-xmlschema11-1-20090130/",
-				"http://www.w3.org/TR/2008/WD-xmlschema11-1-20080620/",
-				"http://www.w3.org/TR/2007/WD-xmlschema11-1-20070830/",
-				"http://www.w3.org/TR/2009/WD-xmlschema11-2-20090130/",
-				"http://www.w3.org/TR/2008/WD-xmlschema11-2-20080620/",
-				"http://www.w3.org/TR/2007/WD-xmlschema11-2-20070830/"}, new SpecificEditorsRule3());
 
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/WD-CSS2-971104",
 				"http://www.w3.org/TR/1998/WD-css2-19980128",
@@ -415,6 +384,8 @@ public class W3C {
 		});
 
 		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/REC-CSS1/", (url, doc) -> "2008-04-11");
+
+		parsers.get("date").setRuleOnURL("http://www.w3.org/TR/REC-PICS-services/", (url, doc) -> "2009-11-24");
 
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/REC-CSS1/",
 				"http://www.w3.org/TR/1999/REC-CSS1-19990111",
@@ -531,7 +502,6 @@ public class W3C {
 		linkReplacer.put("http://www.w3.org/pub/WWW/TR/WD-DSIG-label-970523.html", "http://www.w3.org/TR/WD-DSIG-label-970523.html");
 		linkReplacer.put("http://www.w3.org/pub/WWW/TR/WD-DSIG-label-970516.html", "http://www.w3.org/TR/WD-DSIG-label-970516.html");
 
-
-		parserThread.start();
+		//parserThread.start();
 	}
 }

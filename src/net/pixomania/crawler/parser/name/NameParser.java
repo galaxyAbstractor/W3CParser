@@ -114,15 +114,17 @@ public class NameParser {
 		regex.add(new RegexRule("(([^,]+),)", new int[]{2, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
 
 		preproc.add("\\(deceased\\)");
+		preproc.add("\\(retired\\)");
 	}
 
-	public static Person parse(String name) {
+	public static Person parse(String original) {
 		// We can make a guess that names, affiliations etc will not be longer than 200 characters
 		// if a specification does have this, it can be tweaked. Ugly hack, I know, but eh
-		if (name.length() > 200) return null;
+		if (original.length() > 200) return null;
 
+		String name = original;
 		for (String re : preproc) {
-			name = name.replaceAll(re, "");
+			name = original.replaceAll(re, "");
 		}
 
 		for (RegexRule re : regex) {
@@ -152,12 +154,12 @@ public class NameParser {
 					}
 				}
 
-				person.setFull(name);
+				person.setFull(original);
 				person.setRule(regex.indexOf(re));
 				return person;
 			}
 		}
-		Log.log("warning", "Name: " + name + " could not be parsed!");
+		Log.log("warning", "Name: " + original + " could not be parsed!");
 		return null;
 	}
 }

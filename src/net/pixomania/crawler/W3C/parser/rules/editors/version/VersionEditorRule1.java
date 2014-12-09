@@ -3,7 +3,7 @@
  * @license BSD - $root/license
  */
 
-package net.pixomania.crawler.W3C.parser.rules.editors;
+package net.pixomania.crawler.W3C.parser.rules.editors.version;
 
 import net.pixomania.crawler.W3C.datatypes.Person;
 import net.pixomania.crawler.logger.Log;
@@ -17,45 +17,45 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class EditorsRule2 implements Rule<ArrayList<Person>> {
+public class VersionEditorRule1 implements Rule<ArrayList<Person>> {
 	public String name = this.getClass().getSimpleName();
 
 	@Override
 	public ArrayList<Person> run(String url, Document doc) {
 		ArrayList<Person> editorList = new ArrayList<>();
 
-		Elements editors = doc.select("dt:contains(Editor) ~ dd, dt:contains(Edition Editor) ~ dd");
+		Elements editors = doc.select("dt:contains(version 1), dt:contains(version 1) ~ dd");
 		if (editors.size() == 0) return null;
 
 		boolean skip = false;
+		String version = "";
 		for (Element editor : editors) {
 			Element prev = editor.previousElementSibling();
-			if (prev.tagName().equals("dt")) {
-				if ((!prev.text().trim().toLowerCase().startsWith("editor")
-						&& !prev.text().trim().toLowerCase().startsWith("edition editor"))
-						|| prev.text().trim().toLowerCase().contains("version")
-						|| prev.text().trim().toLowerCase().endsWith("draft:")) {
-					skip = true;
-				}
-			}
-
-			if (skip) {
-				Element next = editor.nextElementSibling();
-				if (next != null) {
-					if (next.text().trim().toLowerCase().startsWith("editor")
-							|| next.text().trim().toLowerCase().contains("edition editor")) {
-						skip = false;
-						continue;
+			if (prev != null) {
+				if (prev.tagName().equals("dt")) {
+					if (!prev.text().trim().toLowerCase().startsWith("version 1")
+							&& !prev.text().trim().toLowerCase().startsWith("editors (version 1")) {
+						skip = true;
 					}
 				}
-				continue;
+
+				if (skip) {
+					Element next = editor.nextElementSibling();
+					if (next != null) {
+						if (next.text().trim().toLowerCase().startsWith("version 1")
+								|| next.text().trim().toLowerCase().startsWith("editors (version 1")) {
+							skip = false;
+
+							continue;
+						}
+					}
+					continue;
+				}
 			}
 
-			if (StringUtils.countMatches(editor.text(), " - ") > 2) {
-				Log.log("warning", "This editor may be a list of editors separated by  - ");
-				EditorsRule5 ed5 = new EditorsRule5();
-
-				return ed5.run(url, doc);
+			if (editor.tagName().equals("dt")) {
+				version = editor.text();
+				continue;
 			}
 
 			String[] splitted = editor.html().split("<br />|<br clear=\"none\" />");
@@ -74,6 +74,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 				Person result = NameParser.parse(editor.text());
 				if (result == null) continue;
 
+				result.setVersion(version);
 				for (int i = 0; i < editor.select("a").size(); i++) {
 					if (!editor.select("a").get(i).attr("href").isEmpty()) {
 						if (editor.select("a").get(i).attr("href").contains("@")){
@@ -102,6 +103,7 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 						Person result = NameParser.parse(newdoc.text());
 						if (result == null) continue;
 
+						result.setVersion(version);
 						for (int i = 0; i < newdoc.select("a").size(); i++) {
 							if (!newdoc.select("a").get(i).attr("href").isEmpty()) {
 								if (newdoc.select("a").get(i).attr("href").contains("@")){
@@ -118,7 +120,8 @@ public class EditorsRule2 implements Rule<ArrayList<Person>> {
 			}
 
 			Element next = editor.nextElementSibling();
-			if (next != null) if (next.tag().getName().equals("dt")) break;
+			if (next != null) if (next.tag().getName().equals("dt") &&
+					!next.text().trim().toLowerCase().startsWith("editors (version 1")) break;
 		}
 
 		if (editorList.size() == 0) return null;

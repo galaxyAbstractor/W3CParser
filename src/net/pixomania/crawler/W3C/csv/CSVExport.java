@@ -30,7 +30,7 @@ public class CSVExport {
 			if (!CSVFile.exists()) CSVFile.createNewFile();
 			writer = new FileWriter(CSVFile);
 
-			writer.append("standard_title;standard_link;version_title;date;status;versionlink;name;currentAffiliation;currentAffiliationUntil;standardAffiliation;standardAffiliationUntil;viaAffiliation;email;workgroup;websites;formerAffiliation;full;role;previous\n");
+			writer.append("standard_title;standard_link;version_title;date;status;versionlink;name;currentAffiliation;currentAffiliationUntil;standardAffiliation;standardAffiliationUntil;viaAffiliation;email;workgroup;websites;formerAffiliation;full;version;role;previous\n");
 
 			SessionFactory sf = HibernateUtil.getSessionFactory();
 			Session session = sf.openSession();
@@ -147,7 +147,7 @@ public class CSVExport {
 
 		Field[] fields = Person.class.getDeclaredFields();
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 12; i++) {
 			try {
 				if (i == 8) {
 					if (fields[i].get(person) != null){

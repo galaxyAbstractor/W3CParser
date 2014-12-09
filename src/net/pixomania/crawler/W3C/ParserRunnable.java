@@ -153,6 +153,13 @@ public class ParserRunnable implements Runnable {
 
 		Result ed = W3C.getParsers().get("editors").parse(url, doc);
 		ArrayList<Person> editors = (ArrayList<Person>) ed.getResult();
+		Result versionEd = W3C.getParsers().get("versionEditors").parse(url, doc);
+		ArrayList<Person> versionEditors = (ArrayList<Person>) versionEd.getResult();
+		if (editors == null && versionEditors != null) {
+			editors = versionEditors;
+		} else if (editors != null && versionEditors != null) {
+			editors.addAll(versionEditors);
+		}
 		sv.setEditors(editors);
 		sv.getRules().put("editors", ed.getRule());
 
