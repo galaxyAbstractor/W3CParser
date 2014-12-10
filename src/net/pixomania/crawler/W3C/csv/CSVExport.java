@@ -133,6 +133,36 @@ public class CSVExport {
 				}
 			});
 		}
+
+		if (sv.getPrincipalAuthors() != null) {
+			sv.getPrincipalAuthors().forEach((person) -> {
+				try {
+					writer.append(personRow(standard, sv, person, "principal author"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+		}
+
+		if (sv.getPrincipalContributors() != null) {
+			sv.getPrincipalContributors().forEach((person) -> {
+				try {
+					writer.append(personRow(standard, sv, person, "principal contributor"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+		}
+
+		if (sv.getWgchair() != null) {
+			sv.getWgchair().forEach((person) -> {
+				try {
+					writer.append(personRow(standard, sv, person, "wg chair"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+		}
 	}
 
 	private static String personRow(Standard standard, StandardVersion sv, Person person, String role) {

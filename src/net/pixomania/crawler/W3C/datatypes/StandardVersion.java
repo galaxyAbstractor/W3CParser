@@ -22,6 +22,9 @@ public class StandardVersion {
 	private List<Person> contributors = new ArrayList<>();
 	private List<Person> contributingAuthors = new ArrayList<>();
 	private List<Person> editorInChief = new ArrayList<>();
+	private List<Person> principalAuthors = new ArrayList<>();
+	private List<Person> principalContributors = new ArrayList<>();
+	private List<Person> wgchair = new ArrayList<>();
 	private String link;
 
 	private long id;
@@ -136,5 +139,29 @@ public class StandardVersion {
 
 	public void setEditorInChief(List<Person> editorInChief) {
 		this.editorInChief = editorInChief;
+	}
+
+	public List<Person> getPrincipalAuthors() {
+		return principalAuthors;
+	}
+
+	public void setPrincipalAuthors(List<Person> principalAuthors) {
+		this.principalAuthors = principalAuthors;
+	}
+
+	public List<Person> getPrincipalContributors() {
+		return principalContributors;
+	}
+
+	public void setPrincipalContributors(List<Person> principalContributors) {
+		this.principalContributors = principalContributors;
+	}
+
+	public List<Person> getWgchair() {
+		return wgchair;
+	}
+
+	public void setWgchair(List<Person> wgchair) {
+		this.wgchair = wgchair;
 	}
 }

@@ -60,5 +60,20 @@
             <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
         </bag>
 
+        <bag name="principalAuthors" cascade="all">
+            <key column="sv_principalAuthors"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="principalContributors" cascade="all">
+            <key column="sv_principalContributors"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
+        <bag name="wgchair" cascade="all">
+            <key column="sv_wgchair"/>
+            <one-to-many class="net.pixomania.crawler.W3C.datatypes.Person"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

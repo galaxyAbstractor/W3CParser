@@ -20,11 +20,14 @@ import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule1;
 import net.pixomania.crawler.W3C.parser.rules.previous.PreviousRule2;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.previousEditors.PreviousEditorsRule2;
+import net.pixomania.crawler.W3C.parser.rules.principalAuthors.PrincipalAuthorsRule1;
+import net.pixomania.crawler.W3C.parser.rules.principalContributors.PrincipalContributorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.seriesEditors.SeriesEditorsRule1;
 import net.pixomania.crawler.W3C.parser.rules.status.*;
 import net.pixomania.crawler.W3C.parser.rules.title.SpecificTitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule1;
 import net.pixomania.crawler.W3C.parser.rules.title.TitleRule2;
+import net.pixomania.crawler.W3C.parser.rules.wgchair.WgChairRule1;
 import net.pixomania.crawler.logger.Log;
 import net.pixomania.crawler.parser.Parser;
 
@@ -57,7 +60,7 @@ public class W3C {
 
 	public W3C() {
 
-		CSVExport.export();
+		//CSVExport.export();
 
 		parsers.put("date", new Parser(new DateRule1()));
 		parsers.put("title", new Parser(new TitleRule1(), new TitleRule2()));
@@ -75,9 +78,12 @@ public class W3C {
 		parsers.put("contributingAuthors", new Parser(new ContributingAuthorsRule1()));
 		parsers.put("previous", new Parser(new PreviousRule1(), new PreviousRule2()));
 		parsers.put("editorInChief", new Parser(new EditorInChiefRule1()));
+		parsers.put("principalAuthors", new Parser(new PrincipalAuthorsRule1()));
+		parsers.put("principalContributors", new Parser(new PrincipalContributorsRule1()));
+		parsers.put("wgchair", new Parser(new WgChairRule1()));
 
-		Log.log("warning", "MathML contains principal authors");
-		standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
+
+		/*standards.add(new Standard(new String[]{"MathML"}, "http://www.w3.org/TR/MathML/"));
 		standards.add(new Standard(new String[]{"xml-entity-names"}, "http://www.w3.org/TR/xml-entity-names/"));
 		standards.add(new Standard(new String[]{"exi-profile"}, "http://www.w3.org/TR/exi-profile/"));
 		standards.add(new Standard(new String[]{"emotionml"}, "http://www.w3.org/TR/emotionml/"));
@@ -290,7 +296,6 @@ public class W3C {
 		standards.add(new Standard(new String[]{"DOM-Level-3-Val"}, "http://www.w3.org/TR/DOM-Level-3-Val/"));
 		standards.add(new Standard(new String[]{"CCPP-struct-vocab", "CCPP-struct", "CCPP-vocab"}, "http://www.w3.org/TR/CCPP-struct-vocab/"));
 		standards.add(new Standard(new String[]{"PNG"}, "http://www.w3.org/TR/PNG/"));
-		Log.log("warning", "MathML2 contains principal authors");
 		standards.add(new Standard(new String[]{"MathML2"}, "http://www.w3.org/TR/MathML2/"));
 		standards.add(new Standard(new String[]{"xptr-element"}, "http://www.w3.org/TR/xptr-element/"));
 		standards.add(new Standard(new String[]{"xptr-framework"}, "http://www.w3.org/TR/xptr-framework/"));
@@ -319,11 +324,11 @@ public class W3C {
 		standards.add(new Standard(new String[]{"xslt"}, "http://www.w3.org/TR/xslt"));
 		standards.add(new Standard(new String[]{"MathML", "math"}, "http://www.w3.org/TR/REC-MathML/"));
 		standards.add(new Standard(new String[]{"WAI-WEBCONTENT", "WAI-PAGEAUTH"}, "http://www.w3.org/TR/WAI-WEBCONTENT/"));
-		standards.add(new Standard(new String[]{"DOM-Level-1"}, "http://www.w3.org/TR/REC-DOM-Level-1/"));
-		standards.add(new Standard(new String[]{"smil"}, "http://www.w3.org/TR/REC-smil/"));
+		*/standards.add(new Standard(new String[]{"DOM-Level-1"}, "http://www.w3.org/TR/REC-DOM-Level-1/"));
+		/*standards.add(new Standard(new String[]{"smil"}, "http://www.w3.org/TR/REC-smil/"));
 		standards.add(new Standard(new String[]{"html32"}, "http://www.w3.org/TR/REC-html32"));
 
-
+*/
 		parsers.get("editors").setRuleOnURLs(new String[]{"http://www.w3.org/TR/WD-CSS2-971104",
 				"http://www.w3.org/TR/1998/WD-css2-19980128",
 				"http://www.w3.org/TR/1998/PR-CSS2-19980324",
@@ -502,6 +507,6 @@ public class W3C {
 		linkReplacer.put("http://www.w3.org/pub/WWW/TR/WD-DSIG-label-970523.html", "http://www.w3.org/TR/WD-DSIG-label-970523.html");
 		linkReplacer.put("http://www.w3.org/pub/WWW/TR/WD-DSIG-label-970516.html", "http://www.w3.org/TR/WD-DSIG-label-970516.html");
 
-		//parserThread.start();
+		parserThread.start();
 	}
 }

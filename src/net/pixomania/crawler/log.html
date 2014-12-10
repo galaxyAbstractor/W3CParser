@@ -164,6 +164,60 @@
                                 rule: {{editor.rule}}<br>
                             </div>
                         </div>
+                        <span ng-if="sv.principalAuthors.length > 0">Principal Authors ({{sv.rules.principalAuthors.name}}):</span>
+                        <div ng-repeat="editor in sv.principalAuthors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                websites: {{editor.websites}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
+                            </div>
+                        </div>
+                        <span ng-if="sv.principalContributors.length > 0">Principal Contributors ({{sv.rules.principalContributors.name}}):</span>
+                        <div ng-repeat="editor in sv.principalContributors" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                websites: {{editor.websites}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
+                            </div>
+                        </div>
+                        <span ng-if="sv.wgchair.length > 0">WG Chair ({{sv.rules.wgchair.name}}):</span>
+                        <div ng-repeat="editor in sv.wgchair" class="indent">
+                            <span ng-click="editor.show = !editor.show" style="text-decoration: underline;">{{editor.name}}</span>
+                            <div ng-show="editor.show || expand" class="editorinfo">
+                                Name: {{editor.name}}<br>
+                                currentAffiliation: {{editor.currentAffiliation}}<br>
+                                currentAffiliationUntil: {{editor.currentAffiliationUntil}}<br>
+                                standardAffiliation: {{editor.standardAffiliation}}<br>
+                                standardAffiliationUntil: {{editor.standardAffiliationUntil}}<br>
+                                viaAffiliation: {{editor.viaAffiliation}}<br>
+                                email: {{editor.email}}<br>
+                                workgroup: {{editor.workgroup}}<br>
+                                websites: {{editor.websites}}<br>
+                                formerAffiliation: {{editor.formerAffiliation}}<br>
+                                full: {{editor.full}}<br>
+                                rule: {{editor.rule}}<br>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

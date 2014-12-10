@@ -168,6 +168,21 @@ public class ParserRunnable implements Runnable {
 		sv.setEditorInChief(eic);
 		sv.getRules().put("editorInChief", editorInChief.getRule());
 
+		Result principalAuthors = W3C.getParsers().get("principalAuthors").parse(url, doc);
+		ArrayList<Person> pA = (ArrayList<Person>) principalAuthors.getResult();
+		sv.setPrincipalAuthors(pA);
+		sv.getRules().put("principalAuthors", principalAuthors.getRule());
+
+		Result principalContributors = W3C.getParsers().get("principalContributors").parse(url, doc);
+		ArrayList<Person> pC = (ArrayList<Person>) principalContributors.getResult();
+		sv.setPrincipalContributors(pC);
+		sv.getRules().put("principalContributors", principalContributors.getRule());
+
+		Result wgchair = W3C.getParsers().get("wgchair").parse(url, doc);
+		ArrayList<Person> wg = (ArrayList<Person>) wgchair.getResult();
+		sv.setWgchair(wg);
+		sv.getRules().put("wgchair", wgchair.getRule());
+
 		boolean noPeople = true;
 		// while loop is because once we find one list that is not null
 		// and contains persons, we do not need to check the rest of the lists
@@ -216,6 +231,27 @@ public class ParserRunnable implements Runnable {
 
 			if (sv.getEditorInChief() != null) {
 				if (sv.getEditorInChief().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getPrincipalAuthors() != null) {
+				if (sv.getPrincipalAuthors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getPrincipalContributors() != null) {
+				if (sv.getPrincipalContributors().size() > 0) {
+					noPeople = false;
+					break;
+				}
+			}
+
+			if (sv.getWgchair() != null) {
+				if (sv.getWgchair().size() > 0) {
 					noPeople = false;
 					break;
 				}
