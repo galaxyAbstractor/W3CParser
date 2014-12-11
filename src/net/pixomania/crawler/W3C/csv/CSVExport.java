@@ -12,23 +12,28 @@ import net.pixomania.crawler.db.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class CSVExport {
 	private static File CSVFile = new File("exported.csv");
-	private static FileWriter writer;
+	private static BufferedWriter writer;
 
 	public static void export() {
 		try {
 			if (CSVFile.exists()) CSVFile.delete();
 			if (!CSVFile.exists()) CSVFile.createNewFile();
-			writer = new FileWriter(CSVFile);
+
+			CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+			encoder.onMalformedInput(CodingErrorAction.REPORT);
+			encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(CSVFile),encoder));
 
 			writer.append("standard_title;standard_link;version_title;date;status;versionlink;name;currentAffiliation;currentAffiliationUntil;standardAffiliation;standardAffiliationUntil;viaAffiliation;email;workgroup;websites;formerAffiliation;full;version;role;previous\n");
 
